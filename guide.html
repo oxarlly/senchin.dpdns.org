@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Codespace Hexo Butterfly 全攻略教程书</title>
+    <style>
+        :root {
+            --primary-blue: #49b1f5;
+            --dark-black: #000000;
+            --code-bg: #282c34;
+            --page-width: 210mm;
+            --page-height: 297mm;
+        }
+
+        /* 强制方角与基础排版 */
+        * { box-sizing: border-box; border-radius: 0 !important; }
+
+        body {
+            margin: 0; padding: 0;
+            background-color: #525659;
+            font-family: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            color: #333;
+        }
+
+        .page {
+            width: var(--page-width);
+            min-height: var(--page-height);
+            background: #fff;
+            margin: 20px auto;
+            padding: 25mm 20mm;
+            position: relative;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+            page-break-after: always;
+            border: 1px solid var(--dark-black);
+        }
+
+        /* 封面样式 - 文字左下角 */
+        .cover {
+            background-image: linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.2)), 
+                              url('https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 30mm 20mm;
+        }
+
+        .cover h1 {
+            font-size: 4rem;
+            margin: 0;
+            line-height: 1;
+            text-transform: uppercase;
+            letter-spacing: -2px;
+        }
+
+        .cover .subtitle {
+            font-size: 1.5rem;
+            margin-top: 15px;
+            border-left: 5px solid var(--primary-blue);
+            padding-left: 15px;
+        }
+
+        /* 目录 */
+        .toc {
+            border: 2px solid var(--dark-black);
+            padding: 25px;
+            margin: 30px 0;
+            background: #f9f9f9;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            border-left: 10px solid var(--dark-black);
+            padding-left: 15px;
+            margin-top: 40px;
+            text-transform: uppercase;
+            background: #f4f4f4;
+        }
+
+        /* 概念加粗术语 */
+        .term-en {
+            font-weight: 700;
+            color: #666;
+            margin-left: 8px;
+            font-size: 0.85em;
+        }
+
+        /* 代码块 - 自动换行 + 行号 */
+        .code-wrapper {
+            background: var(--code-bg);
+            color: #abb2bf;
+            margin: 20px 0;
+            display: flex;
+            border: 1px solid var(--dark-black);
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .line-numbers {
+            background: #21252b;
+            color: #4b5263;
+            padding: 15px 10px;
+            text-align: right;
+            min-width: 40px;
+            user-select: none;
+            border-right: 1px solid #3e4451;
+        }
+
+        .code-content {
+            padding: 15px;
+            white-space: pre-wrap; /* 允许换行 */
+            word-break: break-all;
+            flex: 1;
+        }
+
+        .highlight-bar {
+            background: #fff3cd;
+            border: 1px solid #ffeeba;
+            padding: 10px 15px;
+            margin: 15px 0;
+            font-weight: 500;
+        }
+
+        .img-placeholder {
+            border: 1px solid var(--dark-black);
+            width: 100%;
+            height: 200px;
+            background: #eee;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px 0;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="page cover">
+        <h1>HEXO<br>BUTTERFLY<br>HANDBOOK</h1>
+        <div class="subtitle">GitHub Codespace 云端工作流全攻略</div>
+        <p style="margin-top: 20px;">2025 EDITION | 简体中文版</p>
+    </div>
+
+    <div class="page">
+        <h2>目录 <span class="term-en">CONTENTS</span></h2>
+        <div class="toc">
+            <p>01. 云端基础设施 (Cloud Infrastructure)</p>
+            <p>02. 环境搭建 (Environment Setup)</p>
+            <p>03. 主题深度定制 (Theme Customization)</p>
+            <p>04. 自动化部署 (Automated Deployment)</p>
+        </div>
+
+        <h2>01. 云端基础设施 <span class="term-en">CLOUD INFRASTRUCTURE</span></h2>
+        <p>GitHub Codespace 提供了一个基于容器 <strong>Container</strong> 的完整开发环境。通过这种方式，我们可以摆脱本地环境的不一致性。</p>
+        
+        <div class="img-placeholder">
+            [插图：GitHub Codespace 架构与容器运行原理图]
+        </div>
+        
+
+        <p>开启步骤：进入 GitHub 仓库，选择 <strong>Codespaces</strong> 并点击 <strong>Create codespace on main</strong>。</p>
+    </div>
+
+    <div class="page">
+        <h2>02. 环境搭建 <span class="term-en">ENVIRONMENT SETUP</span></h2>
+        <p>在 Codespace 终端执行以下指令。注意代码块中的命令已支持超长自动换行。</p>
+
+        <div class="code-wrapper">
+            <div class="line-numbers">1<br>2<br>3<br>4<br>5</div>
+            <div class="code-content">npm install -g hexo-cli
+hexo init .
+npm install
+# 安装 Butterfly 必要插件
+npm install hexo-renderer-pug hexo-renderer-stylus --save</div>
+        </div>
+
+        <div class="highlight-bar">
+            <strong>重点提示：</strong> 必须安装渲染器 <strong>Renderer</strong>，否则 Butterfly 主题将无法正常显示，页面会报 Pug 错误。
+        </div>
+
+        <h2>03. 主题定制 <span class="term-en">CUSTOMIZATION</span></h2>
+        <p>拉取主题源码并将其关联至你的 Hexo 项目：</p>
+
+        <div class="code-wrapper">
+            <div class="line-numbers">1</div>
+            <div class="code-content">git clone -b master https://github.com/JerryC808/hexo-theme-butterfly themes/butterfly</div>
+        </div>
+
+        <p>在配置文件 <strong>_config.yml</strong> 中，找到 <strong>theme</strong> 属性并修改为 <strong>butterfly</strong>。</p>
+    </div>
+
+    <div class="page">
+        <h2>04. 配置文件详解 <span class="term-en">CONFIGURATION</span></h2>
+        <p>Butterfly 官网推荐使用配置文件覆盖机制 <strong>Config Overriding</strong>。在根目录下创建 <strong>_config.butterfly.yml</strong>。</p>
+
+        <div class="code-wrapper">
+            <div class="line-numbers">1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9</div>
+            <div class="code-content"># 网站图标 (Favicon)
+favicon: /img/favicon.png
+# 顶部导航栏配置 (Nav Menu)
+menu:
+  首页: / || fas fa-home
+  文章: /archives/ || fas fa-archive
+  标签: /tags/ || fas fa-tags
+  分类: /categories/ || fas fa-folder-open</div>
+        </div>
+        
+        <div class="img-placeholder">
+            [插图：Butterfly 主题配置文件结构与注释详情]
+        </div>
+        
+    </div>
+
+    <div class="page">
+        <h2>05. 自动化部署 <span class="term-en">DEPLOYMENT</span></h2>
+        <p>通过 <strong>hexo-deployer-git</strong> 插件，我们可以将生成的静态网页推送到 GitHub Pages 托管服务。</p>
+
+        <div class="code-wrapper">
+            <div class="line-numbers">1<br>2<br>3<br>4<br>5<br>6</div>
+            <div class="code-content">deploy:
+  type: git
+  repo: https://github.com/YourName/YourName.github.io.git
+  branch: main
+  message: "Site updated by Codespace"</div>
+        </div>
+
+        <div class="highlight-bar">
+            <strong>最后一步：</strong> 在终端运行 <strong>hexo cl && hexo g && hexo d</strong> 即可完成一键发布。
+        </div>
+
+        <p style="margin-top: 100px; text-align: center; font-weight: bold;">
+            - 全教程书结束 -<br>
+            <span style="font-size: 12px; color: #999;">© 2025 HEXO BUTTERFLY PROJECT. ALL RIGHTS RESERVED.</span>
+        </p>
+    </div>
+
+</body>
+</html>

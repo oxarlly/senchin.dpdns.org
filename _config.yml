@@ -174,3 +174,43 @@ encrypt: # hexo-blog-encrypt
   wrong_pass_message: 密码错误
   wrong_hash_message: 抱歉, 这个文章不能被校验, 不过您还是能看看解密后的内容.
 
+# 增量生成配置
+generator:
+  incremental: true  # 开启增量生成
+  silent: true       # 静默模式，减少日志输出耗时
+
+
+# hexo-filter-optimize 配置
+filter_optimize:
+  enable: true
+  # 静态资源压缩配置
+  html:
+    enable: true
+    exclude:  # 排除不需要压缩的文件
+      - '**/*.min.html'
+  css:
+    enable: true
+    exclude:
+      - '**/*.min.css'
+  js:
+    enable: true
+    mangle: true  # 混淆JS变量名（进一步减小体积）
+    exclude:
+      - '**/*.min.js'
+      - '**/live2d/**.js'  # 排除live2d插件（避免混淆后失效）
+      - '**/jsdelivr/**.js'  # 排除CDN资源
+  # 图片优化（建议关闭自动压缩，手动用TinyPNG处理更稳定）
+  image:
+    enable: false
+    interlaced: false  # PNG渐进式加载
+    multipass: false   # SVG优化
+  # 额外优化（关键：适配Butterfly主题）
+  remove_comments: true  # 移除HTML注释（减少体积）
+  remove_empty_attr: true  # 移除空属性
+  remove_quotes: true  # 移除不必要的引号
+  css_inline: false  # 关闭CSS内联（避免与主题样式冲突）
+  lazyload:
+    enable: false  # 关闭插件自带懒加载，用专门的hexo-lazyload-image
+  # 资源预加载（可选，提升首屏速度）
+  preload:
+    enable: false

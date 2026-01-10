@@ -477,6 +477,8 @@ export default GuessTheNumber;
 
 本文分享了 5 个提升 React Hooks 开发效率的实用技巧，并用 React Hooks 实现了一个简单的 "猜数字" 游戏。 希望这些技巧能够帮助你写出更简洁、更易于维护的React 代码，并让你在学习过程中充满乐趣！
 
+新年好
+
 ## 参考资料
 
 *   [React Hooks 官方文档](https://reactjs.org/docs/hooks-intro.html)

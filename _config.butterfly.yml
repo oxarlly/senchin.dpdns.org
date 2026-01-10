@@ -64,7 +64,7 @@ avatar:
 disable_top_img: false
 
 # The banner image of home page
-index_img: media/bg.jpg
+index_img: media/bg-1.jpg
 
 # If the banner of page not setting, it will show the top_img
 default_top_img:
@@ -981,6 +981,7 @@ css_prefix: true
 inject:
   head:
     # - <link rel="stylesheet" href="/xxx.css">
+    - <script defer src="https://cloud.umami.is/script.js" data-website-id="7525f5b2-b5dd-423e-8dff-d482a70f688e"></script>
   bottom:
     # - <script src="xxxx"></script>
 
@@ -998,7 +999,7 @@ CDN:
   # The CDN provider of third party scripts (第三方 js 的 cdn 配置)
   # option: local/jsdelivr/unpkg/cdnjs/custom
   # when set it to local, you need to install hexo-butterfly-extjs
-  third_party_provider: custom
+  third_party_provider: jsdelivr
   # elemecdn
 
   # Add version number to url, true or false
