@@ -24,7 +24,7 @@ jobs:
     - name: Setup Hexo Dependencies
       run: |
         npm install hexo-cli -g
-        npm install        
+        npm install --legacy-peer-deps
     
     # 配置 SSH 部署私钥
     - name: Setup Deploy Private Key
