@@ -36,9 +36,9 @@ comments: false
         {
             "title": "それで充分だよ。 (Cover)",
             "author": "Kotoha",
-            "url": "https://oxarlly.dpdns.org/music/mp3/Kotoha.mp3",
-            "pic": "https://oxarlly.dpdns.org/music/pic/Kotoha.jpg",
-            "lrc": "https://oxarlly.dpdns.org/music/lrc/Kotoha.lrc"
+            "url": "https://oxarlly.dpdns.org/music/mp3/それで充分だよ。 (Cover).mp3",
+            "pic": "https://oxarlly.dpdns.org/music/pic/それで充分だよ。 (Cover).jpg",
+            "lrc": "https://oxarlly.dpdns.org/music/lrc/それで充分だよ。 (Cover).lrc"
         },
         {
             "title": "消えない温度",
