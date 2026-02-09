@@ -240,6 +240,6 @@ pwa:
     # 缓存策略：图片优先走缓存 (CacheFirst)
     routes:
       - pattern: !!js/regexp /\.(png|jpg|jpeg|gif|svg|webp)$/
-        strategy: cacheFirst
+        strategy: networkFirst
       - pattern: !!js/regexp /\.(js|css)$/
-        strategy: cacheFirst
+        strategy: networkFirst
