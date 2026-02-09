@@ -20,6 +20,27 @@ comments: false
     "listmaxheight": "513px",
     "music": [
         {
+            "title": "再生",
+            "author": "ナナツカゼ&PIKASONIC&nakotanmaru",
+            "url": "https://oxarlly.dpdns.org/music/mp3/再生.mp3",
+            "pic": "https://oxarlly.dpdns.org/music/pic/再生.jpg",
+            "lrc": "https://oxarlly.dpdns.org/music/lrc/再生.lrc"
+        },
+        {
+            "title": "あのね",
+            "author": "ナナツカゼ",
+            "url": "https://oxarlly.dpdns.org/music/mp3/あのね.mp3",
+            "pic": "https://oxarlly.dpdns.org/music/pic/あのね.jpg",
+            "lrc": "https://oxarlly.dpdns.org/music/lrc/あのね.lrc"
+        },
+        {
+            "title": "それで充分だよ。 (Cover)",
+            "author": "Kotoha",
+            "url": "https://oxarlly.dpdns.org/music/mp3/Kotoha.mp3",
+            "pic": "https://oxarlly.dpdns.org/music/pic/Kotoha.jpg",
+            "lrc": "https://oxarlly.dpdns.org/music/lrc/Kotoha.lrc"
+        },
+        {
             "title": "消えない温度",
             "author": "Hanon & Kotoha;",
             "url": "https://oxarlly.dpdns.org/music/mp3/消えない温度.mp3",
