@@ -182,7 +182,7 @@ generator:
 
 # hexo-filter-optimize 配置
 filter_optimize:
-  enable: true
+  enable: false  # 全局开关，启用或禁用优化功能
   # 静态资源压缩配置
   html:
     enable: true
