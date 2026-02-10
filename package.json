@@ -35,7 +35,6 @@
     "hexo-renderer-pug": "^3.0.0",
     "hexo-renderer-stylus": "^3.0.1",
     "hexo-server": "^3.0.0",
-    "hexo-service-worker": "^1.0.1",
     "hexo-tag-aplayer": "^3.0.4",
     "hexo-tag-plugins": "^1.0.5",
     "hexo-theme-butterfly": "^5.4.3",
