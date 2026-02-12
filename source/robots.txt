@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://oxarlly.dpdns.org/sitemap.xml
+Sitemap: https://senchin.dpdns.org/sitemap.xml
