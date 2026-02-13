@@ -1007,10 +1007,11 @@ CDN:
 
   # Custom format
   # For example: https://cdn.staticfile.org/${cdnjs_name}/${version}/${min_cdnjs_file}
-  custom_format: https://cdn.jsdmirror.com/npm/${name}${verType}/${min_file}
+  custom_format: https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/${name}/${version}/${file}
   # https://jsd.012700.xyz/npm/${name}/${min_file}
   # https://jsd.012700.xyz/npm/${name}@${version}/${min_file}
   # https://jsd.oxarlly.dpdns.org/npm/${name}/${min_file}
+  # https://cdn.jsdmirror.com/npm/${name}${verType}/${min_file}
 
   option:
     # abcjs_basic_js:
@@ -1037,7 +1038,8 @@ CDN:
     # fancybox_css:
     # fireworks:
     # fontawesome:
-    fontawesome: https://unpkg.com/@fortawesome/fontawesome-free@6.1.1/css/all.min.css
+    # fontawesome: https://unpkg.com/@fortawesome/fontawesome-free@6.1.1/css/all.min.css
+    # fontawesome: https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/font-awesome/6.1.1/css/all.min.css
     # gitalk:
     # gitalk_css:
     # giscus:
