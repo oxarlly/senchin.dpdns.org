@@ -1037,7 +1037,7 @@ CDN:
     # fancybox_css:
     # fireworks:
     # fontawesome:
-    # fontawesome: https://unpkg.com/@fortawesome/fontawesome-free@6.1.1/css/all.min.css
+    fontawesome: https://unpkg.com/@fortawesome/fontawesome-free@6.1.1/css/all.min.css
     # gitalk:
     # gitalk_css:
     # giscus:
