@@ -10,7 +10,7 @@ backend:
     openAuthoring: '{{message}}'
 
 
-logo_url: https://www.oxarlly.dpdns.org/media/favicon.png # 你的 logo
+logo_url: https://oxarlly.github.io/media/favicon.png # 你的 logo
 
 
 # 禁用部署预览链接
@@ -26,8 +26,8 @@ media_folder: "source/images/" # 媒体文件将存储在图片/上载下的Repo
 public_folder: "/images/" # 上传的媒体的src属性将以/images/uploads开头。
 
 
-site_url: https://www.oxarlly.dpdns.org/ # 网站网址
-display_url: https://www.oxarlly.dpdns.org/ # 显示网址
+site_url: https://oxarlly.github.io/ # 网站网址
+display_url: https://oxarlly.github.io/ # 显示网址
 
 
 locale: "zh_Hans" # 语言环境

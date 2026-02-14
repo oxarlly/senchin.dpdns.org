@@ -7,7 +7,7 @@
 
 
 ## 🔗 快速链接
-- **在线预览 (Live Demo):** https://www.oxarlly.dpdns.org/
+- **在线预览 (Live Demo):** https://oxarlly.github.io/
 - **技术支持 (Blog):** https://butterfly.js.org/
 
 ---
@@ -77,7 +77,7 @@
 
 ### 📣 交流与反馈
 - 如果觉得好用，欢迎点一个 **Star** ⭐ 支持作者！
-- 主站: [https://www.oxarlly.dpdns.org/](https://www.oxarlly.dpdns.org/)
+- 主站: [https://oxarlly.github.io/](https://oxarlly.github.io/)
 - 源站: [https://oxarlly.github.io/](https://oxarlly.github.io/)
 
 ---

@@ -48,11 +48,11 @@ social:
 # --------------------------------------
 
 # Favicon（網站圖標）
-favicon: https://www.oxarlly.dpdns.org/media/favicon.png
+favicon: https://oxarlly.github.io/media/favicon.png
 
 # Avatar (頭像)
 avatar:
-  img: https://www.oxarlly.dpdns.org/media/avatar-o.jpg
+  img: https://oxarlly.github.io/media/avatar-o.jpg
   effect: false
 
 # Disable all banner image
@@ -69,11 +69,11 @@ index_img: http://oxarlly.97.com.mp/bg.jpg
 default_top_img:
 
 # The banner image of archive page
-archive_img: https://www.oxarlly.dpdns.org/archives/th.jpg
+archive_img: https://oxarlly.github.io/archives/th.jpg
 
 # If the banner of tag page not setting, it will show the top_img
 # note: tag page, not tags page (子標籤頁面的 top_img)
-tag_img: https://www.oxarlly.dpdns.org/images/tag.jpg
+tag_img: https://oxarlly.github.io/images/tag.jpg
 
 # The banner image of tag page
 # format:
@@ -82,7 +82,7 @@ tag_per_img:
 
 # If the banner of category page not setting, it will show the top_img
 # note: category page, not categories page (子分類頁面的 top_img)
-category_img: https://www.oxarlly.dpdns.org/images/categories.jpg
+category_img: https://oxarlly.github.io/images/categories.jpg
 
 # The banner image of category page
 # format:
@@ -246,7 +246,7 @@ aside:
       link: https://www.youtube.com/channel/UCupYS-zTTlOHHENztxWXI_Q
   card_announcement:
     enable: true
-    content: 投稿者上<a href="https://www.oxarlly.dpdns.org/link/">扩列墙</a>！
+    content: 投稿者上<a href="https://oxarlly.github.io/link/">扩列墙</a>！
   card_recent_post:
     enable: true
     limit: 5 # if set 0 will show all
