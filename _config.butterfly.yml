@@ -983,81 +983,152 @@ inject:
     # - <link rel="stylesheet" href="/xxx.css">
     - <script defer src="https://cloud.umami.is/script.js" data-website-id="7525f5b2-b5dd-423e-8dff-d482a70f688e"></script>
     - |
-      <style>
-/* 系统深色模式下自动启用深色主题 */
-@media (prefers-color-scheme: dark) {
-  .aplayer {
-    background: #1e1e1e !important;
-    color: #e0e0e0 !important;
-    border: none !important;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.3) !important;
-  }
-  .aplayer .aplayer-info {
-    border-top: 1px solid #333 !important;
-  }
-  .aplayer .aplayer-info .aplayer-music .aplayer-title {
-    color: #fff !important;
-  }
-  .aplayer .aplayer-info .aplayer-music .aplayer-author {
-    color: #aaa !important;
-  }
-  .aplayer .aplayer-info .aplayer-controller .aplayer-bar-wrap .aplayer-bar {
-    background: #444 !important;
-  }
-  .aplayer .aplayer-info .aplayer-controller .aplayer-bar-wrap .aplayer-bar .aplayer-loaded {
-    background: #555 !important;
-  }
-  .aplayer .aplayer-info .aplayer-controller .aplayer-bar-wrap .aplayer-bar .aplayer-played {
-    background: #2d8cf0 !important;
-  }
-  .aplayer .aplayer-info .aplayer-controller .aplayer-bar-wrap .aplayer-bar .aplayer-played .aplayer-thumb {
-    border-color: #2d8cf0 !important;
-    background: #fff !important;
-  }
-  .aplayer .aplayer-info .aplayer-controller .aplayer-time {
-    color: #aaa !important;
-  }
-  .aplayer .aplayer-info .aplayer-controller .aplayer-button {
-    color: #ddd !important;
-  }
-  .aplayer .aplayer-info .aplayer-controller .aplayer-button:hover {
-    color: #fff !important;
-  }
-  .aplayer .aplayer-info .aplayer-controller .aplayer-volume-wrap .aplayer-volume-bar-wrap .aplayer-volume-bar {
-    background: #444 !important;
-  }
-  .aplayer .aplayer-info .aplayer-controller .aplayer-volume-wrap .aplayer-volume-bar-wrap .aplayer-volume-bar .aplayer-volume {
-    background: #2d8cf0 !important;
-  }
-  .aplayer .aplayer-list {
-    background: #1e1e1e !important;
-    border-top: 1px solid #333 !important;
-  }
-  .aplayer .aplayer-list ol li {
-    border-top: 1px solid #333 !important;
-    color: #ddd !important;
-  }
-  .aplayer .aplayer-list ol li:hover {
-    background: #2a2a2a !important;
-  }
-  .aplayer .aplayer-list ol li.aplayer-list-light {
-    background: #2d2d2d !important;
-    color: #2d8cf0 !important;
-  }
-  .aplayer .aplayer-list ol li .aplayer-list-author {
-    color: #aaa !important;
-  }
-  .aplayer.aplayer-narrow {
-    background: #1e1e1e !important;
-  }
-  .aplayer .aplayer-lrc p {
-    color: #aaa !important;
-  }
-  .aplayer .aplayer-lrc p.aplayer-lrc-current {
-    color: #2d8cf0 !important;
-  }
-}
-</style>
+       <style>
+       /* 跟随系统全局深色模式 */
+       @media (prefers-color-scheme: dark) {
+         html body .aplayer {
+           background: #1e1e1e !important;
+           color: #e0e0e0 !important;
+           border: none !important;
+           box-shadow: 0 2px 12px rgba(0,0,0,0.3) !important;
+         }
+         html body .aplayer .aplayer-info {
+           border-top: 1px solid #333 !important;
+         }
+         html body .aplayer .aplayer-info .aplayer-music .aplayer-title {
+           color: #fff !important;
+         }
+         html body .aplayer .aplayer-info .aplayer-music .aplayer-author {
+           color: #aaa !important;
+         }
+         html body .aplayer .aplayer-info .aplayer-controller .aplayer-bar-wrap .aplayer-bar {
+           background: #444 !important;
+         }
+         html body .aplayer .aplayer-info .aplayer-controller .aplayer-bar-wrap .aplayer-bar .aplayer-loaded {
+           background: #555 !important;
+         }
+         html body .aplayer .aplayer-info .aplayer-controller .aplayer-bar-wrap .aplayer-bar .aplayer-played {
+           background: #2d8cf0 !important;
+         }
+         html body .aplayer .aplayer-info .aplayer-controller .aplayer-bar-wrap .aplayer-bar .aplayer-played .aplayer-thumb {
+           border-color: #2d8cf0 !important;
+           background: #fff !important;
+         }
+         html body .aplayer .aplayer-info .aplayer-controller .aplayer-time {
+           color: #aaa !important;
+         }
+         html body .aplayer .aplayer-info .aplayer-controller .aplayer-button {
+           color: #ddd !important;
+         }
+         html body .aplayer .aplayer-info .aplayer-controller .aplayer-button:hover {
+           color: #fff !important;
+         }
+         html body .aplayer .aplayer-info .aplayer-controller .aplayer-volume-wrap .aplayer-volume-bar-wrap .aplayer-volume-bar {
+           background: #444 !important;
+         }
+         html body .aplayer .aplayer-info .aplayer-controller .aplayer-volume-wrap .aplayer-volume-bar-wrap .aplayer-volume-bar .aplayer-volume {
+           background: #2d8cf0 !important;
+         }
+         html body .aplayer .aplayer-list {
+           background: #1e1e1e !important;
+           border-top: 1px solid #333 !important;
+         }
+         html body .aplayer .aplayer-list ol li {
+           border-top: 1px solid #333 !important;
+           color: #ddd !important;
+         }
+         html body .aplayer .aplayer-list ol li:hover {
+           background: #2a2a2a !important;
+         }
+         html body .aplayer .aplayer-list ol li.aplayer-list-light {
+           background: #2d2d2d !important;
+           color: #2d8cf0 !important;
+         }
+         html body .aplayer .aplayer-list ol li .aplayer-list-author {
+           color: #aaa !important;
+         }
+         html body .aplayer.aplayer-narrow {
+           background: #1e1e1e !important;
+         }
+         html body .aplayer .aplayer-lrc p {
+           color: #aaa !important;
+         }
+         html body .aplayer .aplayer-lrc p.aplayer-lrc-current {
+           color: #2d8cf0 !important;
+         }
+       }
+       /* 跟随Butterfly主题自带的深色模式开关 */
+       [data-theme="dark"] html body .aplayer {
+         background: #1e1e1e !important;
+         color: #e0e0e0 !important;
+         border: none !important;
+         box-shadow: 0 2px 12px rgba(0,0,0,0.3) !important;
+       }
+       [data-theme="dark"] html body .aplayer .aplayer-info {
+         border-top: 1px solid #333 !important;
+       }
+       [data-theme="dark"] html body .aplayer .aplayer-info .aplayer-music .aplayer-title {
+         color: #fff !important;
+       }
+       [data-theme="dark"] html body .aplayer .aplayer-info .aplayer-music .aplayer-author {
+         color: #aaa !important;
+       }
+       [data-theme="dark"] html body .aplayer .aplayer-info .aplayer-controller .aplayer-bar-wrap .aplayer-bar {
+         background: #444 !important;
+       }
+       [data-theme="dark"] html body .aplayer .aplayer-info .aplayer-controller .aplayer-bar-wrap .aplayer-bar .aplayer-loaded {
+         background: #555 !important;
+       }
+       [data-theme="dark"] html body .aplayer .aplayer-info .aplayer-controller .aplayer-bar-wrap .aplayer-bar .aplayer-played {
+         background: #2d8cf0 !important;
+       }
+       [data-theme="dark"] html body .aplayer .aplayer-info .aplayer-controller .aplayer-bar-wrap .aplayer-bar .aplayer-played .aplayer-thumb {
+         border-color: #2d8cf0 !important;
+         background: #fff !important;
+       }
+       [data-theme="dark"] html body .aplayer .aplayer-info .aplayer-controller .aplayer-time {
+         color: #aaa !important;
+       }
+       [data-theme="dark"] html body .aplayer .aplayer-info .aplayer-controller .aplayer-button {
+         color: #ddd !important;
+       }
+       [data-theme="dark"] html body .aplayer .aplayer-info .aplayer-controller .aplayer-button:hover {
+         color: #fff !important;
+       }
+       [data-theme="dark"] html body .aplayer .aplayer-info .aplayer-controller .aplayer-volume-wrap .aplayer-volume-bar-wrap .aplayer-volume-bar {
+         background: #444 !important;
+       }
+       [data-theme="dark"] html body .aplayer .aplayer-info .aplayer-controller .aplayer-volume-wrap .aplayer-volume-bar-wrap .aplayer-volume-bar .aplayer-volume {
+         background: #2d8cf0 !important;
+       }
+       [data-theme="dark"] html body .aplayer .aplayer-list {
+         background: #1e1e1e !important;
+         border-top: 1px solid #333 !important;
+       }
+       [data-theme="dark"] html body .aplayer .aplayer-list ol li {
+         border-top: 1px solid #333 !important;
+         color: #ddd !important;
+       }
+       [data-theme="dark"] html body .aplayer .aplayer-list ol li:hover {
+         background: #2a2a2a !important;
+       }
+       [data-theme="dark"] html body .aplayer .aplayer-list ol li.aplayer-list-light {
+         background: #2d2d2d !important;
+         color: #2d8cf0 !important;
+       }
+       [data-theme="dark"] html body .aplayer .aplayer-list ol li .aplayer-list-author {
+         color: #aaa !important;
+       }
+       [data-theme="dark"] html body .aplayer.aplayer-narrow {
+         background: #1e1e1e !important;
+       }
+       [data-theme="dark"] html body .aplayer .aplayer-lrc p {
+         color: #aaa !important;
+       }
+       [data-theme="dark"] html body .aplayer .aplayer-lrc p.aplayer-lrc-current {
+         color: #2d8cf0 !important;
+       }
+       </style>
   bottom:
     # - <script src="xxxx"></script>
 
