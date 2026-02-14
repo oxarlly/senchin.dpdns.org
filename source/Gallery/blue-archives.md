@@ -1,7 +1,7 @@
 title: 蔚蓝档案
 aside: false
 comments: false
-top_img: https://oxarlly.github.io/Gallery/02/1.png
+top_img: https://senchin.dpdns.org/Gallery/02/1.png
 date: 2024-12-01 08:11:14
 ---
 

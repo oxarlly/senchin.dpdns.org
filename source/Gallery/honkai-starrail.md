@@ -3,7 +3,7 @@ title: 崩铁
 date: 2022-09-11 20:25:14
 aside: false
 comments: false
-top_img: https://oxarlly.github.io/Gallery/03/1.jpg
+top_img: https://senchin.dpdns.org/Gallery/03/1.jpg
 ---
 
 {% gallery %}

@@ -12,7 +12,7 @@ timezone: ''
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://example.com/child' and root as '/child/'
-url: https://oxarlly.github.io
+url: https://senchin.dpdns.org
 root: /
 permalink: blog/:title/
 permalink_defaults:
@@ -204,7 +204,7 @@ filter_optimize:
     enable: false
     interlaced: false  # PNG渐进式加载
     multipass: false   # SVG优化
-  # 额外优化（关键：适配Butterfly主题）
+  # 额外优化（关键：适配Butteffly主题）
   remove_comments: true  # 移除HTML注释（减少体积）
   remove_empty_attr: true  # 移除空属性
   remove_quotes: true  # 移除不必要的引号
