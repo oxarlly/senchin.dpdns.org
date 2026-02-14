@@ -1013,6 +1013,13 @@ inject:
        html[data-theme="dark"] body .aplayer .aplayer-info .aplayer-controller .aplayer-button:hover {
          color: #ffffff !important;
        }
+       /* 音量条适配 */
+       html[data-theme="dark"] body .aplayer .aplayer-info .aplayer-controller .aplayer-volume-wrap .aplayer-volume-bar-wrap .aplayer-volume-bar {
+         background: #333333 !important;
+       }
+       html[data-theme="dark"] body .aplayer .aplayer-info .aplayer-controller .aplayer-volume-wrap .aplayer-volume-bar-wrap .aplayer-volume-bar .aplayer-volume {
+         background: #2d8cf0 !important;
+       }
        /* 播放列表背景 */
        html[data-theme="dark"] body .aplayer .aplayer-list {
          background: #121212 !important;
@@ -1053,6 +1060,11 @@ inject:
        }
        html[data-theme="dark"] body .aplayer .aplayer-lrc:after {
          background: linear-gradient(180deg, rgba(18, 18, 18, 0) 0, #121212) !important;
+       }
+       /* 核心修改：深色模式下进度条白色滑块适配，消除突兀白色 */
+       html[data-theme="dark"] body .aplayer .aplayer-info .aplayer-controller .aplayer-bar-wrap .aplayer-bar .aplayer-played .aplayer-thumb {
+         border-color: #d4b996 !important;
+         background: #d4b996 !important;
        }
        </style>
   bottom:
