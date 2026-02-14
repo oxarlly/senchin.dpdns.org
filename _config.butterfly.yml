@@ -64,7 +64,7 @@ avatar:
 disable_top_img: false
 
 # The banner image of home page
-index_img: media/bg-1.jpg
+index_img: media/bg-1.webp
 
 # If the banner of page not setting, it will show the top_img
 default_top_img:
