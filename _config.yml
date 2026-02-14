@@ -215,4 +215,6 @@ filter_optimize:
   preload:
     enable: false
 
+skip_render:
+  - "CNAME"  # 确保这一行存在，或者整skip_render 为空
 
