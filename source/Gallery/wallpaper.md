@@ -3,7 +3,7 @@ title: 壁纸
 date: 2021-09-11 20:25:14
 aside: false
 comments: false
-top_img: https://senchin.dpdns.org/Gallery/01/4.jpg
+top_img: https://www.oxarlly.dpdns.org/Gallery/01/4.jpg
 ---
 
 {% gallery %}

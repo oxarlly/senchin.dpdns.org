@@ -12,7 +12,7 @@ timezone: ''
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://example.com/child' and root as '/child/'
-url: https://senchin.dpdns.org
+url: https://www.oxarlly.dpdns.org
 root: /
 permalink: blog/:title/
 permalink_defaults:

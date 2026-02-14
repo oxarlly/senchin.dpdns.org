@@ -22,72 +22,72 @@ comments: false
         {
             "title": "再生",
             "author": "ナナツカゼ&PIKASONIC&nakotanmaru",
-            "url": "https://senchin.dpdns.org/music/mp3/再生.mp3",
-            "pic": "https://senchin.dpdns.org/music/pic/再生.jpg",
-            "lrc": "https://senchin.dpdns.org/music/lrc/再生.lrc"
+            "url": "https://www.oxarlly.dpdns.org/music/mp3/再生.mp3",
+            "pic": "https://www.oxarlly.dpdns.org/music/pic/再生.jpg",
+            "lrc": "https://www.oxarlly.dpdns.org/music/lrc/再生.lrc"
         },
         {
             "title": "あのね",
             "author": "ナナツカゼ",
-            "url": "https://senchin.dpdns.org/music/mp3/あのね.mp3",
-            "pic": "https://senchin.dpdns.org/music/pic/あのね.jpg",
-            "lrc": "https://senchin.dpdns.org/music/lrc/あのね.lrc"
+            "url": "https://www.oxarlly.dpdns.org/music/mp3/あのね.mp3",
+            "pic": "https://www.oxarlly.dpdns.org/music/pic/あのね.jpg",
+            "lrc": "https://www.oxarlly.dpdns.org/music/lrc/あのね.lrc"
         },
         {
             "title": "それで充分だよ。 (Cover)",
             "author": "Kotoha",
-            "url": "https://senchin.dpdns.org/music/mp3/それで充分だよ。 (Cover).mp3",
-            "pic": "https://senchin.dpdns.org/music/pic/それで充分だよ。 (Cover).jpg",
-            "lrc": "https://senchin.dpdns.org/music/lrc/それで充分だよ。 (Cover).lrc"
+            "url": "https://www.oxarlly.dpdns.org/music/mp3/それで充分だよ。 (Cover).mp3",
+            "pic": "https://www.oxarlly.dpdns.org/music/pic/それで充分だよ。 (Cover).jpg",
+            "lrc": "https://www.oxarlly.dpdns.org/music/lrc/それで充分だよ。 (Cover).lrc"
         },
         {
             "title": "消えない温度",
             "author": "Hanon & Kotoha;",
-            "url": "https://senchin.dpdns.org/music/mp3/消えない温度.mp3",
-            "pic": "https://senchin.dpdns.org/music/pic/消えない温度.jpg",
-            "lrc": "https://senchin.dpdns.org/music/lrc/消えない温度.txt"
+            "url": "https://www.oxarlly.dpdns.org/music/mp3/消えない温度.mp3",
+            "pic": "https://www.oxarlly.dpdns.org/music/pic/消えない温度.jpg",
+            "lrc": "https://www.oxarlly.dpdns.org/music/lrc/消えない温度.txt"
         },
         {
             "title": "清空",
             "author": "王忻辰&苏星婕;",
-            "url": "https://senchin.dpdns.org/music/mp3/清空.mp3",
-            "pic": "https://senchin.dpdns.org/music/pic/清空.jpg",
-            "lrc": "https://senchin.dpdns.org/music/lrc/清空.txt"
+            "url": "https://www.oxarlly.dpdns.org/music/mp3/清空.mp3",
+            "pic": "https://www.oxarlly.dpdns.org/music/pic/清空.jpg",
+            "lrc": "https://www.oxarlly.dpdns.org/music/lrc/清空.txt"
         },
         {
             "title": "Something Just Like This",
             "author": "The Chainsmokers&Coldplay",
-            "url": "https://senchin.dpdns.org/music/mp3/Something Just Like This.mp3",
-            "pic": "https://senchin.dpdns.org/music/pic/Something Just Like This.jpg",
-            "lrc": "https://senchin.dpdns.org/music/lrc/Something Just Like This.lrc"
+            "url": "https://www.oxarlly.dpdns.org/music/mp3/Something Just Like This.mp3",
+            "pic": "https://www.oxarlly.dpdns.org/music/pic/Something Just Like This.jpg",
+            "lrc": "https://www.oxarlly.dpdns.org/music/lrc/Something Just Like This.lrc"
         },
         {
             "title": "Daylight",
             "author": "Seredris",
-            "url": "https://senchin.dpdns.org/music/mp3/Daylight.mp3",
-            "pic": "https://senchin.dpdns.org/music/pic/Daylight.jpg",
-            "lrc": "https://senchin.dpdns.org/music/lrc/Daylight.lrc"
+            "url": "https://www.oxarlly.dpdns.org/music/mp3/Daylight.mp3",
+            "pic": "https://www.oxarlly.dpdns.org/music/pic/Daylight.jpg",
+            "lrc": "https://www.oxarlly.dpdns.org/music/lrc/Daylight.lrc"
         },
         {
             "title": "习惯失恋",
             "author": "容祖儿",
-            "url": "https://senchin.dpdns.org/music/mp3/习惯失恋-容祖儿.mp3",
-            "pic": "https://senchin.dpdns.org/music/pic/习惯失恋-容祖儿.jpg",
-            "lrc": "https://senchin.dpdns.org/music/lrc/习惯失恋-容祖儿.lrc"
+            "url": "https://www.oxarlly.dpdns.org/music/mp3/习惯失恋-容祖儿.mp3",
+            "pic": "https://www.oxarlly.dpdns.org/music/pic/习惯失恋-容祖儿.jpg",
+            "lrc": "https://www.oxarlly.dpdns.org/music/lrc/习惯失恋-容祖儿.lrc"
         },
         {
             "title": "孤雏",
             "author": "AGA",
-            "url": "https://senchin.dpdns.org/music/mp3/孤雏-AGA.mp3",
-            "pic": "https://senchin.dpdns.org/music/pic/孤雏-AGA.jpg",
-            "lrc": "https://senchin.dpdns.org/music/lrc/孤雏-AGA.lrc"
+            "url": "https://www.oxarlly.dpdns.org/music/mp3/孤雏-AGA.mp3",
+            "pic": "https://www.oxarlly.dpdns.org/music/pic/孤雏-AGA.jpg",
+            "lrc": "https://www.oxarlly.dpdns.org/music/lrc/孤雏-AGA.lrc"
         },
         {
             "title": "心做し",
             "author": "双笙 (陈元汐)",
-            "url": "https://senchin.dpdns.org/music/mp3/心做し.mp3",
-            "pic": "https://senchin.dpdns.org/music/pic/心做し.jpg",
-            "lrc": "https://senchin.dpdns.org/music/lrc/心做し.lrc"
+            "url": "https://www.oxarlly.dpdns.org/music/mp3/心做し.mp3",
+            "pic": "https://www.oxarlly.dpdns.org/music/pic/心做し.jpg",
+            "lrc": "https://www.oxarlly.dpdns.org/music/lrc/心做し.lrc"
         }
     ]
 }
