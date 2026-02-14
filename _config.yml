@@ -29,7 +29,6 @@ category_dir: categories
 code_dir: downloads/code
 i18n_dir: :lang
 skip_render:
-  - "CNAME"  # 确保这一行存在，或者整skip_render 为空
   - "**/*.jpg"
   - "**/*.png"
   - "**/*.webp"
