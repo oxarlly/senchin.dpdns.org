@@ -5,6 +5,9 @@ tags: [React, Hooks, JavaScript, 效率, 技巧, 游戏]
 categories: [前端开发, React, 游戏开发]
 ---
 
+{% video https://cdn.oxarlly.dpdns.org/Daylight.mp4 %}
+
+
 ## 引言
 
 React Hooks 已经成为 React 开发中不可或缺的一部分。 它们让函数组件也能拥有 state 和生命周期方法，极大地提高了代码的可复用性和可维护性。 本文将分享 5 个我经常使用的 React Hooks 技巧，可以帮助你提高开发效率，写出更简洁、更易于维护的代码。 为了让学习过程更有趣，我们还会用 React Hooks 实现一个简单的 "猜数字" 游戏！
