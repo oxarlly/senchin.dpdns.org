@@ -5,7 +5,7 @@ tags: [React, Hooks, JavaScript, 效率, 技巧, 游戏]
 categories: [前端开发, React, 游戏开发]
 ---
 
-{% video https://cdn.oxarlly.dpdns.org/Daylight.mp4 %}
+{% video https://cdn.senchin.dpdns.org/Daylight.mp4 %}
 
 
 ## 引言
