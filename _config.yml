@@ -29,6 +29,11 @@ category_dir: categories
 code_dir: downloads/code
 i18n_dir: :lang
 skip_render:
+  - "**/*.jpg"
+  - "**/*.png"
+  - "**/*.webp"
+  - "**/*.mp3"
+  - "**/*.mp4"
 
 # Writing
 new_post_name: :title.md # File name of new posts

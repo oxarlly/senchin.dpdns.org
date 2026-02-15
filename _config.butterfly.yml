@@ -982,6 +982,91 @@ inject:
   head:
     # - <link rel="stylesheet" href="/xxx.css">
     - <script defer src="https://cloud.umami.is/script.js" data-website-id="7525f5b2-b5dd-423e-8dff-d482a70f688e"></script>
+    - |
+       <style>
+       /* 仅跟随 Butterfly 主题深色模式开关，与系统深色模式无关 */
+       html[data-theme="dark"] body .aplayer {
+         background: #121212 !important;
+         color: #ffffff !important;
+         border: none !important;
+         box-shadow: 0 2px 12px rgba(0,0,0,0.5) !important;
+       }
+       html[data-theme="dark"] body .aplayer .aplayer-info {
+         border-top: 1px solid #2a2a2a !important;
+       }
+       /* 歌词上方的当前歌曲大标题（基准白色） */
+       html[data-theme="dark"] body .aplayer .aplayer-info .aplayer-music .aplayer-title {
+         color: #ffffff !important;
+       }
+       /* 歌手/作者名（浅灰） */
+       html[data-theme="dark"] body .aplayer .aplayer-info .aplayer-music .aplayer-author {
+         color: #cccccc !important;
+       }
+       /* 播放时间文字 */
+       html[data-theme="dark"] body .aplayer .aplayer-info .aplayer-controller .aplayer-time {
+         color: #dddddd !important;
+       }
+       /* 控制按钮颜色 */
+       html[data-theme="dark"] body .aplayer .aplayer-info .aplayer-controller .aplayer-button {
+         color: #dddddd !important;
+       }
+       html[data-theme="dark"] body .aplayer .aplayer-info .aplayer-controller .aplayer-button:hover {
+         color: #ffffff !important;
+       }
+       /* 音量条适配 */
+       html[data-theme="dark"] body .aplayer .aplayer-info .aplayer-controller .aplayer-volume-wrap .aplayer-volume-bar-wrap .aplayer-volume-bar {
+         background: #333333 !important;
+       }
+       html[data-theme="dark"] body .aplayer .aplayer-info .aplayer-controller .aplayer-volume-wrap .aplayer-volume-bar-wrap .aplayer-volume-bar .aplayer-volume {
+         background: #2d8cf0 !important;
+       }
+       /* 播放列表背景 */
+       html[data-theme="dark"] body .aplayer .aplayer-list {
+         background: #121212 !important;
+         border-top: 1px solid #2a2a2a !important;
+       }
+       /* 列表歌曲名（纯白） */
+       html[data-theme="dark"] body .aplayer .aplayer-list ol li {
+         border-top: 1px solid #2a2a2a !important;
+         color: #ffffff !important;
+       }
+       html[data-theme="dark"] body .aplayer .aplayer-list ol li:hover {
+         background: #252525 !important;
+       }
+       /* 列表中当前播放的歌曲名：和上方大标题颜色完全一致（纯白） */
+       html[data-theme="dark"] body .aplayer .aplayer-list ol li.aplayer-list-light {
+         background: #252525 !important;
+         color: #ffffff !important;
+       }
+       /* 列表歌手名（浅灰） */
+       html[data-theme="dark"] body .aplayer .aplayer-list ol li .aplayer-list-author {
+         color: #cccccc !important;
+       }
+       /* 迷你模式适配 */
+       html[data-theme="dark"] body .aplayer.aplayer-narrow {
+         background: #121212 !important;
+       }
+       /* 非当前行歌词（浅灰） */
+       html[data-theme="dark"] body .aplayer .aplayer-lrc p {
+         color: #bbbbbb !important;
+       }
+       /* 当前播放的歌词：和上方大标题颜色完全一致（纯白） */
+       html[data-theme="dark"] body .aplayer .aplayer-lrc p.aplayer-lrc-current {
+         color: #ffffff !important;
+       }
+       /* 歌词上下渐变遮罩同步适配深色背景 */
+       html[data-theme="dark"] body .aplayer .aplayer-lrc:before {
+         background: linear-gradient(180deg, #121212 0, rgba(18, 18, 18, 0)) !important;
+       }
+       html[data-theme="dark"] body .aplayer .aplayer-lrc:after {
+         background: linear-gradient(180deg, rgba(18, 18, 18, 0) 0, #121212) !important;
+       }
+       /* 核心修改：深色模式下进度条白色滑块适配，消除突兀白色 */
+       html[data-theme="dark"] body .aplayer .aplayer-info .aplayer-controller .aplayer-bar-wrap .aplayer-bar .aplayer-played .aplayer-thumb {
+         border-color: #d4b996 !important;
+         background: #d4b996 !important;
+       }
+       </style>
   bottom:
     # - <script src="xxxx"></script>
 
