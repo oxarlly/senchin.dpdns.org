@@ -223,12 +223,11 @@ filter_optimize:
 
 image_opt:
   enable: true
-  quality: 85
+  quality: 80
   webp: true
-  sizes:
-    - 1920
-    - 1280
-    - 768
-    - 480
+  avif: false
+  # 自动把所有超过1000px的图片缩到1000px以内，彻底避免超大图
+  max_width: 1000
+  max_height: 1000
 
 
