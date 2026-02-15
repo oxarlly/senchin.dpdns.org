@@ -221,3 +221,14 @@ filter_optimize:
     enable: false
 
 
+image_opt:
+  enable: true
+  quality: 85
+  webp: true
+  sizes:
+    - 1920
+    - 1280
+    - 768
+    - 480
+
+
