@@ -18,6 +18,7 @@
     "hexo-blog-passwd": "^3.2.2",
     "hexo-butterfly-extjs": "^1.4.10",
     "hexo-cli": "^4.3.2",
+    "hexo-image-opt": "^1.1.6",
     "hexo-deployer-git": "^4.0.0",
     "hexo-generator-archive": "^2.0.0",
     "hexo-generator-category": "^2.0.0",
