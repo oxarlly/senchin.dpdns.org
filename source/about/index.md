@@ -10,5 +10,5 @@ comments: false
 Made in 2022.05
 
 <div class="videoContent">
-  <video class="videoElement" src="https://senchin.dpdns.org/about/th.mp4" controls
+  <video class="videoElement" src="https://cdn.senchin.dpdns.org/th.mp4" controls
      preload="auto" width="100%" height="100%"></video></div>
