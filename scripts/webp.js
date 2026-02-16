@@ -1,132 +1,47 @@
+const sharp = require('sharp');
+const path = require('path');
 const fs = require('fs');
 const color = require('colors');
-const path = require('path');
-const sharp = require('sharp');
 
+// --- 配置项 ---
+const QUALITY = 85; // 压缩质量
+const EXTNAMES = ['.jpg', '.jpeg', '.png']; // 需要转换的格式
 
-/**
- * Hexo's filter hook that is triggered before generating a post
- */
-hexo.extend.filter.register('before_post_render', function(data){
-    // Replace img src with .webp
-    if (data.path.split('/')[0] === 'about') {
-        return data;
-    }
+hexo.extend.filter.register('after_generate', async function() {
+    const publicDir = hexo.public_dir;
+    const images = [];
 
-    // Find all img tags
-    const imgRegex = /(?<!https?:\/\/)\!\[[^\]]*]\((?!https?:\/\/)(.*?)\)|<img [^>]*src="((?!https?:\/\/)(.*?))"[^>]*>/g;
-    if (data.content.indexOf('<img') !== -1 || data.content.indexOf('![') !== -1) {
-        try {
-            data.content.match(imgRegex).forEach(function(imgTag){
-                console.log(color.green('Hexo-Auto-Webp-Converter  ') + 'Found: ' + color.magenta(imgTag))
-
-                // Determine whether the imgTag is in Markdown format or HTML format
-                const match = imgTag.match(/\((.*?)\)|<img [^>]*src="((?!https?:\/\/)(.*?)?)"/);
-                let src;
-                if (match[1]) {
-                    src = match[1];
-                } else if (match[2]) {
-                    src = match[2];
-                } else {
-                    console.log(color.green('Hexo-Auto-Webp-Converter  ') + color.red('Failed to match ') + color.magenta(match));
-                }
-
-                try {
-                    if(!src.endsWith('.webp')) {
-                        const newSrc = src.substring(0, src.lastIndexOf('.')) + '.webp';
-                        data.content = data.content.replace(src, newSrc);
-                        console.log(color.green('Hexo-Auto-Webp-Converter  ') + 'Replaced: ' + color.magenta(src) + ' => ' + color.magenta(newSrc));
-                    } else {
-                        console.log(color.green('Hexo-Auto-Webp-Converter  ') + color.yellow('Skip ') + color.magenta(src) + ' the match is the following: ' + color.magenta(imgTag));
-                    }
-                } catch (err) {
-                    console.log(color.green('Hexo-Auto-Webp-Converter  ') + color.red('Failed to convert ') + color.magenta(src) + ' due to ' + color.yellow(err));
-                }
-            });
-        } catch (TypeError) {
-            console.log(color.green('Hexo-Auto-Webp-Converter  ') + color.red('Failed to match ') + color.magenta(data.title) + ' due to ' + color.yellow('TypeError') + ', this is often caused by image tags in code blocks');
-        }
-
-    }
-
-    return data;
-});
-
-
-/**
- * Hexo's filter hook that is triggered before Hexo exits
- */
-hexo.extend.filter.register('before_exit', () => {
-    // Check if the command is hexo g or hexo generate, if not, the script will not be executed
-    const args = process.argv;
-    if (args[1].includes('hexo') && (args[2] === 'g' || args[2] === 'generate')) {
-        const publicDir = hexo.public_dir;
-
-        const imgExtensions = ['.jpg', '.jpeg', '.png'];
-        const images = []
-        const videoExtensions = ['.mp4'];
-        const videos = []
-
-        /**
-         * Traverse the directory recursively and find all images and videos
-         * @param dir
-         */
-        function traverse(dir) {
-            // Read all files in the directory
-            const files = fs.readdirSync(dir);
-
-            // Loop through all files
-            files.forEach(file => {
-                const filePath = path.join(dir, file);
-
-                // Determine if the file is a directory or a file
-                // If it is a directory, continue to traverse
-                // If it is a file, determine whether it is an image or a video
-                if (fs.statSync(filePath).isDirectory()) {
-                    traverse(filePath);
-                } else {
-                    const ext = path.extname(filePath);
-                    if (imgExtensions.includes(ext)) {
-                        images.push(filePath);
-                    } else if (videoExtensions.includes(ext)) {
-                        videos.push(filePath);
-                    }
-                }
-            });
-        }
-
-        traverse(publicDir);
-
-        // Convert images to .webp
-        images.forEach(async imgPath => {
-            const imgDir = path.dirname(imgPath);
-            const subDir = imgDir.slice(publicDir.length);
-
-            // Only convert images in the post directory (e.g. public/2021/01/01)
-            // If Hexo_Abbrlink is enabled, the post directory will be public/post
-            const regex = /^(\d{4}\\)|^(posts\\)/;
-            if (regex.test(subDir)) {
-                const imgName = path.basename(imgPath);
-                const name = imgName.split('.').slice(0, -1).join('.');
-                const newPath = path.join(imgDir, name + '.webp');
-
-                // Check if the converted image already exists
-                // If it does not exist, convert it
-                fs.access(newPath, fs.constants.F_OK, async (err) => {
-                    if (err) {
-                        try {
-                            await sharp(imgPath).toFile(newPath);
-                            console.log(color.green('Hexo-Auto-Webp-Converter  ') + 'Converted: ' + color.magenta(imgPath) + ' => ' + color.magenta(newPath));
-                        } catch (err) {
-                            console.log(color.green('Hexo-Auto-Webp-Converter  ') + color.red('Failed to convert ') + color.magenta(imgPath) + ' due to ' + color.yellow(err));
-                        }
-                    } else {
-                        console.log(color.green('Hexo-Auto-Webp-Converter  ') + color.yellow('Skip ') + color.magenta(imgPath) + ' the file already exists');
-                    }
-                });
+    // 1. 递归扫描 public 文件夹下所有图片
+    function traverse(dir) {
+        const files = fs.readdirSync(dir);
+        files.forEach(file => {
+            const filePath = path.join(dir, file);
+            if (fs.statSync(filePath).isDirectory()) {
+                traverse(filePath);
             } else {
-                console.log(color.green('Hexo-Auto-Webp-Converter  ') + color.yellow('Skip ') + color.magenta(subDir) + ' the directory is not a post directory');
+                if (EXTNAMES.includes(path.extname(filePath).toLowerCase())) {
+                    images.push(filePath);
+                }
             }
         });
     }
-}, 9999);
+
+    traverse(publicDir);
+
+    // 2. 执行并行转换
+    await Promise.all(images.map(async imgPath => {
+        const webpPath = imgPath.replace(/\.(jpg|jpeg|png)$/i, '.webp');
+        
+        // 如果 webp 已存在则跳过（增量生成）
+        if (fs.existsSync(webpPath)) return;
+
+        try {
+            await sharp(imgPath)
+                .webp({ quality: QUALITY })
+                .toFile(webpPath);
+            console.log(color.green('[WebP Converter] ') + 'Done: ' + color.magenta(path.relative(publicDir, webpPath)));
+        } catch (err) {
+            console.error(color.red('[WebP Converter] Error: ') + imgPath, err);
+        }
+    }));
+});
