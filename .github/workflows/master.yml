@@ -24,7 +24,6 @@ jobs:
     - name: Setup Hexo Dependencies
       run: |
         npm install hexo-cli -g
-        npm install --platform=linux --arch=x64 sharp
         npm install --legacy-peer-deps
     
     # 配置 SSH 部署私钥
