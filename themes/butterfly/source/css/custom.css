@@ -1,0 +1,7 @@
+/* 强制隐藏MathJax弹出菜单 */
+.MathJax_Menu, mjx-menu {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}

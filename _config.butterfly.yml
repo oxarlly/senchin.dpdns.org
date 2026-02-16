@@ -1067,6 +1067,21 @@ inject:
          background: #d4b996 !important;
        }
        </style>
+    - <script>
+         window.MathJax = {
+           options: {
+             enableMenu: false // 彻底禁用MathJax菜单功能，核心配置
+           },
+           ui: {
+             menu: {
+               settings: {
+                 contextMenu: false, // 禁用右键菜单触发
+                 inTabOrder: false // 移除菜单的Tab焦点，避免键盘误触
+               }
+             }
+           }
+         };
+       </script>
   bottom:
     # - <script src="xxxx"></script>
 
