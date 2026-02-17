@@ -24,7 +24,7 @@ jobs:
     - name: Setup Hexo Dependencies
       run: |
         npm install hexo-cli -g
-        npm install hexo-filter-webp --save
+        npm install hexo-filter-responsive-images --save
         npm install --legacy-peer-deps
     
     # 配置 SSH 部署私钥
