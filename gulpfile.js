@@ -1,16 +1,18 @@
 const gulp = require('gulp');
 const webp = require('gulp-webp');
 
-// 任务：将 source/images 及其所有子目录下的图片转换为 webp
+// 修正路径：Hexo 标准路径通常是 './source/images'
+// 如果你的图片确实在根目录的 images 文件夹，请改回 './images'
+const IMG_PATH = './source/images'; 
+
 gulp.task('webp', () => 
-    gulp.src('./images/**/*.{jpg,png,jpeg}') // ** 代表递归匹配所有子目录
-        .pipe(webp({
-            quality: 85,    // 压缩质量
-            preset: 'photo', // 预设模式
-            method: 6        // 压缩方法（0-6，6为最慢但压缩比最高）
+    gulp.src(`${IMG_PATH}/**/*.{jpg,png,jpeg}`) 
+        .pipe((webp.default ? webp.default : webp)({ 
+            quality: 85,
+            preset: 'photo',
+            method: 6
         }))
-        .pipe(gulp.dest('./images')) // 输出回原目录，Gulp会自动保持子目录结构
+        .pipe(gulp.dest(IMG_PATH)) 
 );
 
-// 默认任务
 gulp.task('default', gulp.series('webp'));
