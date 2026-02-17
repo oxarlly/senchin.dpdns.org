@@ -45,8 +45,7 @@
     "vscode-web": "^1.91.1"
   },
   "devDependencies": {
-    "imagemin": "^9.0.1",
-    "imagemin-webp": "^8.0.0",
-    "sharp": "^0.34.5"
+    "gulp": "^5.0.1",
+    "gulp-webp": "^5.1.0"
   }
 }
