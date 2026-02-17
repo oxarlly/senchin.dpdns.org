@@ -237,3 +237,13 @@ image_opt:
   sizes: [400, 800, 1280, 1920] # 响应式WebP宽度，按需调整
   skipExisting: true   # 跳过已生成的优化图片，提升生成速度
 
+
+webp:
+  quality: 80
+  # 开启后，生成的WebP和原图同目录，仅改后缀
+  replaceSrc: true
+  # 排除已有的WebP文件
+  exclude:
+    - "*.webp"
+
+
