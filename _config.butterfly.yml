@@ -1066,7 +1066,58 @@ inject:
           background: #d4b996 !important;
         }
       </style>
-  bottom:
+bottom:
+    - |
+      <script>
+        (function() {
+          const convertToWebP = () => {
+            // 检查浏览器是否支持 WebP
+            const supportWebP = () => {
+              const elem = document.createElement('canvas');
+              if (elem.getContext && elem.getContext('2d')) {
+                return elem.toDataURL('image/webp').indexOf('data:image/webp') === 0;
+              }
+              return false;
+            };
+
+            if (!supportWebP()) return;
+
+            // 1. 处理所有图片标签 (兼容 src, 懒加载 data-lazy-src, 和响应式 srcset)
+            document.querySelectorAll('img').forEach(img => {
+              ['src', 'data-lazy-src', 'srcset'].forEach(attr => {
+                const val = img.getAttribute(attr);
+                if (val && val.match(/\.(jpe?g|png)$/i) && !val.includes('avatar')) {
+                  img.setAttribute(attr, val.replace(/\.(jpe?g|png)$/i, '.webp'));
+                }
+              });
+            });
+
+            // 2. 处理文章封面、背景图等内联样式
+            document.querySelectorAll('[style*="background-image"]').forEach(el => {
+              const bg = el.style.backgroundImage;
+              if (bg && bg.match(/\.(jpe?g|png)/i)) {
+                el.style.backgroundImage = bg.replace(/\.(jpe?g|png)/i, '.webp');
+              }
+            });
+          };
+
+          // 初始加载时执行
+          window.addEventListener('load', convertToWebP);
+          
+          // 核心：兼容 Butterfly 的 PJAX 局部刷新
+          // 确保切换页面后，新页面的图片也能被替换
+          document.addEventListener('pjax:complete', convertToWebP);
+          
+          // 额外补充：如果使用了懒加载，由于懒加载节点会动态变化，可以在这里触发
+          document.addEventListener('lazyloaded', (e) => {
+            const img = e.target;
+            const src = img.getAttribute('src');
+            if (src && src.match(/\.(jpe?g|png)$/i) && !src.includes('avatar')) {
+              img.setAttribute('src', src.replace(/\.(jpe?g|png)$/i, '.webp'));
+            }
+          });
+        })();
+      </script>
     # - <script src="xxxx"></script>
 
 google_site_verification: Zepir5L0MQpLxVLNQ1k-0CNsHtrOvX0hhc490slOf-U
