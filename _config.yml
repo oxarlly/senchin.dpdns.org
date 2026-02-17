@@ -104,6 +104,15 @@ ignore:
 ## Themes: https://hexo.io/themes/
 theme: butterfly
 
+plugins:
+  - hexo-generator-archive
+  - hexo-generator-category
+  - hexo-generator-tag
+  - hexo-generator-feed
+  - hexo-generator-sitemap
+  - ./scripts/convert-webp.js
+
+
 # Deployment 部署
 ## Docs: https://hexo.io/docs/one-command-deployment
 
