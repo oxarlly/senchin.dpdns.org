@@ -23,7 +23,7 @@ hexo.extend.generator.register('convert-webp', function() {
           imagemin([filePath], {
             destination: outputDir,
             plugins: [
-              imageminWebp({ quality: 75 }) // 转换为 WebP 格式，质量可根据需要调整
+              imageminWebp({ quality: 85 }) // 转换为 WebP 格式，质量可根据需要调整
             ]
           }).then(() => {
             console.log(`Converted: ${filePath} -> ${destPath}`);
