@@ -24,7 +24,7 @@ jobs:
     - name: Setup Hexo Dependencies
       run: |
         npm install hexo-cli -g
-        npm install --save fs path sharp
+        npm install hexo-filter-webp --save
         npm install --legacy-peer-deps
     
     # 配置 SSH 部署私钥
