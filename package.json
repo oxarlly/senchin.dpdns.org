@@ -42,7 +42,6 @@
     "path": "^0.12.7",
     "quill": "^2.0.3",
     "react-dom": "^19.1.1",
-    "hexo-image-opt":"1.1.6",
     "vscode-web": "^1.91.1"
   },
   "devDependencies": {
