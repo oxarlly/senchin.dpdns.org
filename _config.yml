@@ -238,12 +238,12 @@ image_opt:
   skipExisting: true   # 跳过已生成的优化图片，提升生成速度
 
 
-webp:
-  quality: 80
-  # 开启后，生成的WebP和原图同目录，仅改后缀
-  replaceSrc: true
-  # 排除已有的WebP文件
-  exclude:
-    - "*.webp"
+responsive_images:
+  pattern: /\.(jpg|jpeg|png)$/
+  sizes:
+    - width: 1000
+      format: webp
+      quality: 80
+  rename: '${filename}.${format}' # 同目录同名，仅改后缀
 
 
