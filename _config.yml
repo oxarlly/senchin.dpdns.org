@@ -232,18 +232,3 @@ filter_optimize:
 
 
 
-image_opt:
-  quality: 80          # WebP和原图压缩质量，默认80，兼顾画质和体积
-  sizes: [400, 800, 1280, 1920] # 响应式WebP宽度，按需调整
-  skipExisting: true   # 跳过已生成的优化图片，提升生成速度
-
-
-responsive_images:
-  pattern: /\.(jpg|jpeg|png)$/
-  sizes:
-    - width: 1000
-      format: webp
-      quality: 80
-  rename: '${filename}.${format}' # 同目录同名，仅改后缀
-
-
