@@ -18,7 +18,7 @@ jobs:
     - name: Setup Node.js 12.x 
       uses: actions/setup-node@v3
       with:
-        node-version: "16"
+        node-version: "20"
     
     # 安装 Hexo 及其依赖
     - name: Setup Hexo Dependencies
@@ -51,6 +51,5 @@ jobs:
     - name: Deploy Hexo 
       run: |
         hexo clean
-        gulp
         hexo generate
         hexo deploy
