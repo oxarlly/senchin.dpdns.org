@@ -230,5 +230,13 @@ filter_optimize:
     enable: false
 
 
+responsive_images:
+  pattern: /\.(jpg|jpeg|png)$/
+  sizes:
+    - width: 1920
+      format: webp
+      quality: 85
+  rename: '${filename}.webp'
+  replace_src: true # 核心开关
 
 
