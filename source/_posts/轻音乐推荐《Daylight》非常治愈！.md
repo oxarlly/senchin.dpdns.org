@@ -1,7 +1,7 @@
 ---
 abbrlink: ''
 categories: []
-cover: /images/轻音乐推荐《Daylight》非常治愈！/th.png
+cover: /images/轻音乐推荐《Daylight》非常治愈！/th.webp
 date: '2025-10-06T08:22:34+08:00'
 tags:
 - 音乐
