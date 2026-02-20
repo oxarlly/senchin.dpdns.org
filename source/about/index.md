@@ -2,7 +2,7 @@
 title: 关于
 date: 2020-11-22 14:30:00
 type: "about"
-top_img: https://senchin.dpdns.org/about/th.jpg
+top_img: https://senchin.dpdns.org/about/th.webp
 comments: false
 ---
 
