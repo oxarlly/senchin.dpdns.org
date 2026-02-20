@@ -53,7 +53,7 @@ social:
 # --------------------------------------
 
 # Favicon（網站圖標）
-favicon: https://senchin.dpdns.org/media/favicon.png
+favicon: https://senchin.dpdns.org/media/favicon.webp
 
 # Avatar (頭像)
 avatar:
@@ -105,13 +105,13 @@ cover:
 # Replace Broken Images (替換無法顯示的圖片)
 error_img:
   flink: /img/friend_404.gif
-  post_page: /img/404.jpg
+  post_page: /img/404.webp
 
 # A simple 404 page
 error_404:
   enable: true
   subtitle: '页面找不到'
-  background: /media/page404.jpg
+  background: /media/page404.webp
 
 post_meta:
   page: # Home Page
@@ -641,7 +641,7 @@ microsoft_clarity:
 # Google Adsense (谷歌廣告)
 google_adsense:
   enable: false
-  auto_ads: true
+  auto_ads: false
   js: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js
   client:
   enable_page_level_ads: true
@@ -707,7 +707,7 @@ text_align_justify: false
 background:
 
 # Footer Background
-footer_img: media/bg.jpg
+footer_img: media/bg-1.webp
 
 # Add mask to header or footer (为 header 或 footer 添加黑色半透遮罩)
 mask:
