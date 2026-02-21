@@ -1,0 +1,6 @@
+/* 禁用首页文章封面 hover 放大 */
+.article-sort-item-img img,
+.article-sort-item-img img:hover {
+  transform: none !important;
+  transition: none !important;
+}
