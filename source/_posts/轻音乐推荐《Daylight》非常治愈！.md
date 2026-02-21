@@ -12,6 +12,7 @@ cover: /images/轻音乐推荐《Daylight》非常治愈！/th.webp
 
 <video class="videoElement" src="https://cdn.senchin.dpdns.org/Daylight.mp4" controls preload="auto" width="100%" height="100%"></video>
 </div>
+
 ## 🎵 《Daylight》——在黄昏中慢慢亮起的光
 
 有些音乐不需要歌词，
