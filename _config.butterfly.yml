@@ -1066,7 +1066,7 @@ inject:
           background: #d4b996 !important;
         }
       </style>
-- |
+    - |
       <style>
         /* 屏蔽 MathJax 或其他插件生成的右键菜单框架 */
         .CtxtMenu_MenuFrame {
