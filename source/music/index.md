@@ -7,6 +7,7 @@ comments: false
 ---
 
 
+## 深夜治愈循环
 
 {% aplayerlist %}
 {
@@ -17,7 +18,7 @@ comments: false
     "mutex": true,
     "theme": "#e6d0b2",
     "preload": "metadata",
-    "listmaxheight": "513px",
+    "listmaxheight": "520px",
     "music": [
         {
             "title": "再生",
@@ -39,7 +40,24 @@ comments: false
             "url": "https://senchin.dpdns.org/music/mp3/それで充分だよ。 (Cover).mp3",
             "pic": "https://senchin.dpdns.org/music/pic/それで充分だよ。 (Cover).webp",
             "lrc": "https://senchin.dpdns.org/music/lrc/それで充分だよ。 (Cover).lrc"
-        },
+        }
+    ]
+}
+{% endaplayerlist %}
+
+## 日常情绪BGM
+
+{% aplayerlist %}
+{
+    "narrow": false,
+    "autoplay": false,
+    "mode": "random",
+    "showlrc": 3,
+    "mutex": true,
+    "theme": "#e6d0b2",
+    "preload": "metadata",
+    "listmaxheight": "520px",
+    "music": [
         {
             "title": "消えない温度",
             "author": "Hanon & Kotoha;",
