@@ -291,7 +291,7 @@ aside:
       link: https://www.youtube.com/channel/UCupYS-zTTlOHHENztxWXI_Q
   card_announcement:
     enable: true
-    content: 投稿者上<a href="https://senchin.dpdns.org/link/">扩列墙</a>！
+    content: 本站为个人博客，内容随缘更新。<br>感谢你的停留与喜欢。
   card_recent_post:
     enable: true
     limit: 5 # if set 0 will show all
