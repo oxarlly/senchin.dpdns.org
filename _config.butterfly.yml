@@ -64,7 +64,7 @@ avatar:
 disable_top_img: false
 
 # The banner image of home page
-index_img: media/bg-1.webp
+index_img: media/bg.webp
 
 # If the banner of page not setting, it will show the top_img
 default_top_img:
@@ -707,7 +707,7 @@ text_align_justify: false
 background:
 
 # Footer Background
-footer_img: media/bg-1.webp
+footer_img: media/bg.webp
 
 # Add mask to header or footer (为 header 或 footer 添加黑色半透遮罩)
 mask:
