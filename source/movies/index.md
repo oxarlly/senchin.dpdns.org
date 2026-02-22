@@ -5,11 +5,8 @@ type: "movies"
 comments: false
 top_img: https://senchin.dpdns.org/movies/th.webp
 ---
- 
-<div style="text-align: center;">
-<b>无标题视频</b>
-</div>
-<div style="text-align: center;"><font color="gray">管理员    2026年2月22日</font></div>
+
+<center><b>《蔚蓝档案》× 同济大学深海探索馆科普PV</b></center>
+<center><font color="gray">管理员    2026年2月22日</font></center>
 {% video https://cdn.senchin.dpdns.org/movie-1.mp4 %}
 
-<center>《蔚蓝档案》× 同济大学深海探索馆科普PV</center>
