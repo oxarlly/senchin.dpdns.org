@@ -10,7 +10,4 @@ top_img: https://senchin.dpdns.org/movies/th.webp
 <b>无标题视频</b>
 </div>
 <div style="text-align: center;"><font color="gray">管理员    2026年2月22日</font></div>
-<br>
-<div class="videoContent">
-  <video class="videoElement" src="https://cdn.senchin.dpdns.org/movie-1.mp4" controls
-     preload="auto" width="100%" height="100%"></video></div>
+{% video https://cdn.senchin.dpdns.org/movie-1.mp4 %}
