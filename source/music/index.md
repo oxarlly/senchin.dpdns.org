@@ -18,7 +18,7 @@ comments: false
     "mutex": true,
     "theme": "#e6d0b2",
     "preload": "metadata",
-    "listmaxheight": "520px",
+    "listmaxheight": "513px",
     "music": [
         {
             "title": "再生",
@@ -56,7 +56,7 @@ comments: false
     "mutex": true,
     "theme": "#e6d0b2",
     "preload": "metadata",
-    "listmaxheight": "520px",
+    "listmaxheight": "513px",
     "music": [
         {
             "title": "消えない温度",
