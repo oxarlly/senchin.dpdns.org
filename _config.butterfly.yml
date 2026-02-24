@@ -399,14 +399,16 @@ rightside_item_order:
 # (false 需要時加載，須在使用的 Markdown Front-matter 加上 mathjax: true)
 
 math:
-  use: mathjax # 或 katex
+  use: katex # 或 katex
   per_page: true
   hide_scrollbar: true
   mathjax:
     enableMenu: true
     tags: none
   katex:
-    copy_tex: false
+    copy_tex: true
+    mhchem: true # 开启化学式支持
+    async: true
 
 # search (搜索)
 # see https://butterfly.js.org/posts/ceeb73f/#搜索系統
