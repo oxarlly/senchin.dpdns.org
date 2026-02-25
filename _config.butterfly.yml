@@ -399,7 +399,7 @@ rightside_item_order:
 # (false 需要時加載，須在使用的 Markdown Front-matter 加上 mathjax: true)
 
 math:
-  use: katex # 或 katex
+  use: mathjax # 或 katex
   per_page: true
   hide_scrollbar: true
   mathjax:
