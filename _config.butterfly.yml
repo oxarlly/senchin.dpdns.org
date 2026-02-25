@@ -407,8 +407,8 @@ math:
     tags: none
   katex:
     copy_tex: true
-    mhchem: true # 开启化学式支持
-    async: true
+    # mhchem: true # 开启化学式支持
+    # async: true
 
 # search (搜索)
 # see https://butterfly.js.org/posts/ceeb73f/#搜索系統
