@@ -64,7 +64,7 @@ avatar:
 disable_top_img: false
 
 # The banner image of home page
-index_img: media/bg-1.webp
+index_img: media/bg.webp
 
 # If the banner of page not setting, it will show the top_img
 default_top_img:
@@ -291,7 +291,7 @@ aside:
       link: https://www.youtube.com/channel/UCupYS-zTTlOHHENztxWXI_Q
   card_announcement:
     enable: true
-    content: 投稿者上<a href="https://senchin.dpdns.org/link/">扩列墙</a>！
+    content: 本站为个人博客，内容随缘更新。<br>感谢你的停留与喜欢。
   card_recent_post:
     enable: true
     limit: 5 # if set 0 will show all
@@ -399,14 +399,16 @@ rightside_item_order:
 # (false 需要時加載，須在使用的 Markdown Front-matter 加上 mathjax: true)
 
 math:
-  use: mathjax # 或 katex
+  use: katex # 或 katex
   per_page: true
   hide_scrollbar: true
   mathjax:
     enableMenu: true
     tags: none
   katex:
-    copy_tex: false
+    copy_tex: true
+    mhchem: true # 开启化学式支持
+    async: true
 
 # search (搜索)
 # see https://butterfly.js.org/posts/ceeb73f/#搜索系統
@@ -707,7 +709,7 @@ text_align_justify: false
 background:
 
 # Footer Background
-footer_img: media/bg-1.webp
+footer_img: media/bg.webp
 
 # Add mask to header or footer (为 header 或 footer 添加黑色半透遮罩)
 mask:
@@ -785,7 +787,7 @@ display_mode: light
 # Beautify (美化頁面顯示)
 beautify:
   enable: true
-  field: post # site/post
+  field: site # site/post
   title-prefix-icon: '\f0c1'
   title-prefix-icon-color: '#F47466'
 

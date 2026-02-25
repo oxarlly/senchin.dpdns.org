@@ -5,12 +5,8 @@ type: "movies"
 comments: false
 top_img: https://senchin.dpdns.org/movies/th.webp
 ---
- 
-<font size="5"><div style="text-align: center;">
-无标题视频
-</div></font>
-<div style="text-align: center;"><font color="gray">百万    2024年5月28日</font></div>
-<br>
-<div class="videoContent">
-  <video class="videoElement" src="https://senchin.dpdns.org/movies/1.mp4" controls
-     preload="auto" width="100%" height="100%"></video></div>
+
+<center><b>《蔚蓝档案》× 同济大学深海探索馆科普PV</b></center>
+<center><font color="gray">管理员    2026年2月22日</font></center>
+{% video https://cdn.senchin.dpdns.org/movie-1.mp4 %}
+
