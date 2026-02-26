@@ -362,7 +362,8 @@ translate:
   msgToTraditionalChinese: '繁'
   # The text of the button when the language is Traditional Chinese
   msgToSimplifiedChinese: '簡'
-
+  blacklist:
+    - "無量 – Multitudinous"
 # Read Mode (閲讀模式)
 readmode: true
 
