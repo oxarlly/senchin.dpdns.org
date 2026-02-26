@@ -21,5 +21,15 @@ script#config-diff.
     title: '!{titleVal}',
     isHighlightShrink: !{isHighlightShrink},
     isToc: !{showToc},
-    pageType: '!{page.type == 'shuoshuo' ? 'shuoshuo' : globalPageType}'
+    pageType: '!{page.type === "shuoshuo" ? "shuoshuo" : globalPageType}',
+    // 新增：简繁转换相关配置
+    translate: {
+      defaultEncoding: !{theme.translate.defaultEncoding},
+      translateDelay: !{theme.translate.translateDelay},
+      msgToTraditionalChinese: '!{theme.translate.msgToTraditionalChinese}',
+      msgToSimplifiedChinese: '!{theme.translate.msgToSimplifiedChinese}',
+      blacklist: !{JSON.stringify(theme.translate.blacklist || [])}
+    },
+    // 其他配置（如 Snackbar 等）保持不变，按需补充
+    Snackbar: !{JSON.stringify(theme.Snackbar || {})}
   }
