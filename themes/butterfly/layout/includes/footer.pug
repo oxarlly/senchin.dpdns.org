@@ -22,9 +22,9 @@ if nav
       - const sinceYear = owner.since
       span.copyright
         if sinceYear && sinceYear != currentYear
-          != `&copy;&nbsp;${sinceYear} - ${currentYear} By ${config.author}`
+          != `&copy;&nbsp;${sinceYear} - ${currentYear} By <span translate="no">${config.author}</span>`
         else
-          != `&copy;&nbsp;${currentYear} By ${config.author}`
+          != `&copy;&nbsp;${currentYear} By <span translate="no">${config.author}</span>`
     if copyright.enable
       - const v = copyright.version ? getVersion() : false
       span.framework-info
