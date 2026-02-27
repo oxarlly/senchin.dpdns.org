@@ -573,7 +573,7 @@ remark42:
 # Artalk
 # https://artalk.js.org/guide/frontend/config.html
 artalk:
-  server: https://artalk.senchin.dpdns.org/
+  server: https://oxarlly-artalk.hf.space/
   site: 千顷文化
   visitor: false
   option:
