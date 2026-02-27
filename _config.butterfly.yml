@@ -577,6 +577,18 @@ artalk:
   site: 千顷文化
   visitor: false
   option:
+    # 评论框占位提示文字
+    placeholder: 友善发言，理性交流～
+    # 默认头像
+    avatar: mm
+    # 评论最大嵌套层数
+    maxNest: 3
+    # 暗黑模式跟随主题
+    darkMode: auto
+    # 投票/点赞功能
+    vote: true
+    # 图片上传功能
+    imgUpload: true
 
 # Chat Services
 # --------------------------------------
