@@ -391,8 +391,10 @@ rightside_scroll_percent: false
 # Don't repeat 不要重複
 rightside_item_order:
   enable: false
-  hide: comment     # readmode,translate,darkmode,hideAside
-  show: readmode,darkmode,toc,comment # toc,chat,comment
+  hide: 
+# comment     # readmode,translate,darkmode,hideAside
+  show: xxx,xxx,xx
+# readmode,darkmode,toc,comment # toc,chat,comment
 
 # Math (數學)
 # --------------------------------------
