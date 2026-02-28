@@ -5,4 +5,5 @@ reward:
 description:
 top_img: /live/th.webp
 type: shuoshuo
+comments: false
 ---
