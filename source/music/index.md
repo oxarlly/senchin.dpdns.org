@@ -16,7 +16,7 @@ comments: false
     "mutex": true,
     "theme": "#e6d0b2",
     "preload": "metadata",
-    "listmaxheight": "513px",
+    "listmaxheight": "250px",
     "music": [
         {
             "title": "再生",
