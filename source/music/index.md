@@ -33,6 +33,13 @@ comments: false
             "lrc": "https://senchin.dpdns.org/music/lrc/あのね.lrc"
         },
         {
+            "title": "ただ声一つ",
+            "author": "ロクデナシ",
+            "url": "https://senchin.dpdns.org/music/mp3/ただ声一つ.mp3",
+            "pic": "https://senchin.dpdns.org/music/pic/ただ声一つ.webp",
+            "lrc": "https://senchin.dpdns.org/music/lrc/ただ声一つ.txt"
+        },
+        {
             "title": "それで充分だよ。 (Cover)",
             "author": "Kotoha",
             "url": "https://senchin.dpdns.org/music/mp3/それで充分だよ。 (Cover).mp3",
