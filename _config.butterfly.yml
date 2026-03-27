@@ -265,7 +265,7 @@ footer:
   owner:
     enable: true
     since: 2022
-  custom_text: 维护时间: 7:00～23:00
+  custom_text: "维护时间: 7:00～23:00"
   copyright: true # Copyright of theme and framework
 
 # aside (側邊欄)
