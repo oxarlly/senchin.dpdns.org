@@ -19,6 +19,13 @@ comments: false
     "listmaxheight": "250px",
     "music": [
         {
+            "title": "I Always Do",
+            "author": "Punishing Gray Raven",
+            "url": "https://senchin.dpdns.org/music/mp3/I Always Do.mp3",
+            "pic": "https://senchin.dpdns.org/music/pic/I Always Do.webp",
+            "lrc": "https://senchin.dpdns.org/music/lrc/I Always Do.lrc"
+        },
+        {
             "title": "再生",
             "author": "ナナツカゼ&PIKASONIC&nakotanmaru",
             "url": "https://senchin.dpdns.org/music/mp3/再生.mp3",
