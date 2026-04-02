@@ -19,6 +19,13 @@ comments: false
     "listmaxheight": "250px",
     "music": [
         {
+            "title": "僕が見つけた綻び",
+            "author": "nayuta",
+            "url": "https://senchin.dpdns.org/music/mp3/僕が見つけた綻び.mp3",
+            "pic": "https://senchin.dpdns.org/music/pic/僕が見つけた綻び.webp",
+            "lrc": "https://senchin.dpdns.org/music/lrc/僕が見つけた綻び.lrc"
+        },
+        {
             "title": "I Always Do",
             "author": "Punishing Gray Raven",
             "url": "https://senchin.dpdns.org/music/mp3/I Always Do.mp3",
