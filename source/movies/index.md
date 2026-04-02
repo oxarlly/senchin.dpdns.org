@@ -12,4 +12,4 @@ top_img: https://senchin.dpdns.org/movies/th.webp
 
 <center><b>ヨルシカ Yorushika LIVE 2024「前世」「パレード (游行）」</b></center>
 <center><font color="gray">管理员    2026年4月3日</font></center>
-{% video movies/パレード.mp4 %}
+{% video https://senchin.dpdns.org/movies/パレード.mp4 %}
