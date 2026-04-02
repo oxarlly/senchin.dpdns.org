@@ -16,6 +16,8 @@ if nav
                 else if subitem.title
                   div!= subitem.title
 .footer-other
+  if theme.footer.custom_text
+    .footer_custom_text!= theme.footer.custom_text
   .footer-copyright
     if owner.enable
       - const currentYear = new Date().getFullYear()
@@ -35,5 +37,3 @@ if nav
         span.footer-separator |
         span= _p('footer.theme') + ' '
         a(href='https://github.com/jerryc127/hexo-theme-butterfly')= `Butterfly${ v ? ' ' + v.theme : '' }`
-  if theme.footer.custom_text
-    .footer_custom_text!= theme.footer.custom_text

@@ -61,6 +61,13 @@ comments: false
             "lrc": "https://senchin.dpdns.org/music/lrc/清空.txt"
         },
         {
+            "title": "你瞒我瞒",
+            "author": "陈柏宇",
+            "url": "https://senchin.dpdns.org/music/mp3/你瞒我瞒.mp3",
+            "pic": "https://senchin.dpdns.org/music/pic/你瞒我瞒.webp",
+            "lrc": "https://senchin.dpdns.org/music/lrc/你瞒我瞒.txt"
+        },
+        {
             "title": "Something Just Like This",
             "author": "The Chainsmokers&Coldplay",
             "url": "https://senchin.dpdns.org/music/mp3/Something Just Like This.mp3",
@@ -75,11 +82,11 @@ comments: false
             "lrc": "https://senchin.dpdns.org/music/lrc/Daylight.lrc"
         },
         {
-            "title": "习惯失恋",
-            "author": "容祖儿",
-            "url": "https://senchin.dpdns.org/music/mp3/习惯失恋-容祖儿.mp3",
-            "pic": "https://senchin.dpdns.org/music/pic/习惯失恋-容祖儿.webp",
-            "lrc": "https://senchin.dpdns.org/music/lrc/习惯失恋-容祖儿.lrc"
+            "title": "心做し",
+            "author": "双笙 (陈元汐)",
+            "url": "https://senchin.dpdns.org/music/mp3/心做し.mp3",
+            "pic": "https://senchin.dpdns.org/music/pic/心做し.webp",
+            "lrc": "https://senchin.dpdns.org/music/lrc/心做し.lrc"
         },
         {
             "title": "孤雏",
@@ -89,11 +96,11 @@ comments: false
             "lrc": "https://senchin.dpdns.org/music/lrc/孤雏-AGA.lrc"
         },
         {
-            "title": "心做し",
-            "author": "双笙 (陈元汐)",
-            "url": "https://senchin.dpdns.org/music/mp3/心做し.mp3",
-            "pic": "https://senchin.dpdns.org/music/pic/心做し.webp",
-            "lrc": "https://senchin.dpdns.org/music/lrc/心做し.lrc"
+            "title": "习惯失恋",
+            "author": "容祖儿",
+            "url": "https://senchin.dpdns.org/music/mp3/习惯失恋-容祖儿.mp3",
+            "pic": "https://senchin.dpdns.org/music/pic/习惯失恋-容祖儿.webp",
+            "lrc": "https://senchin.dpdns.org/music/lrc/习惯失恋-容祖儿.lrc"
         }
     ]
 }
