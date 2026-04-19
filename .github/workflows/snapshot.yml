@@ -3,7 +3,7 @@ on:
   push:
   workflow_dispatch:
   schedule:
-    - cron: '57 0 * * *'  # 北京时间 08:51
+    - cron: '00 1 * * *'  # 北京时间 08:51
 
 jobs:
   save:
