@@ -239,4 +239,8 @@ responsive_images:
   rename: '${filename}.webp'
   replace_src: true # 核心开关
 
+# Wayback Machine配置
+wayback:
+  url: https://senchin.dpdns.org # 你的博客域名
+  auto_save: true # 发布后自动提交
 
