@@ -1,0 +1,15 @@
+name: Auto Save to Wayback Machine
+on:
+  push:
+  workflow_dispatch:
+  schedule:
+    - cron: "52 0 * * *"  # 每天 UTC 0点（北京时间早8点）
+
+jobs:
+  save:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Save my site
+        uses: Gaojianli/wayback-action@main
+        with:
+          url: https://senchin.dpdns.org
