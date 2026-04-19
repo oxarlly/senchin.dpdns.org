@@ -3,13 +3,13 @@ on:
   push:
   workflow_dispatch:
   schedule:
-    - cron: "52 0 * * *"  # 每天 UTC 0点（北京时间早8点）
+    - cron: '57 0 * * *'  # 北京时间 08:51
 
 jobs:
   save:
     runs-on: ubuntu-latest
     steps:
-      - name: Save my site
-        uses: Gaojianli/wayback-action@main
+      - name: Save to Wayback Machine
+        uses: JamieMagee/wayback@v2
         with:
           url: https://senchin.dpdns.org
