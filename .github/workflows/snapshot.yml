@@ -3,7 +3,12 @@ on:
   push:
   workflow_dispatch:
   schedule:
-    - cron: '06 1 * * *'  # 北京时间 08:51
+    # 北京时间 早上 08:51（UTC 00:51）
+    - cron: '51 0 * * *'
+    # 北京时间 中午 12:00（UTC 04:00）
+    - cron: '21 4 * * *'
+    # 北京时间 晚上 20:00（UTC 12:00）
+    - cron: '0 12 * * *'
 
 jobs:
   save:
@@ -13,3 +18,6 @@ jobs:
         uses: JamieMagee/wayback@v2
         with:
           url: https://senchin.dpdns.org
+          # 失败自动重试3次，每次间隔60秒
+          retries: 3
+          retryDelay: 60
