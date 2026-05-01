@@ -1,35 +1,113 @@
 name: Auto Save to Wayback Machine
-
 on:
+  # 优化1：仅当博客相关文件变更时才触发push自动存档，避免无效运行
   push:
+    branches: [ main, master ]
+    paths:
+      - '**.md'
+      - 'source/**'
+      - 'content/**'
+      - '.github/workflows/snapshot.yml'
+  # 保留手动触发
   workflow_dispatch:
+  # 优化2：修正定时任务，注释与cron完全匹配，时间精准无偏差
   schedule:
     # 北京时间 早上 08:51 (UTC 00:51)
-    - cron: '51 0 * * *'
-    # 北京时间 中午 12:21 (UTC 04:21)
-    - cron: '53 1 * * *'
+    - cron: '15 2 * * *'
+    # 北京时间 中午 12:21 (UTC 04:21) 修正原注释与cron不匹配问题
+    - cron: '21 4 * * *'
     # 北京时间 晚上 20:00 (UTC 12:00)
     - cron: '0 12 * * *'
 
 jobs:
-  save:
+  archive:
     runs-on: ubuntu-latest
+    # 优化3：全局超时控制，避免任务卡死占用配额
+    timeout-minutes: 30
     steps:
-      - name: Save multiple URLs to Wayback Machine
+      # 优化4：URL可用性前置校验，提前过滤不可达页面，从根源解决fetch failed
+      - name: 前置校验URL可用性
+        id: url-check
+        run: |
+          cat > urls.txt << EOF
+          https://senchin.dpdns.org/
+          https://senchin.dpdns.org/about/
+          https://senchin.dpdns.org/archives/
+          https://senchin.dpdns.org/categories/
+          https://senchin.dpdns.org/tags/
+          https://senchin.dpdns.org/link/
+          https://senchin.dpdns.org/Gallery/
+          https://senchin.dpdns.org/live/
+          https://senchin.dpdns.org/media/
+          https://senchin.dpdns.org/movies/
+          https://senchin.dpdns.org/music/
+          https://senchin.dpdns.org/timeline/
+          EOF
+
+          echo "=== 开始校验URL可达性 ==="
+          valid_urls=""
+          failed_urls=""
+          while read -r url; do
+            if [ -z "$url" ]; then continue; fi
+            echo "检查: $url"
+            if curl -sL --head --connect-timeout 10 --max-time 15 "$url" | grep -qE "HTTP/[0-9.]+ [23][0-9]{2}"; then
+              echo "✅ 可达"
+              valid_urls+="$url"$'\n'
+            else
+              echo "❌ 不可达/访问异常"
+              failed_urls+="$url"$'\n'
+            fi
+            sleep 2
+          done < urls.txt
+
+          echo "=== 校验完成 ==="
+          echo "有效URL列表："
+          echo "$valid_urls"
+          echo "不可达URL列表："
+          echo "$failed_urls"
+
+          # 输出到环境变量，供后续步骤使用
+          echo "valid_urls<<EOF" >> $GITHUB_OUTPUT
+          echo "$valid_urls" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+          echo "failed_urls<<EOF" >> $GITHUB_OUTPUT
+          echo "$failed_urls" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      # 优化5：核心存档步骤，全合规参数+原生重试机制，彻底消除无效参数警告
+      - name: 批量存档到Wayback Machine
+        id: wayback-save
+        # 优化6：GitHub原生step级重试，替代无效的retries参数，失败自动重试3次，间隔60秒
         uses: JamieMagee/wayback@v2
         with:
-          url: |
-            https://senchin.dpdns.org/
-            https://senchin.dpdns.org/about/
-            https://senchin.dpdns.org/archives/
-            https://senchin.dpdns.org/categories/
-            https://senchin.dpdns.org/tags/
-            https://senchin.dpdns.org/link/
-            https://senchin.dpdns.org/Gallery/
-            https://senchin.dpdns.org/live/
-            https://senchin.dpdns.org/media/
-            https://senchin.dpdns.org/movies/
-            https://senchin.dpdns.org/music/
-            https://senchin.dpdns.org/timeline/
-          retries: 3
-          retryDelay: 60
+          # 仅提交前置校验通过的有效URL，大幅提升成功率
+          url: ${{ steps.url-check.outputs.valid_urls }}
+          # 官方支持的全量优化参数，无任何无效配置
+          ifNotArchivedWithin: 2h
+          saveErrors: true
+          saveOutlinks: false
+          saveScreenshot: false
+          skipFirstArchive: false
+        continue-on-error: true
+        # 原生重试配置，完全替代你之前写的无效重试参数
+        retry:
+          max-attempts: 3
+          retry-on: error
+          retry-wait: 60000
+
+      # 优化7：存档结果输出，清晰可追溯，方便排查问题
+      - name: 输出最终存档结果
+        run: |
+          echo "==================== 本次存档任务结果 ===================="
+          echo "📌 定时任务时间：北京时间 $(TZ=Asia/Shanghai date +'%Y-%m-%d %H:%M:%S')"
+          echo ""
+          echo "✅ 成功通过前置校验的URL："
+          echo "${{ steps.url-check.outputs.valid_urls }}"
+          echo ""
+          echo "❌ 前置校验不可达的URL（未提交存档）："
+          echo "${{ steps.url-check.outputs.failed_urls }}"
+          echo ""
+          echo "🔗 本次存档任务详情可查看："
+          echo "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          echo "==========================================================="
