@@ -1,44 +1,54 @@
-name: 每4小时定时+推送触发存档
+name: Wayback Machine 博客自动存档
+
+# 1. 每4小时定时触发 + 手动可触发
 on:
-  push:
-    branches: [ main ]
-  workflow_dispatch:
   schedule:
-    # 北京时间 08:00（UTC 00:00）
-    - cron: '30 1 * * *'
-    # 北京时间 12:00（UTC 04:00）
-    - cron: '0 4 * * *'
-    # 北京时间 16:00（UTC 08:00）
-    - cron: '0 8 * * *'
-    # 北京时间 20:00（UTC 12:00）
-    - cron: '0 12 * * *'
-    # 北京时间 00:00（UTC 16:00）
-    - cron: '0 16 * * *'
-    # 北京时间 04:00（UTC 20:00）
-    - cron: '0 20 * * *'
+    - cron: '0 */4 * * *'
+    - cron: '45 1 * * *'
+  workflow_dispatch:
 
 jobs:
-  wayback:
+  archive:
     runs-on: ubuntu-latest
     steps:
-      - name: 批量存档指定页面
+      - name: 安装 Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: 执行 Wayback 归档脚本
         run: |
-          urls=(
-            "https://senchin.dpdns.org/"
-            "https://senchin.dpdns.org/about/"
-            "https://senchin.dpdns.org/archives/"
-            "https://senchin.dpdns.org/categories/"
-            "https://senchin.dpdns.org/tags/"
-            "https://senchin.dpdns.org/link/"
-            "https://senchin.dpdns.org/Gallery/"
-            "https://senchin.dpdns.org/live/"
-            "https://senchin.dpdns.org/media/"
-            "https://senchin.dpdns.org/movies/"
-            "https://senchin.dpdns.org/music/"
-            "https://senchin.dpdns.org/timeline/"
-          )
-          for url in "${urls[@]}"; do
-            echo "正在存档: $url"
-            curl -s -X POST "https://web.archive.org/save/$url"
-            sleep 15
-          done
+          python - <<END
+          import requests
+          import time
+
+          # 需要归档的 URL 列表
+          urls = [
+              "https://senchin.dpdns.org/",
+              "https://senchin.dpdns.org/about/",
+              "https://senchin.dpdns.org/archives/",
+              "https://senchin.dpdns.org/categories/",
+              "https://senchin.dpdns.org/tags/",
+              "https://senchin.dpdns.org/link/",
+              "https://senchin.dpdns.org/Gallery/",
+              "https://senchin.dpdns.org/live/",
+              "https://senchin.dpdns.org/media/",
+              "https://senchin.dpdns.org/movies/",
+              "https://senchin.dpdns.org/music/",
+              "https://senchin.dpdns.org/timeline/"
+          ]
+
+          # 逐个提交到 Wayback Machine
+          for url in urls:
+              print(f"正在归档: {url}")
+              try:
+                  res = requests.get(f"https://web.archive.org/save/{url}", timeout=30)
+                  if res.status_code == 200:
+                      print(f"✅ 归档成功: {url}")
+                  else:
+                      print(f"❌ 归档失败 状态码:{res.status_code} -> {url}")
+              except Exception as e:
+                  print(f"❌ 异常错误: {url} -> {str(e)}")
+              # 间隔 15 秒，防止请求过快被拦截
+              time.sleep(15)
+          END
