@@ -1,19 +1,24 @@
-name: Archive to Wayback Machine
+name: Auto Save to Wayback Machine
 
 on:
-  schedule:
-    cron: '0 */4 * * *'
-    cron: '50 1 * * *'
+  push:
   workflow_dispatch:
+  schedule:
+    # 北京时间 早上 08:51 (UTC 00:51)
+    - cron: '51 0 * * *'
+    # 北京时间 中午 12:21 (UTC 04:21)
+    - cron: '53 1 * * *'
+    # 北京时间 晚上 20:00 (UTC 12:00)
+    - cron: '0 12 * * *'
 
 jobs:
-  wayback:
+  save:
     runs-on: ubuntu-latest
     steps:
-      - name: Wayback Machine Save
-        uses: edwardanthony/wayback-save-action@main
+      - name: Save multiple URLs to Wayback Machine
+        uses: JamieMagee/wayback@v2
         with:
-          urls: |
+          url: |
             https://senchin.dpdns.org/
             https://senchin.dpdns.org/about/
             https://senchin.dpdns.org/archives/
@@ -26,4 +31,5 @@ jobs:
             https://senchin.dpdns.org/movies/
             https://senchin.dpdns.org/music/
             https://senchin.dpdns.org/timeline/
-          delay: 15
+          retries: 3
+          retryDelay: 60
