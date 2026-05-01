@@ -1,23 +1,44 @@
-name: Auto Save to Wayback Machine
+name: 每4小时定时+推送触发存档
 on:
   push:
+    branches: [ main ]
   workflow_dispatch:
   schedule:
-    # 北京时间 早上 08:51（UTC 00:51）
-    - cron: '51 0 * * *'
-    # 北京时间 中午 12:00（UTC 04:00）
-    - cron: '21 4 * * *'
-    # 北京时间 晚上 20:00（UTC 12:00）
+    # 北京时间 08:00（UTC 00:00）
+    - cron: '0 0 * * *'
+    # 北京时间 12:00（UTC 04:00）
+    - cron: '0 4 * * *'
+    # 北京时间 16:00（UTC 08:00）
+    - cron: '0 8 * * *'
+    # 北京时间 20:00（UTC 12:00）
     - cron: '0 12 * * *'
+    # 北京时间 00:00（UTC 16:00）
+    - cron: '0 16 * * *'
+    # 北京时间 04:00（UTC 20:00）
+    - cron: '0 20 * * *'
 
 jobs:
-  save:
+  wayback:
     runs-on: ubuntu-latest
     steps:
-      - name: Save to Wayback Machine
-        uses: JamieMagee/wayback@v2
-        with:
-          url: https://senchin.dpdns.org
-          # 失败自动重试3次，每次间隔60秒
-          retries: 3
-          retryDelay: 60
+      - name: 批量存档指定页面
+        run: |
+          urls=(
+            "https://senchin.dpdns.org/"
+            "https://senchin.dpdns.org/about/"
+            "https://senchin.dpdns.org/archives/"
+            "https://senchin.dpdns.org/categories/"
+            "https://senchin.dpdns.org/tags/"
+            "https://senchin.dpdns.org/link/"
+            "https://senchin.dpdns.org/Gallery/"
+            "https://senchin.dpdns.org/live/"
+            "https://senchin.dpdns.org/media/"
+            "https://senchin.dpdns.org/movies/"
+            "https://senchin.dpdns.org/music/"
+            "https://senchin.dpdns.org/timeline/"
+          )
+          for url in "${urls[@]}"; do
+            echo "正在存档: $url"
+            curl -s -X POST "https://web.archive.org/save/$url"
+            sleep 15
+          done
