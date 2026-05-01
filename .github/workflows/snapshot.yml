@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   schedule:
     # 北京时间 早上 08:51（UTC 00:51）
-    - cron: '22 2 * * *'
+    - cron: '26 2 * * *'
     # 北京时间 中午 12:00（UTC 04:00）
     - cron: '21 4 * * *'
     # 北京时间 晚上 20:00（UTC 12:00）
@@ -17,8 +17,7 @@ jobs:
       - name: Save to Wayback Machine
         uses: JamieMagee/wayback@v2
         with:
-          url: 
-            - "https://senchin.dpdns.org"
+          url: "https://senchin.dpdns.org"
           # 失败自动重试3次，每次间隔60秒
           retries: 3
           retryDelay: 60
