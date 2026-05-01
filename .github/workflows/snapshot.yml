@@ -3,7 +3,7 @@ name: Archive to Wayback Machine
 on:
   schedule:
     cron: '0 */4 * * *'
-    cron: '45 1 * * *'
+    cron: '50 1 * * *'
   workflow_dispatch:
 
 jobs:
