@@ -1,6 +1,4 @@
-- author: {{ config.author }}
-  avatar: {{ config.avatar }}
-  date: 2025-09-21 23:33:26
+- date: 2025-09-21 23:33:26
   key: key-1
   content: |
     台风
