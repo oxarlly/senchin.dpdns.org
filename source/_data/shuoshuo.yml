@@ -1,5 +1,5 @@
-- author: 無量 — Multitudinous
-  avatar: https://senchin.dpdns.org/media/avatar-o.webp
+- author: {{ site.author }}
+  avatar: {{ site.avatar }}
   date: 2025-09-21 23:33:26
   key: key-1
   content: |
