@@ -9,8 +9,8 @@
   tags:
     - 日常
 
-- author: 無量 — Multitudinous
-  avatar: https://senchin.dpdns.org/media/avatar-o.webp
+- author: {{ site.data.name.n1 }}
+  avatar: {{ site.data.name.a1 }}
   date: 2025-10-02 17:27:00
   key: key-2
   content: |
