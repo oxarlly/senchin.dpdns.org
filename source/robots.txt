@@ -1,3 +1,16 @@
+layout: false
+# 对所有搜索引擎生效的通用规则
 User-agent: *
 Allow: /
+# 屏蔽不需要被抓取的后台/测试页面
+Disallow: /admin/
+Disallow: /test/
+
+# 专门针对百度爬虫的规则，提升抓取优先级
+User-agent: Baiduspider
+Allow: /
+Disallow: /admin/
+Disallow: /test/
+
+# 站点地图（必须写在同一行，不能换行）
 Sitemap: https://senchin.dpdns.org/sitemap.xml

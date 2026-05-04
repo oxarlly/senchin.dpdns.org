@@ -2,11 +2,11 @@
 
 
 # 网站的基本信息
-title: 千顷文化
+title: 千顷暝隅
 subtitle: ''
 description: ''
 keywords: 
-author: 無量 – Multitudinous
+author: 消湮​. ​Σ  ̄
 language: zh-CN
 timezone: ''
 
@@ -239,4 +239,8 @@ responsive_images:
   rename: '${filename}.webp'
   replace_src: true # 核心开关
 
+# Wayback Machine配置
+wayback:
+  url: https://senchin.dpdns.org # 你的博客域名
+  auto_save: true # 发布后自动提交
 

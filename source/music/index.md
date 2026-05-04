@@ -19,6 +19,20 @@ comments: false
     "listmaxheight": "250px",
     "music": [
         {
+            "title": "それを世界と言うんだね",
+            "author": "花譜",
+            "url": "https://senchin.dpdns.org/music/mp3/それを世界と言うんだね.mp3",
+            "pic": "https://senchin.dpdns.org/music/pic/それを世界と言うんだね.webp",
+            "lrc": "https://senchin.dpdns.org/music/lrc/それを世界と言うんだね.lrc"
+        },
+        {
+            "title": "パレード",
+            "author": "ヨルシカ",
+            "url": "https://senchin.dpdns.org/music/mp3/パレード.mp3",
+            "pic": "https://senchin.dpdns.org/music/pic/パレード.webp",
+            "lrc": "https://senchin.dpdns.org/music/lrc/パレード.txt"
+        },
+        {
             "title": "僕が見つけた綻び",
             "author": "nayuta",
             "url": "https://senchin.dpdns.org/music/mp3/僕が見つけた綻び.mp3",
