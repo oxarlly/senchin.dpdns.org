@@ -9,8 +9,8 @@
   tags:
     - 日常
 
-- author: {{ site.data.name.n1 }}
-  avatar: {{ site.data.name.a1 }}
+- author: name1
+  avatar: avatar1
   date: 2025-10-02 17:27:00
   key: key-2
   content: |
