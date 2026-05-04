@@ -170,10 +170,24 @@
           .container
             .shuoshuo-item-header
               .shuoshuo-avatar
-                img.no-lightbox(src=i.avatar || url_for(theme.avatar.img))
-              .shuoshuo-info
-                .shuoshuo-author=i.author || config.author
-                time.shuoshuo-date(title=i.date)=i.date
+                
+// 自动匹配name.yml里的作者和头像
+- let uname = i.author || config.author
+- let uavatar = i.avatar || url_for(theme.avatar.img)
+
+// 匹配nameX → 自动取对应的nameX和avatarX
+if i.author && site.data[i.author]
+  - uname = site.data[i.author]
+  - let avatarKey = 'avatar' + i.author.replace('name', '')
+  - if site.data[avatarKey]
+    - uavatar = site.data[avatarKey]
+
+// 输出头像和作者名
+img.no-lightbox(src=uavatar)
+.shuoshuo-info
+  .shuoshuo-author= uname
+  time.shuoshuo-date(title=i.date)=i.date
+
             .shuoshuo-content
               !=markdown(i.content)
             .shuoshuo-footer(class=i.tags && i.tags.length ? 'flex-between' : 'flex-end')
@@ -187,9 +201,3 @@
           if i.key && commentsJsLoad
             .shuoshuo-comment.no-comment(data-key=i.key)
 
-- let uname = ''
-- let uavatar = ''
-
-if item.author
-  - uname = site.data.name[item.author]
-  - uavatar = site.data.name['avatar' + item.author.replace('name','')]
