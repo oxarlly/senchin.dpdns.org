@@ -186,20 +186,10 @@
                   i.fa-solid.fa-comments
           if i.key && commentsJsLoad
             .shuoshuo-comment.no-comment(data-key=i.key)
-// 默认先空着
+
 - let uname = ''
 - let uavatar = ''
 
-// 如果说说里写了 author: n1 / n2 / n3...
-if item.author && site.data.name[item.author]
-  - let user = site.data.name[item.author]
-  - uname = user.name
-  - uavatar = user.avatar
-else
-  // 没指定 author 就用你站点默认作者
-  - uname = config.author
-  - uavatar = "/media/avatar-o.webp"
-
-// 输出
-img.shuoshuo-avatar(src=uavatar)
-span.shuoshuo-name= uname
+if item.author
+  - uname = site.data.name[item.author]
+  - uavatar = site.data.name['avatar' + item.author.replace('name','')]
