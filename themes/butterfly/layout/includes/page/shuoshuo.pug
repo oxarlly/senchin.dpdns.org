@@ -170,9 +170,7 @@
           .container
             .shuoshuo-item-header
               .shuoshuo-avatar
-                
-// 自动匹配name.yml里的作者和头像
-img.no-lightbox(src=i.avatar || url_for(theme.avatar.img))
+                img.no-lightbox(src=i.avatar || url_for(theme.avatar.img))
               .shuoshuo-info
                 .shuoshuo-author=i.author || config.author
                 time.shuoshuo-date(title=i.date)=i.date
@@ -188,4 +186,3 @@ img.no-lightbox(src=i.avatar || url_for(theme.avatar.img))
                   i.fa-solid.fa-comments
           if i.key && commentsJsLoad
             .shuoshuo-comment.no-comment(data-key=i.key)
-
