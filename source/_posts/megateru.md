@@ -12,7 +12,6 @@ tags:
 ---
 
 {% gallery %}
-![](/images/megateru/1.webp)
 ![](/images/megateru/2.webp)
 ![](/images/megateru/3.webp)
 ![](/images/megateru/4.webp)
