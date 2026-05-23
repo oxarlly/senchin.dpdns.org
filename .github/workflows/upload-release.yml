@@ -11,11 +11,10 @@ jobs:
         id: get_date
         run: echo "DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
 
-      - name: Download master branch ZIP of current repository
-        run: |
-          wget https://github.com/${{ github.repository }}/archive/refs/heads/master.zip -O ${{ env.DATE }}.zip
+      - name: Download master branch ZIP
+        run: wget https://github.com/${{ github.repository }}/archive/refs/heads/master.zip -O ${{ env.DATE }}.zip
 
-      - name: Create / Update Release Backup
+      - name: Update Backup Release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: Backup
@@ -23,5 +22,4 @@ jobs:
           files: ${{ env.DATE }}.zip
           overwrite_files: true
         env:
-          # 必须填你自己的 PAT，不是默认 token
           GITHUB_TOKEN: ${{ secrets.RELEASE_PAT }}
