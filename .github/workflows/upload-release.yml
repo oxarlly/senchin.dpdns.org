@@ -1,6 +1,5 @@
 name: Package Repository ZIP & Upload to Release
 run-name: Package and Upload to Release
-# Manual trigger only
 on:
   workflow_dispatch:
 
@@ -16,13 +15,14 @@ jobs:
         run: |
           wget https://github.com/${{ github.repository }}/archive/refs/heads/master.zip -O ${{ env.DATE }}.zip
 
-      - name: Create Release and upload renamed ZIP file
+      - name: Create / Update Release Backup
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: Backup          # 固定Tag为Backup
+          tag_name: Backup
           name: Daily Backup ${{ env.DATE }}
-          files: |
-            ${{ env.DATE }}.zip
-          overwrite_files: true      # 覆盖旧版本文件
+          files: ${{ env.DATE }}.zip
+          overwrite_files: true
+          allow_blank_comments: true
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # 必须使用你自己的 PAT，不要用默认 GITHUB_TOKEN
+          GITHUB_TOKEN: ${{ secrets.RELEASE_PAT }}
