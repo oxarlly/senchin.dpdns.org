@@ -1,0 +1,27 @@
+name: Package Repository ZIP & Upload to Release
+run-name: Package and Upload to Release
+# Manual trigger only, no automatic run
+on:
+  workflow_dispatch:
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get current date in yyyy‑mm‑dd format
+        id: get_date
+        run: echo "DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+
+      - name: Download master branch ZIP of current repository
+        run: |
+          wget https://github.com/${{ github.repository }}/archive/refs/heads/master.zip -O ${{ env.DATE }}.zip
+
+      - name: Create Release and upload renamed ZIP file
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ env.DATE }}
+          name: Release ${{ env.DATE }}
+          files: |
+            ${{ env.DATE }}.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
