@@ -1,6 +1,6 @@
 name: Package Repository ZIP & Upload to Release
 run-name: Package and Upload to Release
-# Manual trigger only, no automatic run
+# Manual trigger only
 on:
   workflow_dispatch:
 
@@ -19,9 +19,10 @@ jobs:
       - name: Create Release and upload renamed ZIP file
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: ${{ env.DATE }}
-          name: Release ${{ env.DATE }}
+          tag_name: Backup          # 固定Tag为Backup
+          name: Daily Backup ${{ env.DATE }}
           files: |
             ${{ env.DATE }}.zip
+          overwrite_files: true      # 覆盖旧版本文件
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
