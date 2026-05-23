@@ -22,7 +22,6 @@ jobs:
           name: Daily Backup ${{ env.DATE }}
           files: ${{ env.DATE }}.zip
           overwrite_files: true
-          allow_blank_comments: true
         env:
-          # 必须使用你自己的 PAT，不要用默认 GITHUB_TOKEN
+          # 必须填你自己的 PAT，不是默认 token
           GITHUB_TOKEN: ${{ secrets.RELEASE_PAT }}
