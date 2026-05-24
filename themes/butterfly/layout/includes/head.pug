@@ -74,11 +74,5 @@ if theme.blog_title_font && theme.blog_title_font.font_link
 
 include ./head/config_site.pug
 
-// 加载自定义 APlayer 样式
-link(rel="stylesheet", href="/css/aplayer.css")
-
-// Umami 网站统计
-if theme.umami?.enable && theme.umami?.website_id
-  script(defer, src=`${theme.umami.host}/script.js`, data-website-id=theme.umami.website_id)
 
 !=fragment_cache('injectHead', function(){return injectHtml(theme.inject.head)})
