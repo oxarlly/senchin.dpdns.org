@@ -19,6 +19,118 @@ comments: false
     "listmaxheight": "250px",
     "music": [
         {
+            "title": "DAYBREAK FRONTLINE",
+            "author": "Orangestar",
+            "url": "https://senchin.dpdns.org/music/mp3/DAYBREAK FRONTLINE.mp3",
+            "pic": "https://senchin.dpdns.org/music/pic/DAYBREAK FRONTLINE.webp",
+            "lrc": "https://senchin.dpdns.org/music/lrc/DAYBREAK FRONTLINE.txt"
+        },
+        {
+            "title": "Last Goodbye",
+            "author": "Namic / Steeg / David Emde",
+            "url": "https://senchin.dpdns.org/music/mp3/Last Goodbye.mp3",
+            "pic": "https://senchin.dpdns.org/music/pic/Last Goodbye.webp",
+            "lrc": "https://senchin.dpdns.org/music/lrc/Last Goodbye.txt"
+        },
+        {
+            "title": "あの夏が飽和する",
+            "author": "カンザキイオリ / 花譜",
+            "url": "https://senchin.dpdns.org/music/mp3/あの夏が飽和する.mp3",
+            "pic": "https://senchin.dpdns.org/music/pic/あの夏が飽和する.webp",
+            "lrc": "https://senchin.dpdns.org/music/lrc/あの夏が飽和する.txt"
+        },
+        {
+            "title": "あわく心模様",
+            "author": "ヰ世界情緒 / 森先生歩",
+            "url": "https://senchin.dpdns.org/music/mp3/あわく心模様.mp3",
+            "pic": "https://senchin.dpdns.org/music/pic/あわく心模様.webp",
+            "lrc": "https://senchin.dpdns.org/music/lrc/あわく心模様.txt"
+        },
+        {
+            "title": "痛みを",
+            "author": "花譜",
+            "url": "https://senchin.dpdns.org/music/mp3/痛みを.mp3",
+            "pic": "https://senchin.dpdns.org/music/pic/痛みを.webp",
+            "lrc": "https://senchin.dpdns.org/music/lrc/痛みを.txt"
+        },
+        {
+            "title": "花 feat. 花譜",
+            "author": "Guiano / 花譜",
+            "url": "https://senchin.dpdns.org/music/mp3/花 feat. 花譜.mp3",
+            "pic": "https://senchin.dpdns.org/music/pic/花 feat. 花譜.webp",
+            "lrc": "https://senchin.dpdns.org/music/lrc/花 feat. 花譜.txt"
+        },
+        {
+            "title": "アリア",
+            "author": "ナナツカゼ",
+            "url": "https://senchin.dpdns.org/music/mp3/アリア.mp3",
+            "pic": "https://senchin.dpdns.org/music/pic/アリア.webp",
+            "lrc": "https://senchin.dpdns.org/music/lrc/アリア.txt"
+        },
+        {
+            "title": "だから僕は音楽を辞めた",
+            "author": "ヨルシカ",
+            "url": "https://senchin.dpdns.org/music/mp3/だから僕は音楽を辞めた.mp3",
+            "pic": "https://senchin.dpdns.org/music/pic/だから僕は音楽を辞めた.webp",
+            "lrc": "https://senchin.dpdns.org/music/lrc/だから僕は音楽を辞めた.txt"
+        },
+        {
+            "title": "蒼の音階",
+            "author": "涼海ネモ",
+            "url": "https://senchin.dpdns.org/music/mp3/蒼の音階.mp3",
+            "pic": "https://senchin.dpdns.org/music/pic/蒼の音階.webp",
+            "lrc": "https://senchin.dpdns.org/music/lrc/蒼の音階.txt"
+        },
+        {
+            "title": "カタチのないもの",
+            "author": "涼海ネモ",
+            "url": "https://senchin.dpdns.org/music/mp3/カタチのないもの.mp3",
+            "pic": "https://senchin.dpdns.org/music/pic/カタチのないもの.webp",
+            "lrc": "https://senchin.dpdns.org/music/lrc/カタチのないもの.txt"
+        },
+        {
+            "title": "雲鶴サクリファイス",
+            "author": "Tom Mage",
+            "url": "https://senchin.dpdns.org/music/mp3/雲鶴サクリファイス.mp3",
+            "pic": "https://senchin.dpdns.org/music/pic/雲鶴サクリファイス.webp",
+            "lrc": "https://senchin.dpdns.org/music/lrc/雲鶴サクリファイス.txt"
+        },
+        {
+            "title": "ありがとう…",
+            "author": "KOKIA",
+            "url": "https://senchin.dpdns.org/music/mp3/ありがとう….mp3",
+            "pic": "https://senchin.dpdns.org/music/pic/ありがとう….webp",
+            "lrc": "https://senchin.dpdns.org/music/lrc/ありがとう….txt"
+        },
+        {
+            "title": "LIFE",
+            "author": "Neuro-sama",
+            "url": "https://senchin.dpdns.org/music/mp3/LIFE.mp3",
+            "pic": "https://senchin.dpdns.org/music/pic/LIFE.webp",
+            "lrc": "https://senchin.dpdns.org/music/lrc/LIFE.txt"
+        },
+        {
+            "title": "海浪、海鸥与你",
+            "author": "AnRain安林",
+            "url": "https://senchin.dpdns.org/music/mp3/海浪、海鸥与你.mp3",
+            "pic": "https://senchin.dpdns.org/music/pic/海浪、海鸥与你.webp",
+            "lrc": "https://senchin.dpdns.org/music/lrc/海浪、海鸥与你.txt"
+        },
+        {
+            "title": "A Thousand Miles",
+            "author": "Josh Vietti",
+            "url": "https://senchin.dpdns.org/music/mp3/A Thousand Miles.mp3",
+            "pic": "https://senchin.dpdns.org/music/pic/A Thousand Miles.webp",
+            "lrc": "https://senchin.dpdns.org/music/lrc/A Thousand Miles.txt"
+        },
+        {
+            "title": "A Little Story",
+            "author": "Valentin",
+            "url": "https://senchin.dpdns.org/music/mp3/A Little Story.mp3",
+            "pic": "https://senchin.dpdns.org/music/pic/A Little Story.webp",
+            "lrc": "https://senchin.dpdns.org/music/lrc/A Little Story.txt"
+        },
+        {
             "title": "それを世界と言うんだね",
             "author": "花譜",
             "url": "https://senchin.dpdns.org/music/mp3/それを世界と言うんだね.mp3",
