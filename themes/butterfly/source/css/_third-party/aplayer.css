@@ -1,0 +1,100 @@
+/* APlayer 深色模式适配 */
+html[data-theme="dark"] body .aplayer {
+  background: #121212 !important;
+  color: #ffffff !important;
+  border: none !important;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.5) !important;
+}
+html[data-theme="dark"] body .aplayer .aplayer-info {
+  border-top: 1px solid #2a2a2a !important;
+}
+html[data-theme="dark"] body .aplayer .aplayer-info .aplayer-music .aplayer-title {
+  color: #ffffff !important;
+}
+html[data-theme="dark"] body .aplayer .aplayer-info .aplayer-music .aplayer-author {
+  color: #cccccc !important;
+}
+html[data-theme="dark"] body .aplayer .aplayer-info .aplayer-controller .aplayer-time {
+  color: #dddddd !important;
+}
+html[data-theme="dark"] body .aplayer .aplayer-info .aplayer-controller .aplayer-button {
+  color: #dddddd !important;
+}
+html[data-theme="dark"] body .aplayer .aplayer-info .aplayer-controller .aplayer-button:hover {
+  color: #ffffff !important;
+}
+html[data-theme="dark"] body .aplayer .aplayer-info .aplayer-controller .aplayer-volume-wrap .aplayer-volume-bar-wrap .aplayer-volume-bar {
+  background: #333333 !important;
+}
+html[data-theme="dark"] body .aplayer .aplayer-info .aplayer-controller .aplayer-volume-wrap .aplayer-volume-bar-wrap .aplayer-volume {
+  background: #2d8cf0 !important;
+}
+html[data-theme="dark"] body .aplayer .aplayer-list {
+  background: #121212 !important;
+  border-top: 1px solid #2a2a2a !important;
+}
+html[data-theme="dark"] body .aplayer .aplayer-list ol li {
+  border-top: 1px solid #2a2a2a !important;
+  color: #ffffff !important;
+}
+html[data-theme="dark"] body .aplayer .aplayer-list ol li:hover {
+  background: #252525 !important;
+}
+html[data-theme="dark"] body .aplayer .aplayer-list ol li.aplayer-list-light {
+  background: #252525 !important;
+  color: #ffffff !important;
+}
+html[data-theme="dark"] body .aplayer .aplayer-list ol li .aplayer-list-author {
+  color: #cccccc !important;
+}
+html[data-theme="dark"] body .aplayer.aplayer-narrow {
+  background: #121212 !important;
+}
+html[data-theme="dark"] body .aplayer .aplayer-lrc p {
+  color: #bbbbbb !important;
+}
+html[data-theme="dark"] body .aplayer .aplayer-lrc p.aplayer-lrc-current {
+  color: #ffffff !important;
+}
+html[data-theme="dark"] body .aplayer .aplayer-lrc:before {
+  background: linear-gradient(180deg, #121212 0, rgba(18, 18, 18, 0)) !important;
+}
+html[data-theme="dark"] body .aplayer .aplayer-lrc:after {
+  background: linear-gradient(180deg, rgba(18, 18, 18, 0) 0, #121212) !important;
+}
+html[data-theme="dark"] body .aplayer .aplayer-info .aplayer-controller .aplayer-bar-wrap .aplayer-bar .aplayer-played .aplayer-thumb {
+  border-color: #d4b996 !important;
+  background: #d4b996 !important;
+}
+
+/* 屏蔽 MathJax 右键菜单 */
+.CtxtMenu_MenuFrame {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+/* 收缩顶图样式 */
+#post-info.shrink-cover {
+  height: 180px !important;
+  min-height: 180px !important;
+}
+#post-info.shrink-cover .post-info-bg {
+  background: #121212 !important;
+  background-image: none !important;
+  opacity: 1 !important;
+}
+#post-info.shrink-cover .post-title {
+  font-size: 2.5rem !important;
+  margin-bottom: 1rem !important;
+}
+#post-info.shrink-cover .post-meta {
+  color: #999 !important;
+}
+@media (prefers-color-scheme: light) {
+  #post-info.shrink-cover .post-info-bg {
+    background: #fff !important;
+  }
+}
