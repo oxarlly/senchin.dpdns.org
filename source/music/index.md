@@ -90,7 +90,7 @@ comments: false
         },
         {
             "title": "雲鶴サクリファイス (feat. nakotanmaru)",
-            "author": "Ton Magie /  Sun1ight / nakotanmaru",
+            "author": "Ton Magie / Sun1ight / nakotanmaru",
             "url": "https://senchin.dpdns.org/music/mp3/雲鶴サクリファイス.mp3",
             "pic": "https://senchin.dpdns.org/music/pic/雲鶴サクリファイス.webp",
             "lrc": "https://senchin.dpdns.org/music/lrc/雲鶴サクリファイス.txt"
@@ -160,7 +160,7 @@ comments: false
         },
         {
             "title": "再生",
-            "author": "ナナツカゼ /  PIKASONIC / nakotanmaru",
+            "author": "ナナツカゼ / PIKASONIC / nakotanmaru",
             "url": "https://senchin.dpdns.org/music/mp3/再生.mp3",
             "pic": "https://senchin.dpdns.org/music/pic/再生.webp",
             "lrc": "https://senchin.dpdns.org/music/lrc/再生.lrc"
@@ -209,7 +209,7 @@ comments: false
         },
         {
             "title": "Something Just Like This",
-            "author": "The Chainsmokers /  Coldplay",
+            "author": "The Chainsmokers / Coldplay",
             "url": "https://senchin.dpdns.org/music/mp3/Something Just Like This.mp3",
             "pic": "https://senchin.dpdns.org/music/pic/Something Just Like This.webp",
             "lrc": "https://senchin.dpdns.org/music/lrc/Something Just Like This.lrc"
