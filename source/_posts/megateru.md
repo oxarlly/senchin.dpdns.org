@@ -9,7 +9,7 @@ tags:
   - 治愈系
   - 狐耳少女
   - めがてる
-top_img: /images/megateru/f32.webp
+shrink_cover: false
 ---
 
 {% gallery %}
