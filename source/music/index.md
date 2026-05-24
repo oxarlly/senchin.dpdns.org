@@ -41,7 +41,7 @@ comments: false
         },
         {
             "title": "あわく心模様",
-            "author": "ヰ世界情緒 / 森先生歩",
+            "author": "森先化歩 / 花譜 / 夜河世界 / ヰ世界情緒",
             "url": "https://senchin.dpdns.org/music/mp3/あわく心模様.mp3",
             "pic": "https://senchin.dpdns.org/music/pic/あわく心模様.webp",
             "lrc": "https://senchin.dpdns.org/music/lrc/あわく心模様.txt"
@@ -89,8 +89,8 @@ comments: false
             "lrc": "https://senchin.dpdns.org/music/lrc/カタチのないもの.txt"
         },
         {
-            "title": "雲鶴サクリファイス",
-            "author": "Tom Mage",
+            "title": "雲鶴サクリファイス (feat. nakotanmaru)",
+            "author": "Ton Magie /  Sun1ight / nakotanmaru",
             "url": "https://senchin.dpdns.org/music/mp3/雲鶴サクリファイス.mp3",
             "pic": "https://senchin.dpdns.org/music/pic/雲鶴サクリファイス.webp",
             "lrc": "https://senchin.dpdns.org/music/lrc/雲鶴サクリファイス.txt"
