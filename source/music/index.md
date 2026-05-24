@@ -20,7 +20,7 @@ comments: false
     "music": [
         {
             "title": "DAYBREAK FRONTLINE",
-            "author": "Orangestar",
+            "author": "めありー",
             "url": "https://senchin.dpdns.org/music/mp3/DAYBREAK FRONTLINE.mp3",
             "pic": "https://senchin.dpdns.org/music/pic/DAYBREAK FRONTLINE.webp",
             "lrc": "https://senchin.dpdns.org/music/lrc/DAYBREAK FRONTLINE.txt"
