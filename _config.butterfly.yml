@@ -268,6 +268,22 @@ footer:
   custom_text:
   copyright: true # Copyright of theme and framework
 
+# Cookie Consent（隐私协议）
+# --------------------------------------
+# 隐私政策同意弹窗
+cookie_consent:
+  enable: true
+  type: banner          # 弹窗样式：banner(底部横幅) / popup(右下角弹窗)
+  position: bottom      # 位置：bottom / top
+  theme: dark           # 主题：dark / light (和你的暗黑博客完美适配)
+  expire_days: 365      # 同意后多少天不再弹出
+  content: 本网站使用 Cookie 提升浏览体验，并遵守隐私政策。继续使用本网站即表示您同意我们的隐私政策条款。
+  link: /privacy/       # 隐私政策页面链接
+  button:
+    text: 我同意
+    # 拒绝按钮（可选，不需要就注释掉）
+    # deny_text: 拒绝
+
 # aside (側邊欄)
 # --------------------------------------
 
