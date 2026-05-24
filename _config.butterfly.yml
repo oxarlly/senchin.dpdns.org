@@ -73,7 +73,7 @@ default_top_img:
 archive_img: https://senchin.dpdns.org/archives/th.jpg
 
 # If the banner of tag page not setting, it will show the top_img
-# note: tag page, not tags page （标签页面的顶图）
+# note: tag page, not tags page （子标签页面的顶图）
 tag_img: https://senchin.dpdns.org/images/tag.jpg
 
 # The banner image of tag page
