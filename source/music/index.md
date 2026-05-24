@@ -160,7 +160,7 @@ comments: false
         },
         {
             "title": "再生",
-            "author": "ナナツカゼ&PIKASONIC&nakotanmaru",
+            "author": "ナナツカゼ /  PIKASONIC / nakotanmaru",
             "url": "https://senchin.dpdns.org/music/mp3/再生.mp3",
             "pic": "https://senchin.dpdns.org/music/pic/再生.webp",
             "lrc": "https://senchin.dpdns.org/music/lrc/再生.lrc"
@@ -188,14 +188,14 @@ comments: false
         },
         {
             "title": "消えない温度",
-            "author": "Hanon & Kotoha;",
+            "author": "Hanon / Kotoha",
             "url": "https://senchin.dpdns.org/music/mp3/消えない温度.mp3",
             "pic": "https://senchin.dpdns.org/music/pic/消えない温度.webp",
             "lrc": "https://senchin.dpdns.org/music/lrc/消えない温度.txt"
         },
         {
             "title": "清空",
-            "author": "王忻辰&苏星婕;",
+            "author": "王忻辰 / 苏星婕",
             "url": "https://senchin.dpdns.org/music/mp3/清空.mp3",
             "pic": "https://senchin.dpdns.org/music/pic/清空.webp",
             "lrc": "https://senchin.dpdns.org/music/lrc/清空.txt"
@@ -209,7 +209,7 @@ comments: false
         },
         {
             "title": "Something Just Like This",
-            "author": "The Chainsmokers&Coldplay",
+            "author": "The Chainsmokers /  Coldplay",
             "url": "https://senchin.dpdns.org/music/mp3/Something Just Like This.mp3",
             "pic": "https://senchin.dpdns.org/music/pic/Something Just Like This.webp",
             "lrc": "https://senchin.dpdns.org/music/lrc/Something Just Like This.lrc"
