@@ -117,6 +117,13 @@ comments: false
             "lrc": "https://senchin.dpdns.org/music/lrc/海浪、海鸥与你.txt"
         },
         {
+            "title": "River Flows in You",
+            "author": "Yiruma",
+            "url": "https://senchin.dpdns.org/music/mp3/River Flows in You.mp3",
+            "pic": "https://senchin.dpdns.org/music/pic/River Flows in You.webp",
+            "lrc": "https://senchin.dpdns.org/music/lrc/River Flows in You.txt"
+        },
+        {
             "title": "A Thousand Miles",
             "author": "Josh Vietti",
             "url": "https://senchin.dpdns.org/music/mp3/A Thousand Miles.mp3",
