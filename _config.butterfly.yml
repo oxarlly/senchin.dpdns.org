@@ -1168,7 +1168,7 @@ CDN:
     # instantpage:
     # instantsearch:
     # katex:
-    # katex_copytex:
+    # katex_copytex: 
     lazyload: https://lazyload.senchin.dpdns.org/js/lazyload.iife.min.js
     # local_search:
     # main:
