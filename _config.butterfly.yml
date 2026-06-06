@@ -849,7 +849,7 @@ subtitle:
   # subtitle 会先显示 source , 再显示 sub 的内容
   typeSpeed: 50
   backSpeed: 25
-  source: 2
+  source: false
   # 如果关闭打字效果，subtitle 只会显示 sub 的第一行文字
   sub:
     - 欢迎来到 ^600 1% 的纯净意识空间。
