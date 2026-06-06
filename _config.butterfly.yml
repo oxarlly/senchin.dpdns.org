@@ -966,7 +966,7 @@ pangu:
   field: site # site/post
 
 # Lazyload （图片懒加载）
-# https://github.com/verlok/vanilla-lazyload
+# https://github.com/verlok/vanilla-lazyload 
 lazyload:
   enable: true
   field: site # site/post
