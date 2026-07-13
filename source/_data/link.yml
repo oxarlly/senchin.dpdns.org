@@ -17,3 +17,7 @@
       link: https://hexo.io/zh-cn/
       avatar: https://d33wubrfki0l68.cloudfront.net/6657ba50e702d84afb32fe846bed54fba1a77add/827ae/logo.svg
       descr: Hexo 网站生成框架
+    - name: 佛山中考查分
+      link: https://exam.edu.foshan.gov.cn:49000/iexam/iexam/foshan/chaXunKaoShengFenShu.do
+      avatar: link/fszk.webp
+      descr: 查分入口
