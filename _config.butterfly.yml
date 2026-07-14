@@ -973,6 +973,17 @@ lazyload:
   placeholder:
   blur: true
 
+butterfly_extsrc:
+  enable: true
+  media:
+    # 自动美化页面所有video、img
+    enable: true
+    video_radius: 14px
+    video_shadow: true
+    video_hover_scale: 1.01
+    # 加载空白时渐变底色
+    video_placeholder: true
+
 # PWA
 # See https://github.com/JLHwung/hexo-offline
 # ---------------

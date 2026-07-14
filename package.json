@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@fancyapps/fancybox": "^3.5.7",
+    "butterfly-extsrc": "^1.1.6",
     "element-ui": "^2.15.14",
     "fs": "^0.0.1-security",
     "hexo": "^7.3.0",
