@@ -73,7 +73,7 @@ content:
   - name: about
     label: "关于页面"
     type: file
-    path: about/index.md
+    path: source/about/index.md
     fields:
       - name: title
         label: "页面标题"
