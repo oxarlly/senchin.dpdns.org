@@ -1,4 +1,4 @@
-文章资源: source/images # 指定图片/视频上传的目标文件夹
+media: source/images # 指定图片/视频上传的目标文件夹
 
 content:
   - name: docs
