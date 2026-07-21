@@ -4,7 +4,7 @@ content:
   - name: docs
     label: 文章管理
     type: collection
-    path: content # 管理 content 目录下的文件
+    path: source # 管理 content 目录下的文件
     fields:
       - name: title
         label: 标题
