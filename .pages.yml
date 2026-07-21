@@ -3,8 +3,8 @@
 
 # 1. 媒体库设置 (Media)
 media:
-  input: images # 媒体文件存放目录
-  output: /images # 页面引用的相对/绝对路径
+  input: source/images # 媒体文件存放目录
+  output: source/images # 页面引用的相对/绝对路径
   label: "媒体库" # 左侧边栏 Media 汉化名称
 
 # 2. 内容与文章管理设置 (Content)
