@@ -1,8 +1,8 @@
-media: source/images # 指定图片/视频上传的目标文件夹
+文章资源: source/images # 指定图片/视频上传的目标文件夹
 
 content:
   - name: docs
-    label: 文章管理
+    label: 文章与页面
     type: collection
     path: source # 管理 content 目录下的文件
     fields:
