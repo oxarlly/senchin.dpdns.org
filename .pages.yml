@@ -88,7 +88,7 @@ content:
   - name: gallery
     label: "相册管理"
     type: collection
-    path: Gallery
+    path: source/Gallery
     fields:
       - name: title
         label: "相片名称"
@@ -106,7 +106,7 @@ content:
   - name: site_data
     label: "站点数据配置"
     type: collection
-    path: _data
+    path: source/_data
     fields:
       - name: title
         label: "配置项名称"
