@@ -1,14 +1,113 @@
-media: source/images # 指定图片/视频上传的目标文件夹
+# Pages CMS 配置文件 (.pages.yml)
+# 放置于仓库根目录下，即可实现菜单、目录和字段的全面汉化
 
+# 1. 媒体库设置 (Media)
+media:
+  input: images # 媒体文件存放目录
+  output: /images # 页面引用的相对/绝对路径
+  label: "媒体库" # 左侧边栏 Media 汉化名称
+
+# 2. 内容与文章管理设置 (Content)
 content:
-  - name: docs
-    label: 文章与页面
+  # ------------------------------------
+  # 文章管理 (_posts)
+  # ------------------------------------
+  - name: posts
+    label: "文章管理" # 侧边栏及顶部展示名称
     type: collection
-    path: source # 管理 content 目录下的文件
+    path: _posts
+    filename: "{year}-{month}-{day}-{primary}.md" # 文件命名规则
+    view:
+      primary: title
+      fields: [title, date, categories]
+      search: [title, content]
+      sort: [date]
+      default:
+        sort: date
+        order: desc
     fields:
       - name: title
-        label: 标题
+        label: "文章标题"
+        type: string
+        required: true
+      - name: date
+        label: "发布日期"
+        type: date
+        required: true
+      - name: categories
+        label: "分类标签"
+        type: string
+        list: true
+      - name: description
+        label: "文章摘要"
+        type: text
+      - name: body
+        label: "正文内容"
+        type: rich-text
+
+  # ------------------------------------
+  # 草稿箱 (_drafts)
+  # ------------------------------------
+  - name: drafts
+    label: "草稿箱"
+    type: collection
+    path: _drafts
+    view:
+      primary: title
+      fields: [title, date]
+    fields:
+      - name: title
+        label: "草稿标题"
+        type: string
+        required: true
+      - name: date
+        label: "创建日期"
+        type: date
+      - name: body
+        label: "正文内容"
+        type: rich-text
+
+  # ------------------------------------
+  # 独立页面 (About / Archives 等)
+  # ------------------------------------
+  - name: about
+    label: "关于页面"
+    type: file
+    path: about/index.md
+    fields:
+      - name: title
+        label: "页面标题"
         type: string
       - name: body
-        label: 内容
+        label: "页面内容"
         type: rich-text
+
+  # ------------------------------------
+  # 画廊 / 相册 (Gallery)
+  # ------------------------------------
+  - name: gallery
+    label: "相册管理"
+    type: collection
+    path: Gallery
+    fields:
+      - name: title
+        label: "相片名称"
+        type: string
+      - name: image
+        label: "选择图片"
+        type: image
+      - name: description
+        label: "图片描述"
+        type: text
+
+  # ------------------------------------
+  # 全局数据配置 (_data)
+  # ------------------------------------
+  - name: site_data
+    label: "站点数据配置"
+    type: collection
+    path: _data
+    fields:
+      - name: title
+        label: "配置项名称"
+        type: string
