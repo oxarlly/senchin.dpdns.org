@@ -16,7 +16,7 @@ content:
     label: "文章管理" # 侧边栏及顶部展示名称
     type: collection
     path: source/_posts
-    filename: "{year}-{month}-{day}-{primary}.md" # 文件命名规则
+    filename: "{year}-{month}-{day}-{slug}.md" # 文件命名规则
     view:
       primary: title
       fields: [title, date, categories]
