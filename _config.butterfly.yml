@@ -57,7 +57,7 @@ favicon: https://senchin.dpdns.org/media/favicon.webp
 
 # Avatar （头像）
 avatar:
-  img: https://senchin.dpdns.org/media/avatar-o.webp
+  img: media/avatar-o.webp
   effect: false
 
 # Disable all banner image
