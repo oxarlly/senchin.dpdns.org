@@ -60,7 +60,7 @@
                 <i class="fa fa-cloud-upload mr-2 text-primary"></i>
                 上传图片
             </h2>
-            
+
             <!-- 选项卡 -->
             <div class="flex border-b mb-6">
                 <button id="tab-upload-file" class="px-4 py-2 font-medium text-primary border-b-2 border-primary">
@@ -70,7 +70,7 @@
                     <i class="fa fa-youtube-play mr-1 text-youtube"></i> YouTube封面
                 </button>
             </div>
-            
+
             <!-- 上传文件面板 -->
             <div id="panel-upload-file" class="block">
                 <div class="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-primary transition-colors duration-300 cursor-pointer" id="drop-area">
@@ -83,7 +83,7 @@
                     <p class="text-sm text-gray-500 mt-4">支持JPG、PNG等常见图片格式</p>
                 </div>
             </div>
-            
+
             <!-- YouTube封面面板 -->
             <div id="panel-youtube" class="hidden">
                 <div class="mb-4">
@@ -112,7 +112,7 @@
                         </button>
                     </div>
                 </div>
-                
+
                 <!-- 缓存文件上传面板 -->
                 <div id="cached-cover-container" class="mt-6 hidden">
                     <div class="bg-green-50 border border-green-200 rounded-lg p-4">
@@ -131,7 +131,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div id="preview-container" class="mt-6 hidden">
                 <h3 class="text-lg font-semibold text-gray-700 mb-3">预览</h3>
                 <div class="flex justify-center">
@@ -146,7 +146,7 @@
                 <i class="fa fa-cogs mr-2 text-primary"></i>
                 处理选项
             </h2>
-            
+
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <!-- 裁剪选项 -->
                 <div class="bg-neutral p-4 rounded-lg">
@@ -181,7 +181,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- 模糊选项 -->
                 <div class="bg-neutral p-4 rounded-lg">
                     <h3 class="text-lg font-semibold text-gray-700 mb-3 flex items-center">
@@ -210,7 +210,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="mt-6 flex justify-center">
                 <button id="process-btn" class="bg-secondary hover:bg-secondary/90 text-white font-bold py-3 px-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 scale-hover flex items-center">
                     <i class="fa fa-magic mr-2"></i>
@@ -225,7 +225,7 @@
                 <i class="fa fa-check-circle mr-2 text-secondary"></i>
                 处理结果
             </h2>
-            
+
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <!-- 横版结果 -->
                 <div class="bg-neutral p-4 rounded-lg">
@@ -235,9 +235,12 @@
                     </h3>
                     <div class="flex flex-col items-center">
                         <canvas id="landscape-canvas" class="max-w-full rounded-lg shadow-md mb-4 border border-gray-200"></canvas>
+                        <button id="download-landscape-btn" class="bg-primary hover:bg-primary/90 text-white font-medium py-2 px-6 rounded-lg transition-all duration-300 scale-hover">
+                            <i class="fa fa-download mr-2"></i>另存横版图片
+                        </button>
                     </div>
                 </div>
-                
+
                 <!-- 竖版结果 -->
                 <div class="bg-neutral p-4 rounded-lg">
                     <h3 class="text-lg font-semibold text-gray-700 mb-3 flex items-center">
@@ -246,15 +249,11 @@
                     </h3>
                     <div class="flex flex-col items-center">
                         <canvas id="portrait-canvas" class="max-w-full rounded-lg shadow-md mb-4 border border-gray-200"></canvas>
+                        <button id="download-portrait-btn" class="bg-primary hover:bg-primary/90 text-white font-medium py-2 px-6 rounded-lg transition-all duration-300 scale-hover">
+                            <i class="fa fa-download mr-2"></i>另存竖版图片
+                        </button>
                     </div>
                 </div>
-            </div>
-            
-            <div class="mt-8 flex justify-center">
-                <button id="download-btn" class="bg-primary hover:bg-primary/90 text-white font-bold py-3 px-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 scale-hover flex items-center">
-                    <i class="fa fa-download mr-2"></i>
-                    另存为（这2张图片）
-                </button>
             </div>
         </section>
 
@@ -281,7 +280,7 @@
         let cachedCoverBlob = null;
         const blurStrengthInput = document.getElementById('blur-strength');
         const blurValueDisplay = document.getElementById('blur-value');
-        
+
         // DOM 元素
         const dropArea = document.getElementById('drop-area');
         const fileInput = document.getElementById('file-input');
@@ -293,10 +292,13 @@
         const resultsSection = document.getElementById('results-section');
         const landscapeCanvas = document.getElementById('landscape-canvas');
         const portraitCanvas = document.getElementById('portrait-canvas');
-        const downloadBtn = document.getElementById('download-btn');
         const loadingOverlay = document.getElementById('loading-overlay');
         const loadingMessage = document.getElementById('loading-message');
-        
+
+        // 独立下载按钮
+        const downloadLandscapeBtn = document.getElementById('download-landscape-btn');
+        const downloadPortraitBtn = document.getElementById('download-portrait-btn');
+
         // YouTube相关元素
         const tabUploadFile = document.getElementById('tab-upload-file');
         const tabYoutube = document.getElementById('tab-youtube');
@@ -311,7 +313,7 @@
         const cacheYoutubeCoverBtn = document.getElementById('cache-youtube-cover');
         const cachedCoverContainer = document.getElementById('cached-cover-container');
         const uploadCachedCoverBtn = document.getElementById('upload-cached-cover');
-        
+
         // 选项卡切换
         tabUploadFile.addEventListener('click', () => {
             tabUploadFile.classList.add('text-primary', 'border-b-2', 'border-primary');
@@ -321,7 +323,7 @@
             panelUploadFile.classList.remove('hidden');
             panelYoutube.classList.add('hidden');
         });
-        
+
         tabYoutube.addEventListener('click', () => {
             tabYoutube.classList.add('text-primary', 'border-b-2', 'border-primary');
             tabYoutube.classList.remove('text-gray-500');
@@ -330,52 +332,52 @@
             panelUploadFile.classList.add('hidden');
             panelYoutube.classList.remove('hidden');
         });
-        
+
         // 更新模糊值显示
         blurStrengthInput.addEventListener('input', () => {
             blurValueDisplay.textContent = blurStrengthInput.value;
         });
-        
+
         // 选择文件按钮点击事件
         selectFileBtn.addEventListener('click', () => {
             fileInput.click();
         });
-        
+
         // 文件选择事件
         fileInput.addEventListener('change', (e) => {
             if (e.target.files.length > 0) {
                 handleFile(e.target.files[0]);
             }
         });
-        
+
         // 拖放功能
         ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
             dropArea.addEventListener(eventName, preventDefaults, false);
         });
-        
+
         function preventDefaults(e) {
             e.preventDefault();
             e.stopPropagation();
         }
-        
+
         ['dragenter', 'dragover'].forEach(eventName => {
             dropArea.addEventListener(eventName, highlight, false);
         });
-        
+
         ['dragleave', 'drop'].forEach(eventName => {
             dropArea.addEventListener(eventName, unhighlight, false);
         });
-        
+
         function highlight() {
             dropArea.classList.add('border-primary', 'bg-primary/5');
         }
-        
+
         function unhighlight() {
             dropArea.classList.remove('border-primary', 'bg-primary/5');
         }
-        
+
         dropArea.addEventListener('drop', handleDrop, false);
-        
+
         function handleDrop(e) {
             const dt = e.dataTransfer;
             const file = dt.files[0];
@@ -383,16 +385,16 @@
                 handleFile(file);
             }
         }
-        
+
         // 处理文件
         function handleFile(file) {
             if (!file.type.match('image.*')) {
                 alert('请选择图片文件！');
                 return;
             }
-            
+
             const reader = new FileReader();
-            
+
             reader.onload = function(e) {
                 const img = new Image();
                 img.onload = function() {
@@ -405,17 +407,17 @@
                 };
                 img.src = e.target.result;
             };
-            
+
             reader.readAsDataURL(file);
         }
-        
+
         // 从YouTube URL提取视频ID
         function getYouTubeVideoId(url) {
             const regex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/;
             const match = url.match(regex);
             return match ? match[1] : null;
         }
-        
+
         // 获取YouTube封面（优先尝试最高质量）
         fetchYoutubeCoverBtn.addEventListener('click', async () => {
             const url = youtubeUrlInput.value.trim();
@@ -423,27 +425,27 @@
                 alert('请输入YouTube视频URL');
                 return;
             }
-            
+
             const videoId = getYouTubeVideoId(url);
             if (!videoId) {
                 alert('无效的YouTube视频URL');
                 return;
             }
-            
+
             // 显示加载中
             loadingOverlay.classList.remove('hidden');
             loadingMessage.textContent = '正在获取YouTube封面...';
-            
+
             // 尝试获取最高质量的封面
             const qualityLevels = [
                 { level: 'maxresdefault', label: '最高质量' },
                 { level: 'sddefault', label: '标准质量' },
                 { level: 'hqdefault', label: '高质量' }
             ];
-            
+
             let coverUrl = '';
             let qualityLabel = '';
-            
+
             for (const level of qualityLevels) {
                 try {
                     const url = `https://img.youtube.com/vi/${videoId}/${level.level}.jpg`;
@@ -455,20 +457,20 @@
                     // 继续尝试下一个质量级别
                 }
             }
-            
+
             if (!coverUrl) {
                 alert('无法获取视频封面，请检查URL是否正确');
                 loadingOverlay.classList.add('hidden');
                 return;
             }
-            
+
             // 显示封面
             youtubePreviewImage.src = coverUrl;
             youtubePreviewContainer.classList.remove('hidden');
             coverQualityDisplay.textContent = qualityLabel;
             loadingOverlay.classList.add('hidden');
         });
-        
+
         // 检查图片是否存在
         function checkImageExists(url) {
             return new Promise((resolve, reject) => {
@@ -478,26 +480,26 @@
                 img.src = url;
             });
         }
-        
+
         // 缓存YouTube封面到本地
         cacheYoutubeCoverBtn.addEventListener('click', async () => {
             if (!youtubePreviewImage.src || youtubePreviewImage.src === 'data:,') {
                 alert('请先获取YouTube封面');
                 return;
             }
-            
+
             // 显示加载中
             loadingOverlay.classList.remove('hidden');
             loadingMessage.textContent = '正在缓存封面图片...';
-            
+
             try {
                 // 从URL获取图片并转换为Blob
                 const response = await fetch(youtubePreviewImage.src);
                 cachedCoverBlob = await response.blob();
-                
+
                 // 显示缓存成功提示
                 cachedCoverContainer.classList.remove('hidden');
-                
+
                 // 平滑滚动到缓存提示
                 setTimeout(() => {
                     cachedCoverContainer.scrollIntoView({ behavior: 'smooth' });
@@ -509,27 +511,27 @@
                 loadingOverlay.classList.add('hidden');
             }
         });
-        
+
         // 上传缓存的封面图片
         uploadCachedCoverBtn.addEventListener('click', () => {
             if (!cachedCoverBlob) {
                 alert('没有缓存的封面图片');
                 return;
             }
-            
+
             // 创建一个临时的File对象
             const file = new File([cachedCoverBlob], 'youtube_cover.jpg', {
                 type: cachedCoverBlob.type,
                 lastModified: new Date().getTime()
             });
-            
+
             // 处理这个文件，就像用户从本地选择的一样
             handleFile(file);
-            
+
             // 切换回上传文件选项卡
             tabUploadFile.click();
         });
-        
+
         // 使用YouTube封面（直接处理）
         useYoutubeCoverBtn.addEventListener('click', () => {
             const img = new Image();
@@ -545,26 +547,26 @@
             };
             img.src = youtubePreviewImage.src;
         });
-        
+
         // 高斯模糊函数
         function gaussianBlur(srcCanvas, srcContext, radius) {
             // 简化版高斯模糊算法
             const src = srcContext.getImageData(0, 0, srcCanvas.width, srcCanvas.height);
             const dst = new ImageData(src.width, src.height);
-            
+
             // 一维高斯核计算
             const gaussianKernel = createGaussianKernel(radius);
-            
+
             // 水平方向模糊
             const temp = new ImageData(src.width, src.height);
             blurHorizontal(src, temp, gaussianKernel, radius);
-            
+
             // 垂直方向模糊
             blurVertical(temp, dst, gaussianKernel, radius);
-            
+
             return dst;
         }
-        
+
         function createGaussianKernel(radius) {
             // 简化的高斯核计算
             const kernelSize = Math.max(1, Math.floor(radius * 3) | 1);
@@ -574,21 +576,21 @@
             const sqrtSigmaPi2 = Math.sqrt(Math.PI * sigma22);
             const total = 0;
             const half = Math.floor(kernelSize / 2);
-            
+
             for (let i = 0; i < kernelSize; i++) {
                 const x = i - half;
                 kernel[i] = Math.exp(-(x * x) / sigma22) / sqrtSigmaPi2;
             }
-            
+
             // 归一化
             const sum = kernel.reduce((a, b) => a + b, 0);
             for (let i = 0; i < kernelSize; i++) {
                 kernel[i] /= sum;
             }
-            
+
             return kernel;
         }
-        
+
         function blurHorizontal(src, dst, kernel, radius) {
             const width = src.width;
             const height = src.height;
@@ -596,22 +598,22 @@
             const dstData = dst.data;
             const kernelSize = Math.max(1, Math.floor(radius * 3) | 1);
             const half = Math.floor(kernelSize / 2);
-            
+
             for (let y = 0; y < height; y++) {
                 for (let x = 0; x < width; x++) {
                     let r = 0, g = 0, b = 0, a = 0;
-                    
+
                     for (let i = -half; i <= half; i++) {
                         const xPos = Math.min(width - 1, Math.max(0, x + i));
                         const idx = (y * width + xPos) * 4;
                         const k = kernel[i + half];
-                        
+
                         r += srcData[idx] * k;
                         g += srcData[idx + 1] * k;
                         b += srcData[idx + 2] * k;
                         a += srcData[idx + 3] * k;
                     }
-                    
+
                     const idx = (y * width + x) * 4;
                     dstData[idx] = r;
                     dstData[idx + 1] = g;
@@ -620,7 +622,7 @@
                 }
             }
         }
-        
+
         function blurVertical(src, dst, kernel, radius) {
             const width = src.width;
             const height = src.height;
@@ -628,22 +630,22 @@
             const dstData = dst.data;
             const kernelSize = Math.max(1, Math.floor(radius * 3) | 1);
             const half = Math.floor(kernelSize / 2);
-            
+
             for (let y = 0; y < height; y++) {
                 for (let x = 0; x < width; x++) {
                     let r = 0, g = 0, b = 0, a = 0;
-                    
+
                     for (let i = -half; i <= half; i++) {
                         const yPos = Math.min(height - 1, Math.max(0, y + i));
                         const idx = (yPos * width + x) * 4;
                         const k = kernel[i + half];
-                        
+
                         r += srcData[idx] * k;
                         g += srcData[idx + 1] * k;
                         b += srcData[idx + 2] * k;
                         a += srcData[idx + 3] * k;
                     }
-                    
+
                     const idx = (y * width + x) * 4;
                     dstData[idx] = r;
                     dstData[idx + 1] = g;
@@ -652,14 +654,14 @@
                 }
             }
         }
-        
+
         // 处理图片
         processBtn.addEventListener('click', async () => {
             if (!originalImage) return;
-            
+
             // 显示加载中
             loadingOverlay.classList.remove('hidden');
-            
+
             try {
                 // 获取设置
                 const landscapeWidth = parseInt(document.getElementById('landscape-width').value) || 960;
@@ -668,22 +670,22 @@
                 const portraitHeight = parseInt(document.getElementById('portrait-height').value) || 960;
                 const blurStrength = parseInt(blurStrengthInput.value) || 50;
                 const overlayOriginal = document.getElementById('overlay-original').checked;
-                
+
                 // 更新加载信息
                 loadingMessage.textContent = '正在裁剪图片...';
-                
+
                 // 处理横版图片
                 await processImage(landscapeCanvas, originalImage, landscapeWidth, landscapeHeight, blurStrength, overlayOriginal);
-                
+
                 // 更新加载信息
                 loadingMessage.textContent = '正在处理竖版图片...';
-                
+
                 // 处理竖版图片
                 await processImage(portraitCanvas, originalImage, portraitWidth, portraitHeight, blurStrength, overlayOriginal);
-                
+
                 // 显示结果
                 resultsSection.classList.remove('hidden');
-                
+
                 // 平滑滚动到结果区域
                 setTimeout(() => {
                     resultsSection.scrollIntoView({ behavior: 'smooth' });
@@ -696,7 +698,7 @@
                 loadingOverlay.classList.add('hidden');
             }
         });
-        
+
         // 处理单个图片
         async function processImage(canvas, original, targetWidth, targetHeight, blurRadius, overlayOriginal) {
             return new Promise((resolve) => {
@@ -705,13 +707,13 @@
                 const cropCtx = cropCanvas.getContext('2d');
                 cropCanvas.width = targetWidth;
                 cropCanvas.height = targetHeight;
-                
+
                 // 计算等比例缩放
                 const originalRatio = original.width / original.height;
                 const targetRatio = targetWidth / targetHeight;
-                
+
                 let scale, x, y, drawWidth, drawHeight;
-                
+
                 if (originalRatio > targetRatio) {
                     // 原图更宽，以高度为基准缩放
                     scale = targetHeight / original.height;
@@ -727,34 +729,34 @@
                     x = 0;
                     y = (targetHeight - drawHeight) / 2;
                 }
-                
+
                 // 裁剪图片
                 cropCtx.drawImage(original, x, y, drawWidth, drawHeight);
-                
+
                 // 创建临时画布用于模糊
                 const blurCanvas = document.createElement('canvas');
                 const blurCtx = blurCanvas.getContext('2d');
                 blurCanvas.width = targetWidth;
                 blurCanvas.height = targetHeight;
-                
+
                 // 应用高斯模糊
                 blurCtx.drawImage(cropCanvas, 0, 0);
                 const blurredImageData = gaussianBlur(blurCanvas, blurCtx, blurRadius);
                 blurCtx.putImageData(blurredImageData, 0, 0);
-                
+
                 // 准备最终画布
                 const ctx = canvas.getContext('2d');
                 canvas.width = targetWidth;
                 canvas.height = targetHeight;
-                
+
                 // 绘制模糊背景
                 ctx.drawImage(blurCanvas, 0, 0);
-                
+
                 // 如果需要叠加原图
                 if (overlayOriginal) {
                     // 计算适合尺寸的原图叠加
                     let overlayScale, overlayWidth, overlayHeight, overlayX, overlayY;
-                    
+
                     if (originalRatio > targetRatio) {
                         // 原图更宽，以宽度为基准缩放
                         overlayScale = targetWidth / original.width;
@@ -770,50 +772,36 @@
                         overlayX = (targetWidth - overlayWidth) / 2;
                         overlayY = 0;
                     }
-                    
+
                     // 设置叠加透明度
                     ctx.globalAlpha = 0.8; // 80% 透明度
                     ctx.drawImage(original, overlayX, overlayY, overlayWidth, overlayHeight);
                     ctx.globalAlpha = 1; // 恢复不透明
                 }
-                
+
                 resolve();
             });
         }
-        
-        // 下载功能 - 合并为一个按钮
-        downloadBtn.addEventListener('click', () => {
-            downloadBothImages();
-        });
-        
-        // 下载两张图片
-        function downloadBothImages() {
-            // 由于浏览器安全限制，无法直接批量下载
-            // 这里会依次触发两个下载，用户需要分别确认
-            
-            // 创建临时链接数组
-            const links = [];
-            
-            // 创建横版图片下载链接
-            const landscapeLink = document.createElement('a');
-            landscapeLink.download = '横版模糊.jpg';
-            landscapeLink.href = landscapeCanvas.toDataURL('image/jpeg', 0.9);
-            links.push(landscapeLink);
-            
-            // 创建竖版图片下载链接
-            const portraitLink = document.createElement('a');
-            portraitLink.download = '竖版模糊.jpg';
-            portraitLink.href = portraitCanvas.toDataURL('image/jpeg', 0.9);
-            links.push(portraitLink);
-            
-            // 依次触发下载
-            links.forEach((link, index) => {
-                setTimeout(() => {
-                    link.click();
-                }, index * 500); // 间隔500ms，确保浏览器有时间处理每个下载
-            });
+
+        // 单独下载横版
+        function downloadLandscapeImage() {
+            const link = document.createElement('a');
+            link.download = '横版模糊.jpg';
+            link.href = landscapeCanvas.toDataURL('image/jpeg', 0.9);
+            link.click();
         }
-        
+        // 单独下载竖版
+        function downloadPortraitImage() {
+            const link = document.createElement('a');
+            link.download = '竖版模糊.jpg';
+            link.href = portraitCanvas.toDataURL('image/jpeg', 0.9);
+            link.click();
+        }
+
+        // 绑定按钮点击
+        downloadLandscapeBtn.addEventListener('click', downloadLandscapeImage);
+        downloadPortraitBtn.addEventListener('click', downloadPortraitImage);
+
         // 添加页面加载动画
         document.addEventListener('DOMContentLoaded', () => {
             document.body.classList.add('opacity-0');
@@ -824,4 +812,4 @@
         });
     </script>
 </body>
-</html>    
+</html>
