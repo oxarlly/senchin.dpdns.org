@@ -1,6 +1,5 @@
 name: Auto Save to Wayback Machine
 on:
-  push:
   workflow_dispatch:
   schedule:
     - cron: '17 0 * * *'  # 北京时间 08:17
@@ -17,6 +16,5 @@ jobs:
         uses: JamieMagee/wayback@v2
         with:
           url: "https://senchin.dpdns.org"
-          # 失败自动重试3次，每次间隔60秒
           retries: 3
           retryDelay: 60
