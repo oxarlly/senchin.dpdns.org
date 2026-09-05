@@ -16,7 +16,7 @@ menu:
     分类: /categories/ || fas fa-folder-open
   目录||fas fa-list:
     音乐: /music/ || fas fa-music
-    视频: /movies/ || fas fa-video
+    视频: /categories/movies/ || fas fa-video
   壁纸: /Gallery/ || fas fa-images
   时间线: /timeline/ || fas fa-timeline
   动态: /live/ || fas fa-comments
