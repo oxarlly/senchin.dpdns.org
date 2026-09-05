@@ -3,6 +3,7 @@ title: 视频
 date: 2024-01-07 23:59:59
 type: "movies"
 comments: false
+permalink：/movies/1/
 categories: 视频
 top_img: https://senchin.dpdns.org/movies/th.webp
 ---
