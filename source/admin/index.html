@@ -1,36 +1,2125 @@
 <!DOCTYPE html>
-<html style="margin: 0; padding: 0; height: 100%; overflow: hidden">
+<html lang="zh-CN">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>GitHub 文件管理器</title>
     <style>
-        iframe {
-            border: none;
-            width: 100vw;
-            height: 100vh;
-        }
-        body {
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f6f8fa;
+            --bg-tertiary: #eaeef2;
+            --text-primary: #24292f;
+            --text-secondary: #57606a;
+            --text-muted: #8c959f;
+            --border-color: #d0d7de;
+            --accent-color: #0969da;
+            --success-color: #1a7f37;
+            --danger-color: #cf222e;
+            --warning-color: #9a6700;
+            --radius: 6px;
+            --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #0d1117;
+            --bg-secondary: #161b22;
+            --bg-tertiary: #21262d;
+            --text-primary: #f0f6fc;
+            --text-secondary: #8b949e;
+            --text-muted: #6e7681;
+            --border-color: #30363d;
+            --accent-color: #58a6ff;
+            --success-color: #3fb950;
+            --danger-color: #f85149;
+            --warning-color: #d29922;
+        }
+
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            transition: var(--transition);
             overflow: hidden;
+        }
+
+        /* 登录页面 */
+        .login-page {
+            position: fixed;
+            inset: 0;
+            background: url('https://senchin.dpdns.org/media/bg.webp') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            padding: 20px;
+        }
+        .login-page::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.62);
+        }
+        .login-card {
+            position: relative;
+            z-index: 1;
+            width: 380px;
+            padding: 48px 40px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: var(--radius);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+            backdrop-filter: blur(12px);
+        }
+        [data-theme="dark"] .login-card {
+            background: rgba(22, 27, 34, 0.95);
+        }
+        .login-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            text-align: center;
+        }
+        .login-subtitle {
+            color: var(--text-secondary);
+            text-align: center;
+            margin-bottom: 32px;
+            font-size: 14px;
+        }
+        .form-group { margin-bottom: 20px; }
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+        .form-input {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            font-size: 14px;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            outline: none;
+        }
+        .form-input:focus {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(9, 105, 218, 0.15);
+        }
+        .btn-primary {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: var(--radius);
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            background: var(--accent-color);
+            color: white;
+        }
+        .login-tip {
+            margin-top: 20px;
+            font-size: 12px;
+            color: var(--text-muted);
+            text-align: center;
+            line-height: 1.5;
+        }
+        .login-tip a { color: var(--accent-color); text-decoration: none; }
+
+        /* 主应用布局 */
+        .app-container {
+            display: none;
+            height: 100vh;
+            height: 100dvh;
+            overflow: hidden;
+        }
+        .app-container.active { display: flex; }
+
+        /* 侧边栏 */
+        .sidebar {
+            width: 260px;
+            background: var(--bg-secondary);
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+            z-index: 100;
+        }
+        .sidebar-header {
+            height: 56px;
+            padding: 0 16px;
+            border-bottom: 1px solid var(--border-color);
+            cursor: pointer;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 3px;
+        }
+        .user-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            line-height: 1;
+        }
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            border: 1px solid var(--border-color);
+        }
+        .user-name {
+            font-weight: 600;
+            font-size: 14px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .current-repo {
+            font-size: 12px;
+            color: var(--text-secondary);
+            padding-left: 42px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            line-height: 1;
+        }
+
+        /* 仓库下拉菜单 */
+        .repo-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 3px 6px rgba(0,0,0,0.12);
+            display: none;
+            z-index: 200;
+            max-height: 50vh;
+            overflow: hidden;
+            flex-direction: column;
+        }
+        .repo-dropdown.show { display: flex; }
+        .repo-dropdown-search {
+            padding: 10px 12px;
+            border-bottom: 1px solid var(--border-color);
+            flex-shrink: 0;
+        }
+        .repo-dropdown-search input {
+            width: 100%;
+            padding: 8px 10px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            font-size: 13px;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            outline: none;
+        }
+        .repo-dropdown-list { overflow-y: auto; flex: 1; }
+        .repo-dropdown-item {
+            padding: 10px 12px;
+            cursor: pointer;
+            font-size: 13px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .repo-dropdown-item:last-child { border-bottom: none; }
+        .repo-dropdown-item-name { font-weight: 500; margin-bottom: 2px; }
+        .repo-dropdown-item-meta { font-size: 11px; color: var(--text-muted); }
+
+        .sidebar-menu {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px 0;
+        }
+        .menu-section {
+            padding: 8px 16px;
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 8px;
+        }
+        .menu-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            cursor: pointer;
+            font-size: 14px;
+            color: var(--text-primary);
+            border-left: 3px solid transparent;
+        }
+        .menu-item.active {
+            background: rgba(9, 105, 218, 0.1);
+            border-left-color: var(--accent-color);
+            color: var(--accent-color);
+        }
+        .menu-item svg { width: 18px; height: 18px; flex-shrink: 0; }
+
+        /* 底部按钮 */
+        .sidebar-footer {
+            padding: 12px 16px;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            justify-content: flex-start;
+        }
+        .icon-only-btn {
+            width: 36px;
+            height: 36px;
+            flex-shrink: 0;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            background: var(--bg-primary);
+            color: var(--text-secondary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .icon-only-btn svg { width: 16px; height: 16px; }
+
+        .theme-menu {
+            position: absolute;
+            bottom: 48px;
+            left: 0;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            box-shadow: 0 3px 6px rgba(0,0,0,0.12);
+            display: none;
+            min-width: 120px;
+            overflow: hidden;
+            z-index: 100;
+        }
+        .theme-menu.show { display: block; }
+        .theme-option {
+            padding: 10px 16px;
+            font-size: 13px;
+            cursor: pointer;
+        }
+        .theme-option:hover { background: var(--bg-secondary) !important; }
+        .theme-option.active { color: var(--accent-color); }
+
+        /* 移动端菜单按钮 */
+        .mobile-menu-btn {
+            display: none;
+            width: 40px;
+            height: 40px;
+            border: none;
+            background: transparent;
+            color: var(--text-primary);
+            cursor: pointer;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 99;
+        }
+        .sidebar-overlay.show { display: block; }
+
+        /* 顶部栏 */
+        .topbar {
+            height: 56px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            padding: 0 24px;
+            gap: 24px;
+            background: var(--bg-primary);
+            flex-shrink: 0;
+        }
+        .breadcrumb {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+        .breadcrumb::-webkit-scrollbar { display: none; }
+        .breadcrumb-item {
+            color: var(--text-secondary);
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+        .breadcrumb-sep { color: var(--text-muted); flex-shrink: 0; }
+        .breadcrumb-current { font-weight: 500; color: var(--text-primary); flex-shrink: 0; }
+
+        .toolbar {
+            display: flex;
+            gap: 4px;
+            align-items: center;
+            flex-shrink: 0;
+        }
+        .tool-btn {
+            width: 36px;
+            height: 36px;
+            border: none;
+            border-radius: var(--radius);
+            background: transparent;
+            color: var(--text-secondary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .tool-btn svg { width: 18px; height: 18px; }
+
+        /* 主内容区 */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            min-width: 0;
+        }
+        .content-area {
+            flex: 1;
+            overflow: auto;
+            padding: 24px;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* 文件列表 */
+        .file-list {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            overflow: hidden;
+        }
+        .file-header {
+            display: grid;
+            grid-template-columns: 1fr 100px 150px;
+            padding: 10px 16px;
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-color);
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+        .file-row {
+            display: grid;
+            grid-template-columns: 1fr 100px 150px;
+            padding: 12px 16px;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            cursor: pointer;
+            gap: 16px;
+            position: relative;
+        }
+        .file-row:last-child { border-bottom: none; }
+        .file-row:active { background: var(--bg-secondary); }
+        .file-name {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            min-width: 0;
+        }
+        .file-name span {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .file-icon { width: 18px; height: 18px; flex-shrink: 0; color: var(--text-secondary); }
+        .file-icon.dir { color: var(--warning-color); }
+        .file-size { font-size: 13px; color: var(--text-secondary); }
+        .file-date { font-size: 13px; color: var(--text-muted); }
+
+        /* 上传区 */
+        .drop-zone {
+            border: 2px dashed var(--border-color);
+            border-radius: var(--radius);
+            padding: 24px;
+            text-align: center;
+            margin-bottom: 20px;
+            background: var(--bg-secondary);
+        }
+        .drop-zone p { color: var(--text-secondary); margin-bottom: 12px; font-size: 13px; }
+
+        /* 编辑器 */
+        .code-editor {
+            width: 100%;
+            flex: 1;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            font-family: 'Consolas', 'Monaco', 'Menlo', monospace;
+            font-size: 13px;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            resize: none;
+            outline: none;
+            line-height: 1.6;
+            min-height: 300px;
+        }
+
+        /* 媒体预览 */
+        .media-container {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #000;
+            border-radius: var(--radius);
+            overflow: hidden;
+        }
+        .media-container img {
+            max-width: 100%;
+            max-height: 70vh;
+            display: block;
+        }
+        .media-container video,
+        .media-container audio {
+            width: 100%;
+        }
+        .audio-container {
+            padding: 40px 20px;
+            background: var(--bg-secondary);
+        }
+
+        /* ========== 修改：Action 列表文字换行 ========== */
+        .run-item {
+            padding: 14px 20px;
+            border-bottom: 1px solid var(--border-color);
+            display: grid;
+            grid-template-columns: 20px 1fr auto auto auto;
+            gap: 16px;
+            align-items: flex-start;
+            background: var(--bg-primary);
+        }
+        .run-item:last-child { border-bottom: none; }
+        .run-status-dot { 
+            width: 12px; 
+            height: 12px; 
+            border-radius: 50%; 
+            flex-shrink: 0;
+            margin-top: 3px;
+        }
+        .run-status-dot.success { background: var(--success-color); }
+        .run-status-dot.failure { background: var(--danger-color); }
+        .run-status-dot.running { 
+            background: var(--accent-color);
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+        .run-info { min-width: 0; }
+        .run-title {
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 4px;
+            line-height: 1.4;
+            word-break: break-word;
+        }
+        .run-desc {
+            font-size: 12px;
+            color: var(--text-secondary);
+            line-height: 1.4;
+            word-break: break-word;
+        }
+        .run-badge {
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 500;
+            background: var(--bg-tertiary);
+            color: var(--text-secondary);
+            margin-top: 2px;
+            white-space: nowrap;
+        }
+        .run-status-text { 
+            font-size: 12px; 
+            color: var(--text-secondary); 
+            min-width: 80px; 
+            text-align: right;
+            margin-top: 2px;
+            white-space: nowrap;
+        }
+        .run-time { 
+            font-size: 12px; 
+            color: var(--text-muted); 
+            min-width: 100px; 
+            text-align: right;
+            margin-top: 2px;
+            white-space: nowrap;
+        }
+
+        /* 模态框 */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            align-items: flex-start;
+            justify-content: center;
+            z-index: 2000;
+            padding: 20px;
+            padding-top: 10vh;
+        }
+        .modal-overlay.active { display: flex; }
+        .modal {
+            background: var(--bg-primary);
+            border-radius: var(--radius);
+            width: 700px;
+            max-width: 100%;
+            max-height: 80vh;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .modal.small { width: 420px; }
+        .modal-header {
+            padding: 14px 20px;
+            border-bottom: 1px solid var(--border-color);
+            font-weight: 600;
+            font-size: 15px;
+            flex-shrink: 0;
+        }
+        .modal-body {
+            padding: 20px;
+            flex: 1;
+            overflow: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .modal-footer {
+            padding: 14px 20px;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: flex-end;
+            gap: 8px;
+            flex-shrink: 0;
+        }
+        .btn {
+            padding: 8px 14px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .btn-primary { background: var(--accent-color); border-color: var(--accent-color); color: white; }
+        .btn-danger { background: var(--danger-color); border-color: var(--danger-color); color: white; }
+
+        /* 右键菜单 */
+        .context-menu {
+            position: fixed;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            box-shadow: 0 3px 6px rgba(0,0,0,0.12);
+            min-width: 180px;
+            display: none;
+            z-index: 3000;
+            overflow: hidden;
+        }
+        .context-menu.active { display: block; }
+        .context-menu-item {
+            padding: 12px 16px;
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .context-menu-item.danger { color: var(--danger-color); }
+        .context-menu-divider { height: 1px; background: var(--border-color); margin: 4px 0; }
+
+        .loading {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid var(--border-color);
+            border-top-color: var(--accent-color);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-muted);
+        }
+        .empty-state svg { width: 64px; height: 64px; margin-bottom: 16px; opacity: 0.5; }
+
+        .input-error { border-color: var(--danger-color) !important; }
+        .error-text { color: var(--danger-color); font-size: 12px; margin-top: 4px; }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                position: fixed;
+                left: -260px;
+                top: 0;
+                bottom: 0;
+                width: 260px;
+                z-index: 100;
+            }
+            .sidebar.open { left: 0; box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
+            .mobile-menu-btn { display: flex; }
+            .topbar { padding: 0 12px; gap: 12px; height: 52px; }
+            .content-area { padding: 16px; }
+            .file-header { grid-template-columns: 1fr 80px; padding: 8px 12px; }
+            .file-header .file-date { display: none; }
+            .file-row { grid-template-columns: 1fr 80px; padding: 12px; gap: 12px; }
+            .file-row .file-date { display: none; }
+            .modal-overlay { padding: 0; padding-top: 0; align-items: flex-end; }
+            .modal { width: 100%; max-height: 85vh; border-radius: 6px 6px 0 0; }
+            .modal.small { width: 100%; }
+            .run-item { grid-template-columns: 16px 1fr auto; padding: 12px 16px; gap: 12px; }
+            .run-badge, .run-time { display: none; }
         }
     </style>
 </head>
 <body>
-<script>
-    // 域名检测与框架嵌套
-    const host = window.location.hostname;
-    let frameUrl = '';
+    <!-- 登录页面 -->
+    <div class="login-page" id="loginPage">
+        <div class="login-card">
+            <h1 class="login-title">欢迎回来</h1>
+            <p class="login-subtitle">网站仓库文件管理器</p>
+            <div class="form-group">
+                <label class="form-label">密码</label>
+                <input type="password" class="form-input" id="tokenInput" placeholder="请输入..." autocomplete="off">
+            </div>
+            <button class="btn-primary" id="loginBtn">登录</button>
+            <div class="login-tip">
+                密码仅保存在本地浏览器中<br>
+                <a href="https://github.com/settings/tokens" target="_blank">前往 GitHub 生成</a>
+            </div>
+        </div>
+    </div>
 
-    if (host === 'oxarlly.dpdns.org') {
-        frameUrl = 'https://senchin.dpdns.org/admin/a.html';
-    } else if (host === 'senchin.netlify.app') {
-        frameUrl = 'https://senchin.netlify.app/admin/b.html';
-    }
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
 
-    if (frameUrl) {
-        const iframe = document.createElement('iframe');
-        iframe.src = frameUrl;
-        document.body.appendChild(iframe);
-    }
-</script>
+    <!-- 主应用 -->
+    <div class="app-container" id="appContainer">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header" onclick="toggleRepoDropdown(event)">
+                <div class="user-row">
+                    <img class="user-avatar" id="sidebarAvatar" src="" alt="avatar">
+                    <div class="user-name" id="sidebarUsername">username</div>
+                </div>
+                <div class="current-repo" id="sidebarRepo">选择仓库</div>
+                <div class="repo-dropdown" id="repoDropdown">
+                    <div class="repo-dropdown-search">
+                        <input type="text" id="repoSearchInput" placeholder="搜索仓库..." oninput="filterRepoDropdown(this.value)" onclick="event.stopPropagation()">
+                    </div>
+                    <div class="repo-dropdown-list" id="repoDropdownList"></div>
+                </div>
+            </div>
+
+            <nav class="sidebar-menu">
+                <div class="menu-section">导航</div>
+                <div class="menu-item active" data-page="files" onclick="switchPage('files')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 7v10a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-6l-2-2H5a2 2 0 0 0-2 2z"></path>
+                    </svg>
+                    文件管理
+                </div>
+                <div class="menu-item" data-page="actions" onclick="switchPage('actions')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                    </svg>
+                    GitHub Actions
+                </div>
+            </nav>
+
+            <div class="sidebar-footer">
+                <button class="icon-only-btn" onclick="toggleThemeMenu(event)" title="主题">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    </svg>
+                    <div class="theme-menu" id="themeMenu">
+                        <div class="theme-option" data-theme="light" onclick="setTheme('light')">亮色</div>
+                        <div class="theme-option" data-theme="dark" onclick="setTheme('dark')">暗色</div>
+                        <div class="theme-option" data-theme="system" onclick="setTheme('system')">跟随系统</div>
+                    </div>
+                </button>
+                <button class="icon-only-btn" onclick="logout()" title="退出">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                        <polyline points="16 17 21 12 16 7"></polyline>
+                        <line x1="21" y1="12" x2="9" y2="12"></line>
+                    </svg>
+                </button>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <div class="topbar">
+                <button class="mobile-menu-btn" onclick="toggleSidebar()">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+                <div class="breadcrumb" id="breadcrumb">
+                    <span class="breadcrumb-current">请选择仓库</span>
+                </div>
+                <div class="toolbar" id="toolbar"></div>
+            </div>
+            <div class="content-area" id="contentArea"></div>
+        </main>
+    </div>
+
+    <!-- 新建文件夹 -->
+    <div class="modal-overlay" id="newFolderModal">
+        <div class="modal small">
+            <div class="modal-header">新建文件夹</div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="form-label">文件夹名称</label>
+                    <input type="text" class="form-input" id="newFolderName" placeholder="例如: images">
+                    <div class="error-text" id="newFolderError" style="display:none;"></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" onclick="closeModal('newFolderModal')">取消</button>
+                <button class="btn btn-primary" onclick="createNewFolder()">创建</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 重命名 -->
+    <div class="modal-overlay" id="renameModal">
+        <div class="modal small">
+            <div class="modal-header">重命名</div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="form-label">新名称</label>
+                    <input type="text" class="form-input" id="renameInput">
+                    <div class="error-text" id="renameError" style="display:none;"></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" onclick="closeModal('renameModal')">取消</button>
+                <button class="btn btn-primary" onclick="confirmRename()">确定</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 移动 -->
+    <div class="modal-overlay" id="moveModal">
+        <div class="modal small">
+            <div class="modal-header">移动</div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="form-label">目标路径</label>
+                    <input type="text" class="form-input" id="moveTargetPath" placeholder="例如: docs/new-folder/">
+                    <p style="font-size:12px;color:var(--text-muted);margin-top:6px;">输入相对于仓库根目录的完整路径</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" onclick="closeModal('moveModal')">取消</button>
+                <button class="btn btn-primary" onclick="confirmMove()">移动</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 编辑文件 -->
+    <div class="modal-overlay" id="editModal">
+        <div class="modal">
+            <div class="modal-header">编辑文件</div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="form-label">文件名</label>
+                    <input type="text" class="form-input" id="editFileName">
+                </div>
+                <textarea class="code-editor" id="codeEditor" spellcheck="false"></textarea>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" onclick="closeModal('editModal')">取消</button>
+                <button class="btn btn-primary" onclick="saveFileEdit()">保存</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 图片预览 -->
+    <div class="modal-overlay" id="imageModal">
+        <div class="modal">
+            <div class="modal-header" id="imageTitle">图片预览</div>
+            <div class="modal-body" style="padding:0;">
+                <div class="media-container">
+                    <img id="imagePlayer" alt="预览">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" onclick="closeImageModal()">关闭</button>
+                <button class="btn btn-primary" onclick="downloadFile()">下载文件</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 音频播放 -->
+    <div class="modal-overlay" id="audioModal">
+        <div class="modal small">
+            <div class="modal-header" id="audioTitle">音频播放</div>
+            <div class="modal-body audio-container">
+                <audio id="audioPlayer" controls style="width:100%;">
+                    您的浏览器不支持音频播放
+                
+            </div>
+            <div class="modal-footer">
+                <button class="btn" onclick="closeAudioModal()">关闭</button>
+                <button class="btn btn-primary" onclick="downloadFile()">下载文件</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 视频播放 -->
+    <div class="modal-overlay" id="videoModal">
+        <div class="modal">
+            <div class="modal-header" id="videoTitle">视频播放</div>
+            <div class="modal-body" style="padding:0;">
+                <div class="media-container">
+                    <video id="videoPlayer" controls>您的浏览器不支持视频播放</video>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" onclick="closeVideoModal()">关闭</button>
+                <button class="btn btn-primary" onclick="downloadFile()">下载文件</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 确认删除 -->
+    <div class="modal-overlay" id="deleteModal">
+        <div class="modal small">
+            <div class="modal-header">确认删除</div>
+            <div class="modal-body">
+                <p>确定要删除 <strong id="deleteFileName"></strong> 吗？此操作不可撤销。</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" onclick="closeModal('deleteModal')">取消</button>
+                <button class="btn btn-danger" onclick="confirmDelete()">删除</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 右键菜单 -->
+    <div class="context-menu" id="contextMenu">
+        <div class="context-menu-item" id="menuEdit" onclick="editFile()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 20h9"></path>
+                <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+            </svg>
+            编辑
+        </div>
+        <div class="context-menu-item" onclick="showRenameModal()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 20h9"></path>
+                <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+            </svg>
+            重命名
+        </div>
+        <div class="context-menu-item" onclick="showMoveModal()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="16 3 21 3 21 8"></polyline>
+                <line x1="4" y1="20" x2="19" y2="5"></line>
+                <polyline points="21 16 21 21 16 21"></polyline>
+            </svg>
+            移动
+        </div>
+        <div class="context-menu-item" onclick="copyFile()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+            复制
+        </div>
+        <div class="context-menu-item" onclick="downloadFile()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            下载
+        </div>
+        <div class="context-menu-divider"></div>
+        <div class="context-menu-item danger" onclick="showDeleteModal()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="3 6 5 6 21 6"></polyline>
+                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"></path>
+            </svg>
+            删除
+        </div>
+    </div>
+
+    <script>
+        const GITHUB_API = 'https://api.github.com';
+        const BINARY_EXTENSIONS = ['zip','rar','7z','tar','gz','bz2','exe','dll','so','dylib','pdf','doc','docx','xls','xlsx','ppt','pptx','woff','woff2','ttf','eot','otf'];
+        const IMAGE_EXTENSIONS = ['jpg','jpeg','png','gif','webp','bmp','ico','svg'];
+        const AUDIO_EXTENSIONS = ['mp3','wav','flac','ogg','aac','m4a'];
+        const VIDEO_EXTENSIONS = ['mp4','webm','mov','mkv','avi','flv','wmv'];
+        const INVALID_NAME_CHARS = /[\\/:*?"<>|]/;
+        
+        let state = {
+            token: localStorage.getItem('github_token') || '',
+            user: null,
+            repos: [],
+            filteredRepos: [],
+            currentRepo: null,
+            filePath: '',
+            currentFile: null,
+            currentFileSha: null,
+            theme: localStorage.getItem('theme') || 'system',
+            currentPage: 'files'
+        };
+
+        // ========== 初始化 ==========
+        document.addEventListener('DOMContentLoaded', () => {
+            initTheme();
+            bindEvents();
+            if (state.token) verifyToken();
+        });
+
+        function utf8ToBase64(str) {
+            return btoa(unescape(encodeURIComponent(str)));
+        }
+        function base64ToUtf8(str) {
+            return decodeURIComponent(escape(atob(str)));
+        }
+
+        // 主题系统
+        function initTheme() {
+            setTheme(state.theme);
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+                if (state.theme === 'system') applyTheme();
+            });
+        }
+        function setTheme(theme) {
+            state.theme = theme;
+            localStorage.setItem('theme', theme);
+            applyTheme();
+            updateThemeMenu();
+            document.getElementById('themeMenu').classList.remove('show');
+        }
+        function applyTheme() {
+            const isDark = state.theme === 'system' 
+                ? window.matchMedia('(prefers-color-scheme: dark)').matches 
+                : state.theme === 'dark';
+            document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+        }
+        function updateThemeMenu() {
+            document.querySelectorAll('.theme-option').forEach(option => {
+                option.classList.toggle('active', option.dataset.theme === state.theme);
+            });
+        }
+        function toggleThemeMenu(e) {
+            e.stopPropagation();
+            document.getElementById('themeMenu').classList.toggle('show');
+        }
+
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('open');
+            document.getElementById('sidebarOverlay').classList.toggle('show');
+        }
+        function closeSidebar() {
+            document.getElementById('sidebar').classList.remove('open');
+            document.getElementById('sidebarOverlay').classList.remove('show');
+        }
+
+        function bindEvents() {
+            document.getElementById('loginBtn').addEventListener('click', handleLogin);
+            document.getElementById('tokenInput').addEventListener('keypress', e => e.key === 'Enter' && handleLogin());
+
+            document.getElementById('breadcrumb').addEventListener('click', e => {
+                const item = e.target.closest('.breadcrumb-item');
+                if (item && item.dataset.path !== undefined) {
+                    state.filePath = item.dataset.path;
+                    loadContents();
+                }
+            });
+
+            document.addEventListener('click', () => {
+                document.getElementById('contextMenu').classList.remove('active');
+                document.getElementById('repoDropdown').classList.remove('show');
+                document.getElementById('themeMenu').classList.remove('show');
+            });
+        }
+
+        function switchPage(page) {
+            document.querySelectorAll('.menu-item').forEach(i => i.classList.remove('active'));
+            document.querySelector(`[data-page="${page}"]`).classList.add('active');
+            state.currentPage = page;
+            closeSidebar();
+            navigateTo(page);
+        }
+
+        // ========== 登录 ==========
+        async function handleLogin() {
+            const token = document.getElementById('tokenInput').value.trim();
+            if (!token) return alert('请输入密码');
+
+            const btn = document.getElementById('loginBtn');
+            btn.disabled = true;
+            btn.innerHTML = '<span class="loading"></span> 登录中...';
+
+            try {
+                state.token = token;
+                const user = await apiRequest('/user');
+                state.user = user;
+                localStorage.setItem('github_token', token);
+                showApp();
+                loadRepos();
+                navigateTo('files');
+            } catch (e) {
+                alert('登录失败：' + e.message + '\n请检查密码是否正确，且已勾选 repo 权限');
+                state.token = '';
+            } finally {
+                btn.disabled = false;
+                btn.textContent = '登录';
+            }
+        }
+
+        async function verifyToken() {
+            try {
+                const user = await apiRequest('/user');
+                state.user = user;
+                showApp();
+                loadRepos();
+                navigateTo('files');
+            } catch (e) {
+                state.token = '';
+                localStorage.removeItem('github_token');
+            }
+        }
+
+        function logout() {
+            if (!confirm('确定要退出登录吗？')) return;
+            state.token = '';
+            state.user = null;
+            localStorage.removeItem('github_token');
+            document.getElementById('appContainer').classList.remove('active');
+            document.getElementById('loginPage').style.display = 'flex';
+            document.getElementById('tokenInput').value = '';
+        }
+
+        function showApp() {
+            document.getElementById('loginPage').style.display = 'none';
+            document.getElementById('appContainer').classList.add('active');
+            document.getElementById('sidebarAvatar').src = state.user.avatar_url;
+            document.getElementById('sidebarUsername').textContent = state.user.login;
+        }
+
+        // ========== API 封装 ==========
+        async function apiRequest(path, options = {}) {
+            const headers = {
+                'Authorization': `token ${state.token}`,
+                'Accept': 'application/vnd.github.v3+json',
+                'Content-Type': 'application/json',
+                ...options.headers
+            };
+
+            let url = `${GITHUB_API}${path}`;
+            if (!options.method || options.method === 'GET') {
+                url += (url.includes('?') ? '&' : '?') + `_t=${Date.now()}`;
+            }
+
+            const response = await fetch(url, { ...options, headers });
+
+            if (!response.ok) {
+                const error = await response.json().catch(() => ({ message: response.statusText }));
+                throw new Error(error.message || `请求失败 (${response.status})`);
+            }
+
+            if (response.status === 204) return null;
+            return response.json();
+        }
+
+        // ========== 批量提交 ==========
+        async function batchCommit(addFiles = [], deleteFiles = [], message) {
+            const repo = state.currentRepo.full_name;
+            const branch = state.currentRepo.default_branch;
+
+            const ref = await apiRequest(`/repos/${repo}/git/ref/heads/${branch}`);
+            const commitSha = ref.object.sha;
+            const commit = await apiRequest(`/repos/${repo}/git/commits/${commitSha}`);
+            const baseTree = commit.tree.sha;
+
+            const treeChanges = [];
+            for (const file of addFiles) {
+                treeChanges.push({
+                    path: file.path,
+                    mode: '100644',
+                    type: 'blob',
+                    content: file.content,
+                    encoding: 'base64'
+                });
+            }
+            for (const path of deleteFiles) {
+                treeChanges.push({
+                    path: path,
+                    mode: '100644',
+                    type: 'blob',
+                    sha: null
+                });
+            }
+
+            const newTree = await apiRequest(`/repos/${repo}/git/trees`, {
+                method: 'POST',
+                body: JSON.stringify({ base_tree: baseTree, tree: treeChanges })
+            });
+
+            const newCommit = await apiRequest(`/repos/${repo}/git/commits`, {
+                method: 'POST',
+                body: JSON.stringify({
+                    message: message,
+                    parents: [commitSha],
+                    tree: newTree.sha
+                })
+            });
+
+            await apiRequest(`/repos/${repo}/git/refs/heads/${branch}`, {
+                method: 'PATCH',
+                body: JSON.stringify({ sha: newCommit.sha })
+            });
+
+            return newCommit;
+        }
+
+        // 递归获取文件夹所有文件
+        async function getAllFilesInDir(dirPath) {
+            let allFiles = [];
+            try {
+                const contents = await apiRequest(`/repos/${state.currentRepo.full_name}/contents/${dirPath}`);
+                if (!Array.isArray(contents)) return allFiles;
+                
+                for (const item of contents) {
+                    if (item.type === 'file') {
+                        const fileDetail = await apiRequest(`/repos/${state.currentRepo.full_name}/contents/${item.path}`);
+                        allFiles.push(fileDetail);
+                    } else if (item.type === 'dir') {
+                        const subFiles = await getAllFilesInDir(item.path);
+                        allFiles = allFiles.concat(subFiles);
+                    }
+                }
+            } catch (e) {
+                console.error('遍历目录失败:', e);
+            }
+            return allFiles;
+        }
+
+        // ========== 新增：递归计算文件夹大小 ==========
+        async function calcFolderSize(dirPath) {
+            let total = 0;
+            try {
+                const contents = await apiRequest(`/repos/${state.currentRepo.full_name}/contents/${dirPath}`);
+                if (!Array.isArray(contents)) return 0;
+                
+                for (const item of contents) {
+                    if (item.type === 'file') {
+                        total += item.size || 0;
+                    } else if (item.type === 'dir') {
+                        total += await calcFolderSize(item.path);
+                    }
+                }
+            } catch (e) {
+                console.error('计算文件夹大小失败:', e);
+            }
+            return total;
+        }
+
+        // ========== 工具函数 ==========
+        function validateFileName(name) {
+            if (!name || name.trim() === '') return '名称不能为空';
+            if (INVALID_NAME_CHARS.test(name)) return '名称不能包含 \\ / : * ? " < > | 等字符';
+            if (name === '.' || name === '..') return '名称不合法';
+            return null;
+        }
+
+        function checkDuplicateName(name, excludePath = null) {
+            if (!state.files) return false;
+            return state.files.some(f => f.name.toLowerCase() === name.toLowerCase() && f.path !== excludePath);
+        }
+
+        // ========== 工具栏 ==========
+        function renderToolbar() {
+            const toolbar = document.getElementById('toolbar');
+            if (state.currentPage === 'files') {
+                toolbar.innerHTML = `
+                    <button class="tool-btn" title="返回上一级" onclick="goUpLevel()">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M19 12H5"></path>
+                            <polyline points="12 5 5 12 12 19"></polyline>
+                        </svg>
+                    </button>
+                    <button class="tool-btn" title="新建文件夹" onclick="showNewFolderModal()">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 5v14"></path>
+                            <path d="M5 12h14"></path>
+                        </svg>
+                    </button>
+                    <button class="tool-btn" title="刷新" onclick="refreshCurrent()">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="23 4 23 10 17 10"></polyline>
+                            <polyline points="1 20 1 14 7 14"></polyline>
+                            <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10"></path>
+                            <path d="M20.49 15a9 9 0 0 1-14.85 3.36L1 14"></path>
+                        </svg>
+                    </button>
+                `;
+            } else {
+                toolbar.innerHTML = `
+                    <button class="tool-btn" title="刷新" onclick="refreshCurrent()">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="23 4 23 10 17 10"></polyline>
+                            <polyline points="1 20 1 14 7 14"></polyline>
+                            <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10"></path>
+                            <path d="M20.49 15a9 9 0 0 1-14.85 3.36L1 14"></path>
+                        </svg>
+                    </button>
+                `;
+            }
+        }
+
+        function goUpLevel() {
+            if (!state.filePath) return;
+            const parts = state.filePath.split('/');
+            parts.pop();
+            state.filePath = parts.join('/');
+            loadContents();
+        }
+
+        // ========== 仓库管理 ==========
+        async function loadRepos() {
+            try {
+                const repos = await apiRequest('/user/repos?per_page=100&sort=updated');
+                state.repos = repos;
+                state.filteredRepos = repos;
+                renderRepoDropdown();
+            } catch (e) {
+                console.error('加载仓库失败:', e);
+            }
+        }
+
+        function toggleRepoDropdown(e) {
+            e.stopPropagation();
+            const dropdown = document.getElementById('repoDropdown');
+            dropdown.classList.toggle('show');
+            if (dropdown.classList.contains('show')) {
+                renderRepoDropdown();
+                setTimeout(() => document.getElementById('repoSearchInput').focus(), 50);
+            }
+        }
+
+        function renderRepoDropdown() {
+            const list = document.getElementById('repoDropdownList');
+            list.innerHTML = state.filteredRepos.map(repo => `
+                <div class="repo-dropdown-item" onclick="selectRepo('${repo.full_name}')">
+                    <div class="repo-dropdown-item-name">${repo.full_name}</div>
+                    <div class="repo-dropdown-item-meta">${repo.private ? '私有' : '公开'} · 更新于 ${formatDate(repo.updated_at)}</div>
+                </div>
+            `).join('');
+        }
+
+        function filterRepoDropdown(keyword) {
+            keyword = keyword.toLowerCase();
+            state.filteredRepos = state.repos.filter(repo => 
+                repo.full_name.toLowerCase().includes(keyword)
+            );
+            renderRepoDropdown();
+        }
+
+        async function selectRepo(fullName) {
+            try {
+                const repo = await apiRequest(`/repos/${fullName}`);
+                state.currentRepo = repo;
+                document.getElementById('sidebarRepo').textContent = repo.name;
+                document.getElementById('repoDropdown').classList.remove('show');
+                state.filePath = '';
+                navigateTo(state.currentPage);
+            } catch (e) {
+                alert('打开仓库失败：' + e.message);
+            }
+        }
+
+        // ========== 文件管理 ==========
+        async function loadContents() {
+            if (!state.currentRepo) {
+                renderEmptyRepo();
+                return;
+            }
+
+            const content = document.getElementById('contentArea');
+            content.innerHTML = `<div style="text-align:center;padding:40px;"><span class="loading"></span></div>`;
+
+            try {
+                const contents = await apiRequest(`/repos/${state.currentRepo.full_name}/contents/${state.filePath}`);
+                state.files = Array.isArray(contents) ? contents : [contents];
+                renderFileManager();
+                // 异步加载文件夹大小
+                loadFolderSizes();
+            } catch (e) {
+                content.innerHTML = `
+                    <div class="empty-state">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="12" y1="8" x2="12" y2="12"></line>
+                            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                        </svg>
+                        <p>加载失败：${e.message}</p>
+                        <button class="btn" onclick="loadContents()" style="margin:0 auto;">重试</button>
+                    </div>
+                `;
+            }
+        }
+
+        // 异步加载所有子文件夹大小
+        async function loadFolderSizes() {
+            const dirs = state.files.filter(f => f.type === 'dir');
+            for (const dir of dirs) {
+                calcFolderSize(dir.path).then(size => {
+                    const row = document.querySelector(`.file-row[data-path="${dir.path}"] .file-size`);
+                    if (row) row.textContent = formatSize(size);
+                });
+            }
+        }
+
+        function renderEmptyRepo() {
+            const content = document.getElementById('contentArea');
+            content.innerHTML = `
+                <div class="empty-state">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M3 7v10a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-6l-2-2H5a2 2 0 0 0-2 2z"></path>
+                    </svg>
+                    <p>请点击左上角选择一个仓库开始</p>
+                </div>
+            `;
+            updateBreadcrumb([{ text: '请选择仓库', active: true }]);
+            renderToolbar();
+        }
+
+        function renderFileManager() {
+            const content = document.getElementById('contentArea');
+            
+            const dirs = state.files.filter(f => f.type === 'dir').sort((a,b) => a.name.localeCompare(b.name));
+            const files = state.files.filter(f => f.type === 'file').sort((a,b) => a.name.localeCompare(b.name));
+            const allFiles = [...dirs, ...files];
+
+            content.innerHTML = `
+                <div class="drop-zone" id="dropZone">
+                    <p>点击下方按钮上传文件</p>
+                    <input type="file" id="fileInput" multiple style="display:none" onchange="handleFileUpload(this.files)">
+                    <button class="btn btn-primary" onclick="document.getElementById('fileInput').click()">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="17 8 12 3 7 8"></polyline>
+                            <line x1="12" y1="3" x2="12" y2="15"></line>
+                        </svg>
+                        上传文件
+                    </button>
+                </div>
+
+                <div class="file-list">
+                    <div class="file-header">
+                        <span>名称</span>
+                        <span class="file-size">大小</span>
+                        <span class="file-date">更新时间</span>
+                    </div>
+                    ${allFiles.length ? allFiles.map(file => `
+                        <div class="file-row" data-path="${file.path}" data-type="${file.type}" data-sha="${file.sha}" data-name="${file.name}"
+                             onclick="handleFileClick('${file.path}', '${file.type}', '${file.sha}', '${file.name}')"
+                             oncontextmenu="showContextMenu(event, '${file.path}', '${file.type}', '${file.sha}', '${file.name}')">
+                            <div class="file-name">
+                                ${getFileIcon(file.type, file.name)}
+                                <span>${file.name}</span>
+                            </div>
+                            <div class="file-size">${file.type === 'dir' ? '计算中...' : formatSize(file.size)}</div>
+                            <div class="file-date">--</div>
+                        </div>
+                    `).join('') : `
+                        <div class="file-row" style="justify-content:center;">
+                            <span style="color:var(--text-muted);">此目录为空</span>
+                        </div>
+                    `}
+                </div>
+            `;
+
+            updateBreadcrumb(buildBreadcrumb());
+            renderToolbar();
+        }
+
+        function getFileIcon(type, name) {
+            if (type === 'dir') {
+                return `<svg class="file-icon dir" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+                </svg>`;
+            }
+            
+            const ext = name.split('.').pop().toLowerCase();
+            let color = 'var(--text-secondary)';
+            
+            if (IMAGE_EXTENSIONS.includes(ext)) color = '#8250df';
+            else if (['js','ts','jsx','tsx'].includes(ext)) color = '#f1e05a';
+            else if (['html','css','scss','less'].includes(ext)) color = '#e34c26';
+            else if (['md','markdown'].includes(ext)) color = '#083fa1';
+            else if (['json','yml','yaml','toml'].includes(ext)) color = '#cb171e';
+            else if (['zip','rar','7z','tar','gz'].includes(ext)) color = '#d4b200';
+            else if (VIDEO_EXTENSIONS.includes(ext)) color = '#ff4b4b';
+            else if (AUDIO_EXTENSIONS.includes(ext)) color = '#1db954';
+
+            return `<svg class="file-icon" viewBox="0 0 24 24" fill="none" stroke="${color}" stroke-width="2">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+            </svg>`;
+        }
+
+        function isTextFile(filename) {
+            const ext = filename.split('.').pop().toLowerCase();
+            return !BINARY_EXTENSIONS.includes(ext) 
+                && !IMAGE_EXTENSIONS.includes(ext) 
+                && !AUDIO_EXTENSIONS.includes(ext) 
+                && !VIDEO_EXTENSIONS.includes(ext);
+        }
+
+        // ========== 文件点击处理 ==========
+        function handleFileClick(path, type, sha, name) {
+            if (type === 'dir') {
+                state.filePath = path;
+                loadContents();
+                return;
+            }
+
+            state.currentFile = { path, type, sha, name };
+            const ext = name.split('.').pop().toLowerCase();
+            
+            if (IMAGE_EXTENSIONS.includes(ext)) {
+                openImagePreview(path, name);
+            } else if (AUDIO_EXTENSIONS.includes(ext)) {
+                openAudioPreview(path, name);
+            } else if (VIDEO_EXTENSIONS.includes(ext)) {
+                openVideoPreview(path, name);
+            } else if (isTextFile(name)) {
+                editFile();
+            } else {
+                downloadFile();
+            }
+        }
+
+        // 图片预览
+        function openImagePreview(path, name) {
+            const url = `https://raw.githubusercontent.com/${state.currentRepo.full_name}/${state.currentRepo.default_branch}/${path}`;
+            document.getElementById('imageTitle').textContent = name;
+            document.getElementById('imagePlayer').src = url;
+            openModal('imageModal');
+        }
+        function closeImageModal() {
+            document.getElementById('imagePlayer').src = '';
+            closeModal('imageModal');
+        }
+
+        // 音频播放
+        function openAudioPreview(path, name) {
+            const url = `https://raw.githubusercontent.com/${state.currentRepo.full_name}/${state.currentRepo.default_branch}/${path}`;
+            document.getElementById('audioTitle').textContent = name;
+            document.getElementById('audioPlayer').src = url;
+            openModal('audioModal');
+        }
+        function closeAudioModal() {
+            const player = document.getElementById('audioPlayer');
+            player.pause();
+            player.src = '';
+            closeModal('audioModal');
+        }
+
+        // 视频播放
+        function openVideoPreview(path, name) {
+            const url = `https://raw.githubusercontent.com/${state.currentRepo.full_name}/${state.currentRepo.default_branch}/${path}`;
+            document.getElementById('videoTitle').textContent = name;
+            document.getElementById('videoPlayer').src = url;
+            openModal('videoModal');
+        }
+        function closeVideoModal() {
+            const player = document.getElementById('videoPlayer');
+            player.pause();
+            player.src = '';
+            closeModal('videoModal');
+        }
+
+        // ========== 文件上传 ==========
+        async function handleFileUpload(files) {
+            if (!state.currentRepo) return alert('请先选择仓库');
+            let success = 0;
+            for (const file of files) {
+                try {
+                    await uploadFile(file);
+                    success++;
+                } catch (e) {
+                    alert(`上传 ${file.name} 失败：${e.message}`);
+                }
+            }
+            if (success > 0) setTimeout(() => loadContents(), 600);
+        }
+
+        async function uploadFile(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = async () => {
+                    try {
+                        const base64 = reader.result.split(',')[1];
+                        const fullPath = state.filePath 
+                            ? `${state.filePath}/${file.name}` 
+                            : file.name;
+
+                        try {
+                            const existing = await apiRequest(`/repos/${state.currentRepo.full_name}/contents/${fullPath}`);
+                            if (!confirm(`文件 ${file.name} 已存在，是否覆盖？`)) {
+                                resolve();
+                                return;
+                            }
+                            await apiRequest(`/repos/${state.currentRepo.full_name}/contents/${fullPath}`, {
+                                method: 'PUT',
+                                body: JSON.stringify({
+                                    message: `更新文件: ${file.name}`,
+                                    content: base64,
+                                    sha: existing.sha
+                                })
+                            });
+                        } catch {
+                            await apiRequest(`/repos/${state.currentRepo.full_name}/contents/${fullPath}`, {
+                                method: 'PUT',
+                                body: JSON.stringify({
+                                    message: `上传文件: ${file.name}`,
+                                    content: base64
+                                })
+                            });
+                        }
+                        resolve();
+                    } catch (e) {
+                        reject(e);
+                    }
+                };
+                reader.onerror = reject;
+                reader.readAsDataURL(file);
+            });
+        }
+
+        // ========== 新建文件夹 ==========
+        function showNewFolderModal() {
+            if (!state.currentRepo) return alert('请先选择仓库');
+            document.getElementById('newFolderName').value = '';
+            document.getElementById('newFolderError').style.display = 'none';
+            document.getElementById('newFolderName').classList.remove('input-error');
+            openModal('newFolderModal');
+        }
+
+        async function createNewFolder() {
+            const name = document.getElementById('newFolderName').value.trim();
+            const errorEl = document.getElementById('newFolderError');
+            const inputEl = document.getElementById('newFolderName');
+
+            const nameError = validateFileName(name);
+            if (nameError) {
+                inputEl.classList.add('input-error');
+                errorEl.textContent = nameError;
+                errorEl.style.display = 'block';
+                return;
+            }
+            if (checkDuplicateName(name)) {
+                inputEl.classList.add('input-error');
+                errorEl.textContent = '当前目录已存在同名项目';
+                errorEl.style.display = 'block';
+                return;
+            }
+
+            try {
+                const fullPath = state.filePath 
+                    ? `${state.filePath}/${name}/.gitkeep` 
+                    : `${name}/.gitkeep`;
+
+                await apiRequest(`/repos/${state.currentRepo.full_name}/contents/${fullPath}`, {
+                    method: 'PUT',
+                    body: JSON.stringify({ message: `新建文件夹: ${name}`, content: '' })
+                });
+
+                closeModal('newFolderModal');
+                setTimeout(() => loadContents(), 600);
+            } catch (e) {
+                alert('创建文件夹失败：' + e.message);
+            }
+        }
+
+        // 右键菜单
+        function showContextMenu(e, path, type, sha, name) {
+            e.preventDefault();
+            e.stopPropagation();
+            state.currentFile = { path, type, sha, name };
+            
+            const menu = document.getElementById('contextMenu');
+            const editItem = document.getElementById('menuEdit');
+            
+            if (type === 'dir' || !isTextFile(name)) {
+                editItem.classList.add('disabled');
+            } else {
+                editItem.classList.remove('disabled');
+            }
+
+            menu.style.left = e.clientX + 'px';
+            menu.style.top = e.clientY + 'px';
+            menu.classList.add('active');
+
+            setTimeout(() => {
+                const rect = menu.getBoundingClientRect();
+                if (rect.right > window.innerWidth) menu.style.left = (e.clientX - rect.width) + 'px';
+                if (rect.bottom > window.innerHeight) menu.style.top = (e.clientY - rect.height) + 'px';
+            }, 0);
+        }
+
+        // ========== 编辑文件 ==========
+        async function editFile() {
+            if (!state.currentFile || state.currentFile.type === 'dir') return;
+            if (!isTextFile(state.currentFile.name)) return alert('此文件类型不支持在线编辑');
+
+            try {
+                const path = state.currentFile.path;
+                const file = await apiRequest(`/repos/${state.currentRepo.full_name}/contents/${path}`);
+                const content = base64ToUtf8(file.content);
+                
+                document.getElementById('editFileName').value = state.currentFile.name;
+                document.getElementById('codeEditor').value = content;
+                state.currentFileSha = file.sha;
+                
+                openModal('editModal');
+                
+                setTimeout(() => {
+                    const editor = document.getElementById('codeEditor');
+                    editor.scrollTop = 0;
+                    editor.focus();
+                }, 100);
+            } catch (e) {
+                alert('加载文件失败：' + e.message);
+            }
+        }
+
+        async function saveFileEdit() {
+            if (!state.currentFile) return;
+            
+            const newName = document.getElementById('editFileName').value.trim();
+            const content = document.getElementById('codeEditor').value;
+            const oldPath = state.currentFile.path;
+
+            if (!newName) return alert('文件名不能为空');
+            const nameError = validateFileName(newName);
+            if (nameError) return alert(nameError);
+
+            const oldName = state.currentFile.name;
+            if (newName !== oldName && checkDuplicateName(newName, oldPath)) {
+                return alert('当前目录已存在同名文件');
+            }
+
+            try {
+                const parts = oldPath.split('/');
+                parts.pop();
+                parts.push(newName);
+                const newPath = parts.join('/');
+
+                await apiRequest(`/repos/${state.currentRepo.full_name}/contents/${newPath}`, {
+                    method: 'PUT',
+                    body: JSON.stringify({
+                        message: `编辑文件: ${newName}`,
+                        content: utf8ToBase64(content),
+                        sha: state.currentFileSha
+                    })
+                });
+
+                if (oldPath !== newPath) {
+                    await apiRequest(`/repos/${state.currentRepo.full_name}/contents/${oldPath}`, {
+                        method: 'DELETE',
+                        body: JSON.stringify({
+                            message: `删除原文件: ${oldPath}`,
+                            sha: state.currentFileSha
+                        })
+                    }).catch(() => {});
+                }
+
+                closeModal('editModal');
+                setTimeout(() => loadContents(), 600);
+            } catch (e) {
+                alert('保存失败：' + e.message);
+            }
+        }
+
+        // ========== 重命名 ==========
+        function showRenameModal() {
+            if (!state.currentFile) return;
+            document.getElementById('renameInput').value = state.currentFile.path.split('/').pop();
+            document.getElementById('renameError').style.display = 'none';
+            document.getElementById('renameInput').classList.remove('input-error');
+            openModal('renameModal');
+        }
+
+        async function confirmRename() {
+            const newName = document.getElementById('renameInput').value.trim();
+            const errorEl = document.getElementById('renameError');
+            const inputEl = document.getElementById('renameInput');
+
+            if (!newName || !state.currentFile) return;
+
+            const nameError = validateFileName(newName);
+            if (nameError) {
+                inputEl.classList.add('input-error');
+                errorEl.textContent = nameError;
+                errorEl.style.display = 'block';
+                return;
+            }
+
+            const oldPath = state.currentFile.path;
+            const oldName = state.currentFile.path.split('/').pop();
+            
+            if (newName === oldName) {
+                closeModal('renameModal');
+                return;
+            }
+
+            if (checkDuplicateName(newName, oldPath)) {
+                inputEl.classList.add('input-error');
+                errorEl.textContent = '当前目录已存在同名项目';
+                errorEl.style.display = 'block';
+                return;
+            }
+
+            try {
+                const parts = oldPath.split('/');
+                parts.pop();
+                parts.push(newName);
+                const newPath = parts.join('/');
+
+                if (state.currentFile.type === 'dir') {
+                    const allFiles = await getAllFilesInDir(oldPath);
+                    const addFiles = allFiles.map(file => ({
+                        path: file.path.replace(oldPath, newPath),
+                        content: file.content
+                    }));
+                    const deleteFiles = allFiles.map(file => file.path);
+                    await batchCommit(addFiles, deleteFiles, `重命名文件夹: ${oldPath} -> ${newPath}`);
+                } else {
+                    const file = await apiRequest(`/repos/${state.currentRepo.full_name}/contents/${oldPath}`);
+                    await apiRequest(`/repos/${state.currentRepo.full_name}/contents/${newPath}`, {
+                        method: 'PUT',
+                        body: JSON.stringify({
+                            message: `重命名: ${oldPath} -> ${newPath}`,
+                            content: file.content
+                        })
+                    });
+                    await apiRequest(`/repos/${state.currentRepo.full_name}/contents/${oldPath}`, {
+                        method: 'DELETE',
+                        body: JSON.stringify({ message: `删除原文件: ${oldPath}`, sha: file.sha })
+                    });
+                }
+
+                closeModal('renameModal');
+                setTimeout(() => loadContents(), 600);
+            } catch (e) {
+                alert('重命名失败：' + e.message);
+            }
+        }
+
+        // ========== 移动 ==========
+        function showMoveModal() {
+            if (!state.currentFile) return;
+            document.getElementById('moveTargetPath').value = state.currentFile.path;
+            openModal('moveModal');
+        }
+
+        async function confirmMove() {
+            const newPath = document.getElementById('moveTargetPath').value.trim();
+            if (!newPath || !state.currentFile) return;
+
+            try {
+                const oldPath = state.currentFile.path;
+                if (oldPath === newPath) {
+                    closeModal('moveModal');
+                    return;
+                }
+
+                if (state.currentFile.type === 'dir') {
+                    const allFiles = await getAllFilesInDir(oldPath);
+                    const addFiles = allFiles.map(file => ({
+                        path: file.path.replace(oldPath, newPath),
+                        content: file.content
+                    }));
+                    const deleteFiles = allFiles.map(file => file.path);
+                    await batchCommit(addFiles, deleteFiles, `移动文件夹: ${oldPath} -> ${newPath}`);
+                } else {
+                    const file = await apiRequest(`/repos/${state.currentRepo.full_name}/contents/${oldPath}`);
+                    await apiRequest(`/repos/${state.currentRepo.full_name}/contents/${newPath}`, {
+                        method: 'PUT',
+                        body: JSON.stringify({
+                            message: `移动: ${oldPath} -> ${newPath}`,
+                            content: file.content
+                        })
+                    });
+                    await apiRequest(`/repos/${state.currentRepo.full_name}/contents/${oldPath}`, {
+                        method: 'DELETE',
+                        body: JSON.stringify({ message: `删除原文件: ${oldPath}`, sha: file.sha })
+                    });
+                }
+
+                closeModal('moveModal');
+                setTimeout(() => loadContents(), 600);
+            } catch (e) {
+                alert('移动失败：' + e.message);
+            }
+        }
+
+        // ========== 复制 ==========
+        async function copyFile() {
+            if (!state.currentFile) return;
+            
+            const name = state.currentFile.path.split('/').pop();
+            const newName = prompt('输入新名称：', `副本_${name}`);
+            if (!newName) return;
+
+            try {
+                const oldPath = state.currentFile.path;
+                const parts = oldPath.split('/');
+                parts.pop();
+                parts.push(newName);
+                const newPath = parts.join('/');
+
+                if (state.currentFile.type === 'dir') {
+                    const allFiles = await getAllFilesInDir(oldPath);
+                    const addFiles = allFiles.map(file => ({
+                        path: file.path.replace(oldPath, newPath),
+                        content: file.content
+                    }));
+                    await batchCommit(addFiles, [], `复制文件夹: ${newName}`);
+                } else {
+                    const file = await apiRequest(`/repos/${state.currentRepo.full_name}/contents/${oldPath}`);
+                    await apiRequest(`/repos/${state.currentRepo.full_name}/contents/${newPath}`, {
+                        method: 'PUT',
+                        body: JSON.stringify({
+                            message: `复制文件: ${newName}`,
+                            content: file.content
+                        })
+                    });
+                }
+
+                setTimeout(() => loadContents(), 600);
+            } catch (e) {
+                alert('复制失败：' + e.message);
+            }
+        }
+
+        // 下载
+        function downloadFile() {
+            if (!state.currentFile) return;
+            window.open(`https://raw.githubusercontent.com/${state.currentRepo.full_name}/${state.currentRepo.default_branch}/${state.currentFile.path}`, '_blank');
+        }
+
+        // ========== 删除 ==========
+        function showDeleteModal() {
+            if (!state.currentFile) return;
+            document.getElementById('deleteFileName').textContent = state.currentFile.path.split('/').pop();
+            openModal('deleteModal');
+        }
+
+        async function confirmDelete() {
+            if (!state.currentFile) return;
+
+            try {
+                if (state.currentFile.type === 'dir') {
+                    const allFiles = await getAllFilesInDir(state.currentFile.path);
+                    const deleteFiles = allFiles.map(file => file.path);
+                    await batchCommit([], deleteFiles, `删除文件夹: ${state.currentFile.path}`);
+                } else {
+                    const file = await apiRequest(`/repos/${state.currentRepo.full_name}/contents/${state.currentFile.path}`);
+                    await apiRequest(`/repos/${state.currentRepo.full_name}/contents/${state.currentFile.path}`, {
+                        method: 'DELETE',
+                        body: JSON.stringify({
+                            message: `删除: ${state.currentFile.path}`,
+                            sha: file.sha
+                        })
+                    });
+                }
+
+                closeModal('deleteModal');
+                setTimeout(() => loadContents(), 600);
+            } catch (e) {
+                alert('删除失败：' + e.message);
+            }
+        }
+
+        // ========== Actions 页面 ==========
+        async function loadActions() {
+            if (!state.currentRepo) {
+                renderEmptyRepo();
+                return;
+            }
+
+            const content = document.getElementById('contentArea');
+            content.innerHTML = `<div style="text-align:center;padding:40px;"><span class="loading"></span></div>`;
+
+            try {
+                const runs = await apiRequest(`/repos/${state.currentRepo.full_name}/actions/runs?per_page=30`);
+                renderActionsPage(runs.workflow_runs);
+            } catch (e) {
+                content.innerHTML = `
+                    <div class="empty-state">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                        </svg>
+                        <p>加载 Actions 失败：${e.message}</p>
+                        <button class="btn" onclick="loadActions()" style="margin:0 auto;">重试</button>
+                    </div>
+                `;
+            }
+        }
+
+        function renderActionsPage(runs) {
+            const content = document.getElementById('contentArea');
+
+            content.innerHTML = `
+                <div style="border:1px solid var(--border-color);border-radius:var(--radius);overflow:hidden;">
+                    ${runs.length ? runs.map(run => {
+                        let statusClass = 'queued';
+                        let statusText = '排队中';
+                        
+                        if (run.status === 'completed') {
+                            statusClass = run.conclusion === 'success' ? 'success' : 'failure';
+                            statusText = run.conclusion === 'success' ? '成功' : '失败';
+                        } else if (run.status === 'in_progress') {
+                            statusClass = 'running';
+                            statusText = '进行中';
+                        }
+
+                        let duration = '';
+                        if (run.status === 'completed' && run.started_at && run.updated_at) {
+                            const start = new Date(run.started_at);
+                            const end = new Date(run.updated_at);
+                            const diff = Math.round((end - start) / 1000);
+                            duration = diff < 60 ? `${diff}s` : `${Math.floor(diff / 60)}m ${diff % 60}s`;
+                        }
+
+                        return `
+                            <div class="run-item">
+                                <div class="run-status-dot ${statusClass}"></div>
+                                <div class="run-info">
+                                    <div class="run-title">${run.name}</div>
+                                    <div class="run-desc">${run.head_commit?.message || '无提交信息'}</div>
+                                </div>
+                                <span class="run-badge">${run.head_branch}</span>
+                                <div class="run-status-text">${statusText}</div>
+                                <div class="run-time">${formatDate(run.updated_at)} · ${duration || '--'}</div>
+                            </div>
+                        `;
+                    }).join('') : `
+                        <div class="empty-state">
+                            <p>暂无运行记录</p>
+                        </div>
+                    `}
+                </div>
+            `;
+
+            updateBreadcrumb([{ text: state.currentRepo.name, active: true }]);
+            renderToolbar();
+        }
+
+        // ========== 导航与工具函数 ==========
+        function navigateTo(page) {
+            state.currentPage = page;
+            if (page === 'files') loadContents();
+            else if (page === 'actions') loadActions();
+        }
+
+        function refreshCurrent() {
+            if (state.currentPage === 'files') loadContents();
+            else if (state.currentPage === 'actions') loadActions();
+        }
+
+        function buildBreadcrumb() {
+            const items = [];
+            items.push({ 
+                text: state.currentRepo.name, 
+                path: '',
+                active: !state.filePath
+            });
+            
+            if (state.filePath) {
+                const parts = state.filePath.split('/');
+                let path = '';
+                parts.forEach((part, i) => {
+                    path += (i > 0 ? '/' : '') + part;
+                    items.push({
+                        text: part,
+                        path: path,
+                        active: i === parts.length - 1
+                    });
+                });
+            }
+            return items;
+        }
+
+        function updateBreadcrumb(items) {
+            const breadcrumb = document.getElementById('breadcrumb');
+            breadcrumb.innerHTML = items.map((item, i) => {
+                if (item.active) {
+                    return `<span class="breadcrumb-current">${item.text}</span>`;
+                }
+                return `<span class="breadcrumb-item" data-path="${item.path || ''}">${item.text}</span><span class="breadcrumb-sep">/</span>`;
+            }).join('');
+        }
+
+        function openModal(id) {
+            document.getElementById(id).classList.add('active');
+        }
+        function closeModal(id) {
+            document.getElementById(id).classList.remove('active');
+        }
+
+        function formatSize(bytes) {
+            if (bytes < 1024) return bytes + ' B';
+            if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+            if (bytes < 1024 * 1024 * 1024) return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
+            return (bytes / (1024 * 1024 * 1024)).toFixed(1) + ' GB';
+        }
+
+        function formatDate(dateStr) {
+            const date = new Date(dateStr);
+            const now = new Date();
+            const diff = now - date;
+            
+            if (diff < 60000) return '刚刚';
+            if (diff < 3600000) return Math.floor(diff / 60000) + ' 分钟前';
+            if (diff < 86400000) return Math.floor(diff / 3600000) + ' 小时前';
+            if (diff < 86400000 * 30) return Math.floor(diff / 86400000) + ' 天前';
+            return date.toLocaleDateString('zh-CN');
+        }
+    </script>
 </body>
 </html>
