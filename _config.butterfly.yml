@@ -21,6 +21,10 @@ menu:
   时间线: /timeline/ || fas fa-timeline
   动态: /live/ || fas fa-comments
 
+index_posts:
+  exclude_categories: [movies]
+
+
 # Code Blocks （代码块）
 # --------------------------------------
 
