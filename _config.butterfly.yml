@@ -22,7 +22,7 @@ menu:
   动态: /live/ || fas fa-comments
 
 index_posts:
-  exclude_categories: [movies]
+  exclude_categories: [视频]
 
 
 # Code Blocks （代码块）
