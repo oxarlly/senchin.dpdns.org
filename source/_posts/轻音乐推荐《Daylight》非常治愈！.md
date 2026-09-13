@@ -5,8 +5,7 @@ tags:
   - 音乐
   - 治愈
 categories:
-  - 音乐推荐
-  - 视频
+  - 音乐推荐,视频
 cover: /images/轻音乐推荐《Daylight》非常治愈！/th.webp
 description: 超治愈的宝藏轻音乐，适配学习独处，温柔抚平所有疲惫
 ---
