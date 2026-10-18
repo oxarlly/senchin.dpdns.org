@@ -458,6 +458,7 @@ search:
     top_n_per_article: 1
     # Unescape html strings to the readable one.
     unescape: false
+    content: false
     pagination:
       enable: true
       # Number of search results per page
