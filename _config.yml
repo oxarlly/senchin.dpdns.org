@@ -207,7 +207,7 @@ filter_optimize:
     remove_comments: true # 删除JS注释
     excludes: [] # 不压缩的JS文件，遇到报错就写这里
   html:
-    minify: true # 压缩HTML
+    minify: false # 压缩HTML
     excludes: []
   image:
     enable: true # 开启图片压缩（jpg/png→更小，不会自动转webp）
