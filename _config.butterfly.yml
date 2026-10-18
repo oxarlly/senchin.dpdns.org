@@ -231,6 +231,8 @@ footer:
               url: /about/
             - title: 传送门
               url: /link/
+            - title: 状态
+              url: /status/
     - content:
       - title: 索引
         item:
