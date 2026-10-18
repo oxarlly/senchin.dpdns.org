@@ -195,3 +195,26 @@ generator:
   incremental: true  # 开启增量生成
   silent: true       # 静默模式，减少日志输出耗时
 
+# hexo-optimize 配置
+filter_optimize:
+  enable: true
+  versioning: false # 静态资源版本号，一般关闭
+  css:
+    minify: true # 压缩CSS
+    excludes: []
+  js:
+    minify: true # 压缩JS
+    remove_comments: true # 删除JS注释
+    excludes: [] # 不压缩的JS文件，遇到报错就写这里
+  html:
+    minify: true # 压缩HTML
+    excludes: []
+  image:
+    enable: true # 开启图片压缩（jpg/png→更小，不会自动转webp）
+    interlaced: false
+    mozjpeg: false
+    pngquant: true
+    webp:
+      enable: false # 这里先关闭webp，避免和你后续webp方案冲突
+      quality: 80
+    excludes: []
