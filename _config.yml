@@ -200,10 +200,10 @@ filter_optimize:
   enable: true
   versioning: false # 静态资源版本号，一般关闭
   css:
-    minify: true # 压缩CSS
+    minify: false # 压缩CSS
     excludes: []
   js:
-    minify: true # 压缩JS
+    minify: false # 压缩JS
     remove_comments: true # 删除JS注释
     excludes: [] # 不压缩的JS文件，遇到报错就写这里
   html:
