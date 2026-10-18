@@ -47,7 +47,7 @@
     "vscode-web": "^1.91.1"
   },
   "devDependencies": {
-    "gulp": "^5.0.1"
+    "gulp": "^5.0.1",
     "hexo-optimize": "^3.5.1"
   }
 }
